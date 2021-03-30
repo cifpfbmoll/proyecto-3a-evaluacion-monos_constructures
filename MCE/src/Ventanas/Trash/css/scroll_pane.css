@@ -1,0 +1,4 @@
+.scroll_pane:focused{
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color:rgba(255,0,0,0.2); /* here rgba (corrected) */
+}

@@ -1,0 +1,16 @@
+# MCE ARCHIVO LAUNCH
+# Este archivo contiene los parámetros del programa que le afectan atemporalmente a partir de su instalación.
+#
+# Aquellos parámetros que se hayan introducido de manera legal desde la apicación serán considerados ACEPTADOS,
+# Aquellos otros que se hayan realizado a través de una manipulación directa de este archivo será considerado ILEGAL,
+# Si un parámetro no ha sido [ACEPTADO] todavía, su estado inicial se mantendrá en [DENEGADO].
+#
+# Este archivo contiene un dictado de normas o procedimientos legales que se deben cumplir o activar en cierto momento.
+# Cada apartado del dictado empieza con un valor [$VALOR] y se iguala a un estado [DENEGADO],[ACEPTADO].
+# Un dictado puede contener varios $VALOR, y cada valor solo puede contener un ESTADO a la vez.
+#
+# Si se añaden nuevos valores, es necesario actualizar el intérprete para que pueda entenderlos.
+#
+#
+
+$Legal.TYC = denegado

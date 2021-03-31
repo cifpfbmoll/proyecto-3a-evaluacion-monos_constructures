@@ -1,5 +1,6 @@
 package Ventanas.TermsAndConditions;
 
+import Launch.LaunchInterpreter;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +27,7 @@ public class TermsAndConditionsController {
 	 */
 	EventHandler<MouseEvent> aceptarTerminos = event ->{
 		try {
+			LaunchInterpreter.replaceValue(LaunchInterpreter.TERMINOS_Y_CONDICIONES, " = aceptado");
 			Parent termsConfirmed = FXMLLoader.load(getClass().getResource("../TermsConfirmed/terms_confirmed.fxml"));
 			Scene termsConfirmedScene = new Scene(termsConfirmed);
 			Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();

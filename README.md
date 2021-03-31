@@ -1,4 +1,4 @@
-![MCE Logo](https://raw.githubusercontent.com/cifpfbmoll/proyecto-3a-evaluacion-monos_constructures/feature/TerminosYCondiciones/MCE/src/Ventanas/Trash/img/MC_Logo.png)
+![MCE Logo](https://raw.githubusercontent.com/cifpfbmoll/proyecto-3a-evaluacion-monos_constructures/develop/MCE/src/Ventanas/Trash/img/MC_Logo.png)
 # MCE - CRUCEROS
 #### _Documentación del proyecto_
 - - -

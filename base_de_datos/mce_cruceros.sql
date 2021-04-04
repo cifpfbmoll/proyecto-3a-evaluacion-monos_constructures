@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-04-2021 a las 12:30:23
+-- Tiempo de generación: 04-04-2021 a las 13:26:04
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.3
 
@@ -48,10 +48,10 @@ CREATE TABLE `billete` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `camarotes`
+-- Estructura de tabla para la tabla `camarote`
 --
 
-CREATE TABLE `camarotes` (
+CREATE TABLE `camarote` (
   `CODIGO_CAMAROTE` varchar(20) NOT NULL,
   `CODIGO_CRUCERO` varchar(20) NOT NULL,
   `CODIGO_TARIFA` varchar(20) NOT NULL,
@@ -69,6 +69,15 @@ CREATE TABLE `ciudad` (
   `NOMBRE_CIUDAD` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `ciudad`
+--
+
+INSERT INTO `ciudad` (`CODIGO_CIUDAD`, `NOMBRE_CIUDAD`) VALUES
+('BCN', 'Barcelona'),
+('PMA', 'Palma de Mallorca'),
+('VLC', 'Valencia');
+
 -- --------------------------------------------------------
 
 --
@@ -79,7 +88,7 @@ CREATE TABLE `cliente` (
   `NIE` varchar(20) NOT NULL,
   `NOMBRE_CLIENTE` varchar(30) NOT NULL,
   `APELLIDOS_CLIENTE` varchar(40) NOT NULL,
-  `FECHA_NACIMIENTO_CLIENTE` int(11) NOT NULL,
+  `FECHA_NACIMIENTO_CLIENTE` date NOT NULL,
   `CODIGO_DESCUENTO` varchar(20) NOT NULL,
   `TELEFONO_CLIENTE` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -128,6 +137,13 @@ CREATE TABLE `empleado` (
   `CONTRASEÑA_EMPLEADO` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `empleado`
+--
+
+INSERT INTO `empleado` (`CODIGO_EMPLEADO`, `NIE_EMPLEADO`, `NOMBRE_EMPLEADO`, `APELLIDO_EMPLEADO`, `DOMICILIACION_EMPLEADO`, `FECHA_NACIMIENTO_EMPLEADO`, `CODIGO_SERVICIO`, `CONTRASEÑA_EMPLEADO`) VALUES
+('001', '33333333A', 'Jose Luis', 'Saiz Lopez', 'C/ Caracas nº4', '2001-02-03', 'RRHH', '1234');
+
 -- --------------------------------------------------------
 
 --
@@ -145,10 +161,10 @@ CREATE TABLE `nomina` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `paradas`
+-- Estructura de tabla para la tabla `parada`
 --
 
-CREATE TABLE `paradas` (
+CREATE TABLE `parada` (
   `CODIGO_CRUCERO` varchar(20) NOT NULL,
   `FECHA_EMBARQUE_VIAJE` datetime NOT NULL,
   `CODIGO_PUERTO` varchar(20) NOT NULL,
@@ -180,6 +196,13 @@ CREATE TABLE `servicio` (
   `NOMBRE_SERVICIO` varchar(30) NOT NULL,
   `SALARIO_SERVICIO` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `servicio`
+--
+
+INSERT INTO `servicio` (`CODIGO_SERVICIO`, `NOMBRE_SERVICIO`, `SALARIO_SERVICIO`) VALUES
+('RRHH', 'Recursos Humanos', 3500);
 
 -- --------------------------------------------------------
 
@@ -226,9 +249,9 @@ ALTER TABLE `billete`
   ADD KEY `FECHA_EMBARQUE_VIAJE` (`FECHA_EMBARQUE_VIAJE`);
 
 --
--- Indices de la tabla `camarotes`
+-- Indices de la tabla `camarote`
 --
-ALTER TABLE `camarotes`
+ALTER TABLE `camarote`
   ADD PRIMARY KEY (`CODIGO_CAMAROTE`),
   ADD KEY `CODIGO_CRUCERO` (`CODIGO_CRUCERO`),
   ADD KEY `CODIGO_TARIFA` (`CODIGO_TARIFA`);
@@ -272,9 +295,9 @@ ALTER TABLE `nomina`
   ADD PRIMARY KEY (`CODIGO_EMPLEADO`,`FECHA_NOMINA`);
 
 --
--- Indices de la tabla `paradas`
+-- Indices de la tabla `parada`
 --
-ALTER TABLE `paradas`
+ALTER TABLE `parada`
   ADD PRIMARY KEY (`CODIGO_CRUCERO`,`NUMERO_PARADA`,`FECHA_EMBARQUE_VIAJE`) USING BTREE,
   ADD KEY `CODIGO_PUERTO` (`CODIGO_PUERTO`),
   ADD KEY `paradas_ibfk_3` (`FECHA_EMBARQUE_VIAJE`);
@@ -323,15 +346,15 @@ ALTER TABLE `asignacion`
 --
 ALTER TABLE `billete`
   ADD CONSTRAINT `billete_ibfk_1` FOREIGN KEY (`NIE`) REFERENCES `cliente` (`NIE`),
-  ADD CONSTRAINT `billete_ibfk_2` FOREIGN KEY (`CODIGO_CAMAROTE`) REFERENCES `camarotes` (`CODIGO_CAMAROTE`),
+  ADD CONSTRAINT `billete_ibfk_2` FOREIGN KEY (`CODIGO_CAMAROTE`) REFERENCES `camarote` (`CODIGO_CAMAROTE`),
   ADD CONSTRAINT `billete_ibfk_3` FOREIGN KEY (`FECHA_EMBARQUE_VIAJE`) REFERENCES `viaje` (`FECHA_EMBARQUE_VIAJE`);
 
 --
--- Filtros para la tabla `camarotes`
+-- Filtros para la tabla `camarote`
 --
-ALTER TABLE `camarotes`
-  ADD CONSTRAINT `camarotes_ibfk_1` FOREIGN KEY (`CODIGO_CRUCERO`) REFERENCES `crucero` (`CODIGO_CRUCERO`),
-  ADD CONSTRAINT `camarotes_ibfk_2` FOREIGN KEY (`CODIGO_TARIFA`) REFERENCES `tarifa` (`CODIGO_TARIFA`);
+ALTER TABLE `camarote`
+  ADD CONSTRAINT `camarote_ibfk_1` FOREIGN KEY (`CODIGO_CRUCERO`) REFERENCES `crucero` (`CODIGO_CRUCERO`),
+  ADD CONSTRAINT `camarote_ibfk_2` FOREIGN KEY (`CODIGO_TARIFA`) REFERENCES `tarifa` (`CODIGO_TARIFA`);
 
 --
 -- Filtros para la tabla `cliente`
@@ -352,12 +375,12 @@ ALTER TABLE `nomina`
   ADD CONSTRAINT `nomina_ibfk_1` FOREIGN KEY (`CODIGO_EMPLEADO`) REFERENCES `empleado` (`CODIGO_EMPLEADO`);
 
 --
--- Filtros para la tabla `paradas`
+-- Filtros para la tabla `parada`
 --
-ALTER TABLE `paradas`
-  ADD CONSTRAINT `paradas_ibfk_1` FOREIGN KEY (`CODIGO_PUERTO`) REFERENCES `puerto` (`CODIGO_PUERTO`),
-  ADD CONSTRAINT `paradas_ibfk_3` FOREIGN KEY (`FECHA_EMBARQUE_VIAJE`) REFERENCES `viaje` (`FECHA_EMBARQUE_VIAJE`),
-  ADD CONSTRAINT `paradas_ibfk_4` FOREIGN KEY (`CODIGO_CRUCERO`) REFERENCES `viaje` (`CODIGO_CRUCERO`);
+ALTER TABLE `parada`
+  ADD CONSTRAINT `parada_ibfk_1` FOREIGN KEY (`CODIGO_PUERTO`) REFERENCES `puerto` (`CODIGO_PUERTO`),
+  ADD CONSTRAINT `parada_ibfk_3` FOREIGN KEY (`FECHA_EMBARQUE_VIAJE`) REFERENCES `viaje` (`FECHA_EMBARQUE_VIAJE`),
+  ADD CONSTRAINT `parada_ibfk_4` FOREIGN KEY (`CODIGO_CRUCERO`) REFERENCES `viaje` (`CODIGO_CRUCERO`);
 
 --
 -- Filtros para la tabla `puerto`

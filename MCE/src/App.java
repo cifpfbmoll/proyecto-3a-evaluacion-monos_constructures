@@ -14,6 +14,10 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
+        //[TESTING]
+        testing();
+
         if (LaunchInterpreter.checkTermsAndConditions()){
             System.out.println("Something went good");
         } else {
@@ -30,4 +34,15 @@ public class App extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+    /**
+     * [TESTING]
+     * Este método está enfocado especialmente para el PROCESO DE DESARROLLO de la aplicación
+     * Este debe ser eliminado de la versión final junto a todas sus referencias en el código final.
+     */
+    public static void testing(){
+        System.out.println("-------> Testing for class App.java");
+        LaunchInterpreter.replaceValue(LaunchInterpreter.TERMINOS_Y_CONDICIONES, " = denegado");
+    }
+
 }

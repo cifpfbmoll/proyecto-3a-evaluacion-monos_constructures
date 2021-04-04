@@ -4,6 +4,11 @@ import Utils.FileUtils;
 
 import java.io.*;
 
+/**
+ * Esta clase se encarga de leer e interpretar los valores introducidos dentro del archivo AppLaunch.mce.
+ * Su intención es la de poder validar que se han aceptado o denegado una serie de permisos que se han descrito dentro
+ * del archivo LAUNCH.
+ */
 public class LaunchInterpreter {
 
 	private static final String filePath = "src/Launch/AppLaunch.mce";
@@ -38,16 +43,12 @@ public class LaunchInterpreter {
 			file.close();
 			String inputStr = inputBuffer.toString();
 
-			//Mostramos el archivo sin modificar [DEBUG]
-			//System.out.println(inputStr);
-
 			// Lógica para reemplazar el contenido del archivo
 			if (estado.equals(" = aceptado")) {
 				inputStr = inputStr.replace(valor + " = denegado", valor + " = aceptado");
+			} else if (estado.equals(" = denegado")){
+				inputStr = inputStr.replace(valor + " = aceptado", valor + " = denegado");
 			}
-
-			// Para mostrar el contenido del archivo modificado [DEBUG]
-			// System.out.println("----------------------------------\n" + inputStr);
 
 			// Reescribimos el archivo originando los cambios en la misma línea.
 			FileOutputStream fileOut = new FileOutputStream(filePath);

@@ -1,2 +1,4 @@
-package Utils;public class DBUtils {
+package Utils;
+
+public class DBUtils {
 }

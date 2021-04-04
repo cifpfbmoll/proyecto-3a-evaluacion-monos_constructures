@@ -1,10 +1,13 @@
 import Launch.LaunchInterpreter;
+import Utils.DBUtils;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+import java.sql.SQLException;
 
 /**
  * Esta es la clase principal del programa.
@@ -40,9 +43,19 @@ public class App extends Application {
      * Este método está enfocado especialmente para el PROCESO DE DESARROLLO de la aplicación
      * Este debe ser eliminado de la versión final junto a todas sus referencias en el código final.
      */
-    public static void testing(){
+    public static void testing() throws SQLException {
         System.out.println("-------> Testing for class App.java");
         LaunchInterpreter.replaceValue(LaunchInterpreter.TERMINOS_Y_CONDICIONES, " = denegado");
+
+        System.out.print("--------------------> Login Status :");
+        DBUtils.connectDB();
+        if (DBUtils.employeeLogin("Jose Luis", "1234")){
+            System.out.print(" Signed in as Jose\n");
+        } else {
+            System.out.print(" Login incorrecto\n");
+        }
+        DBUtils.closeDB();
+
     }
 
 }

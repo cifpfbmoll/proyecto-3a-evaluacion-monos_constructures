@@ -2,6 +2,9 @@ package Utils;
 
 import java.io.*;
 
+/**
+ * Esta clase va a almacenar todos los métodos relacionados con la lectura, escritura, creación y eliminación de archivos.
+ */
 public class FileUtils {
 
 	/**

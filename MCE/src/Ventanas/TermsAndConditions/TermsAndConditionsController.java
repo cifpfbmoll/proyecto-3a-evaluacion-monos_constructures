@@ -1,15 +1,11 @@
 package Ventanas.TermsAndConditions;
 
 import Launch.LaunchInterpreter;
+import Utils.WindowUtils;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -27,23 +23,17 @@ public class TermsAndConditionsController {
 	 */
 	EventHandler<MouseEvent> aceptarTerminos = event ->{
 		try {
-			LaunchInterpreter.replaceValue(LaunchInterpreter.TERMINOS_Y_CONDICIONES, " = aceptado");
-			Parent termsConfirmed = FXMLLoader.load(getClass().getResource("../TermsConfirmed/terms_confirmed.fxml"));
-			Scene termsConfirmedScene = new Scene(termsConfirmed);
-			Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-			window.setScene(termsConfirmedScene);
-		} catch (IOException e) {
+			LaunchInterpreter.replaceValue( LaunchInterpreter.TERMINOS_Y_CONDICIONES, " = aceptado" );
+			WindowUtils.cambiarVentana( event, "[ACEPTADOS] Términos y condiciones", "../Ventanas/TermsConfirmed/terms_confirmed.fxml" );
+		} catch ( IOException e ) {
 			e.printStackTrace();
 		}
-
 	};
 
 	/**
 	 * Este evento cierra el programa ya que el usuario ha decidido NO aceptar los términos y condiciones.
 	 */
-	EventHandler<MouseEvent> cerrarPrograma = event -> {
-		System.exit(0);
-	};
+	EventHandler<MouseEvent> cerrarPrograma = event -> System.exit(0);
 
 	/**
 	 * Este evento se lanza al cargar la página

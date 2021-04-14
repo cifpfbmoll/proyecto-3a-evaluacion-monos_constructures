@@ -1,0 +1,5 @@
+.inner_panel {
+    -fx-background-color: #fff;
+    -fx-background-radius: 60;
+    -fx-effect: dropshadow(three-pass-box, black, 60, 0, 3, 3);
+}

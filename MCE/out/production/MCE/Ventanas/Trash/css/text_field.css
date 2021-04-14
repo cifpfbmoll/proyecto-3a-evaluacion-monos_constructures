@@ -1,0 +1,22 @@
+.text_field{
+    -fx-background-color: rgb(200, 200, 200);
+    -fx-background-radius: 10;
+    -fx-text-fill: #222;
+    -fx-border-color: rgb(255, 223, 223);
+    -fx-border-radius: 10;
+    -fx-prompt-text-fill: #222;
+}
+
+.text_field:focused {
+    -fx-background-color: rgb(220, 220, 220);
+    -fx-border-color: rgb(0, 100, 100);
+    -fx-border-width: 2;
+    -fx-border-radius: 10;
+}
+
+.text_field_error {
+    -fx-background-color: rgb(220, 220, 220);
+    -fx-border-color: rgb(150, 0, 0);
+    -fx-border-width: 2;
+    -fx-border-radius: 10;
+}

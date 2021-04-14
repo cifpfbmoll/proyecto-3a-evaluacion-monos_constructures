@@ -24,7 +24,7 @@ public class TermsAndConditionsController {
 	EventHandler<MouseEvent> aceptarTerminos = event ->{
 		try {
 			LaunchInterpreter.replaceValue( LaunchInterpreter.TERMINOS_Y_CONDICIONES, " = aceptado" );
-			WindowUtils.cambiarVentana( event, "[ACEPTADOS] Términos y condiciones", "../Ventanas/TermsConfirmed/terms_confirmed.fxml" );
+			WindowUtils.cambiarVentana( event, "[ACEPTADOS] Términos y condiciones", "../Ventanas/TermsConfirmed/terms_confirmed.fxml", false);
 		} catch ( IOException e ) {
 			e.printStackTrace();
 		}

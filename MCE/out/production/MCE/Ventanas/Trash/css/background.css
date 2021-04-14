@@ -1,0 +1,5 @@
+.background {
+        -fx-background-image: url("../img/background_gradient.jpg");
+        -fx-background-repeat: stretch;
+        -fx-background-position: center center;
+}

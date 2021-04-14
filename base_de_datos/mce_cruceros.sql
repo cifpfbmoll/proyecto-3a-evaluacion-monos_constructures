@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-04-2021 a las 13:26:04
+-- Tiempo de generación: 14-04-2021 a las 19:28:26
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.3
 
@@ -142,7 +142,7 @@ CREATE TABLE `empleado` (
 --
 
 INSERT INTO `empleado` (`CODIGO_EMPLEADO`, `NIE_EMPLEADO`, `NOMBRE_EMPLEADO`, `APELLIDO_EMPLEADO`, `DOMICILIACION_EMPLEADO`, `FECHA_NACIMIENTO_EMPLEADO`, `CODIGO_SERVICIO`, `CONTRASEÑA_EMPLEADO`) VALUES
-('001', '33333333A', 'Jose Luis', 'Saiz Lopez', 'C/ Caracas nº4', '2001-02-03', 'RRHH', '1234');
+('001', '33333333A', 'Jose Luis', 'Saiz Lopez', 'C/ Caracas nº4', '2001-02-03', 'RRHH', 'ɘ�����');
 
 -- --------------------------------------------------------
 

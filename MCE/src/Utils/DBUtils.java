@@ -1,5 +1,7 @@
 package Utils;
 
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 import java.sql.*;
 
 /**
@@ -55,12 +57,41 @@ public class DBUtils {
 	 * @throws SQLException Lanza una excepción en caso de no estar bien formulada la consulta [NO DEBERÍA].
 	 */
 	public static boolean employeeLogin(String nombre, String password) throws SQLException {
-		ResultSet resultSet = searchInTable("EMPLEADO", "CODIGO_SERVICIO",
-				"NOMBRE_EMPLEADO LIKE '" + nombre + "' AND CONTRASEÑA_EMPLEADO LIKE '" + password + "'");
+		ResultSet resultSet = searchInTable(
+				"EMPLEADO",
+				"CODIGO_EMPLEADO, NIE_EMPLEADO, NOMBRE_EMPLEADO, APELLIDO_EMPLEADO, CODIGO_SERVICIO",
+				"NIE_EMPLEADO LIKE '" + nombre + "' AND CONTRASEÑA_EMPLEADO LIKE '"
+				+ password + "'");
 		if (resultSet.next()){
+			Credentials.setUserAtService(resultSet);
 			return true;
 		} else {
 			return false;
 		}
+	}
+
+	/**
+	 * Encriptación de una cadena de texto, funciona para añadir privacidad a nuestra base de datos, de forma que sea
+	 * casi imposible descifrar una clave sin conocerla.
+	 * El tipo de algoritmo aplicado es Blowfish.
+	 * @param strClearText El texto sin cifrar
+	 * @param strKey La clave privada del algoritmo
+	 * @return Devuelve la cadena de texto cifrada
+	 * @throws Exception Produce una excepción en caso de no poder cifrar la cadena
+	 */
+	public static String encrypt(String strClearText,String strKey) throws Exception{
+		String strData;
+		try {
+			SecretKeySpec skeyspec=new SecretKeySpec(strKey.getBytes(),"Blowfish");
+			Cipher cipher=Cipher.getInstance("Blowfish");
+			cipher.init(Cipher.ENCRYPT_MODE, skeyspec);
+			byte[] encrypted=cipher.doFinal(strClearText.getBytes());
+			strData=new String(encrypted);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
+		return strData;
 	}
 }

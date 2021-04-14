@@ -7,8 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.sql.SQLException;
-
 /**
  * Esta es la clase principal del programa.
  * Contiene el método MAIN que se encarga de cargar la página principal.
@@ -22,7 +20,12 @@ public class App extends Application {
         testing();
 
         if (LaunchInterpreter.checkTermsAndConditions()){
-            System.out.println("Something went good");
+            Parent root = FXMLLoader.load(getClass().getResource("Ventanas/LogIn/log_in.fxml"));
+            primaryStage.setTitle("Iniciar sesión");
+            primaryStage.getIcons().add(new Image("Ventanas/Trash/img/MC_Logo.png"));
+            primaryStage.setScene(new Scene(root));
+            primaryStage.setResizable(false);
+            primaryStage.show();
         } else {
             Parent root = FXMLLoader.load(getClass().getResource("Ventanas/TermsAndConditions/terms_and_conditions.fxml"));
             primaryStage.setTitle("Términos y condiciones");
@@ -43,7 +46,7 @@ public class App extends Application {
      * Este método está enfocado especialmente para el PROCESO DE DESARROLLO de la aplicación
      * Este debe ser eliminado de la versión final junto a todas sus referencias en el código final.
      */
-    public static void testing() throws SQLException {
+    public static void testing() throws Exception {
         System.out.println("-------> Testing for class App.java");
         LaunchInterpreter.replaceValue(LaunchInterpreter.TERMINOS_Y_CONDICIONES, " = denegado");
 
@@ -56,6 +59,8 @@ public class App extends Application {
         }
         DBUtils.closeDB();
 
+        //encript
+        System.out.println(DBUtils.encrypt("1234", "1234"));
     }
 
 }

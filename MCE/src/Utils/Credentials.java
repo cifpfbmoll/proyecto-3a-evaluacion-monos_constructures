@@ -2,7 +2,9 @@ package Utils;
 
 import ObjetosCrucero.Servicios.RecursosHumanos;
 import ObjetosCrucero.Servicios.Usuario;
+import javafx.event.Event;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -41,6 +43,24 @@ public class Credentials {
 		testing();
 	}
 
+
+	/**
+	 * Función para mostrar la pantalla de inicio de un empleado dependiendo de su servicio.
+	 * @param event El evento que llama a esta función
+	 * @throws IOException Excepción al no poder leer el archivo en el FXMLPath.
+	 */
+	public static void loadUserWindow(Event event) throws IOException {
+		String nombreEmpleadoCompleto = loggedUser.getNombreEmpleado() + " " + loggedUser.getApellidoEmpleado();
+
+		if ( loggedUser instanceof RecursosHumanos ){
+			WindowUtils.cambiarVentana(
+					event,
+					"Recursos Humanos ~ " + nombreEmpleadoCompleto,
+					"../Ventanas/RecursosHumanos/MainPage/rrhh_main_page.fxml",
+					true
+			);
+		}
+	}
 
 	/**
 	 * [TESTING]

@@ -17,7 +17,7 @@ public class App extends Application {
     public void start(Stage primaryStage) throws Exception{
 
         //[TESTING]
-        testing();
+        //testing();
 
         if (LaunchInterpreter.checkTermsAndConditions()){
             Parent root = FXMLLoader.load(getClass().getResource("Ventanas/LogIn/log_in.fxml"));

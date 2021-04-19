@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="900.0" minWidth="1800.0" prefHeight="900.0" prefWidth="1800.0" styleClass="background" stylesheets="@../../Trash/css/background.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Ventanas.RecursosHumanos.MainPage.RrhhMainPageController">
+   <children>
+      <AnchorPane fx:id="mainCard" layoutX="79.0" layoutY="61.0" prefHeight="739.0" prefWidth="1234.0" styleClass="inner_panel" stylesheets="@../../Trash/css/inner_panel.css" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="50.0">
+         <children>
+            <Label fx:id="welcomeMessage" layoutX="14.0" layoutY="26.0" prefHeight="90.0" prefWidth="1513.0" text="¿Qué desea hacer hoy, [username] ?" textFill="#292929" AnchorPane.bottomAnchor="690.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font size="47.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="73.0" fitWidth="71.0" layoutX="1544.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Trash/img/MC_logo_Icon.png" />
+               </image>
+            </ImageView>
+            <AnchorPane layoutX="75.0" layoutY="169.0" prefHeight="562.0" prefWidth="770.0" styleClass="worktab" stylesheets="@../../Trash/css/worktab.css" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="170.0">
+               <children>
+                  <VBox fx:id="addUser" alignment="CENTER" layoutX="82.0" layoutY="89.0" prefHeight="200.0" prefWidth="201.0" styleClass="button_resizable" stylesheets="@../../Trash/css/button_resizable.css" AnchorPane.leftAnchor="82.0" AnchorPane.topAnchor="89.0">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Trash/img/ic_add_user.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="Nuevo empleado" textFill="#a70000">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </VBox>
+                  <VBox fx:id="removeUser" alignment="CENTER" layoutX="486.0" layoutY="89.0" prefHeight="200.0" prefWidth="201.0" styleClass="button_resizable" stylesheets="@../../Trash/css/button_resizable.css">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Trash/img/ic_remove-user.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="Tramitar despido" textFill="#a70000">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </VBox>
+                  <VBox fx:id="listUser" alignment="CENTER" layoutX="284.0" layoutY="315.0" prefHeight="200.0" prefWidth="201.0" styleClass="button_resizable" stylesheets="@../../Trash/css/button_resizable.css">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Trash/img/ic_user_list.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="Lista de empleados" textFill="#a70000">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </VBox>
+                  <Label layoutX="293.0" layoutY="14.0" prefHeight="36.0" prefWidth="186.0" text="••• Worktab •••" textFill="#676767">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

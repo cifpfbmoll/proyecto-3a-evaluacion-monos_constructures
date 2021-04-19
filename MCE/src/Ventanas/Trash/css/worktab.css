@@ -1,0 +1,5 @@
+.worktab{
+     -fx-background-color: #F0F0F0;
+     -fx-background-radius: 60;
+     -fx-effect: dropshadow(three-pass-box, #bbb, 30, 0, 0.1, 0.1);
+}

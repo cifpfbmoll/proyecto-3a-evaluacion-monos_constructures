@@ -1,9 +1,12 @@
 package Ventanas.LogIn;
 
+import Utils.Credentials;
 import Utils.DBUtils;
 import Utils.WindowUtils;
+import Ventanas.Fx.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -29,28 +32,6 @@ public class LogInController {
 	HBox login_warning;
 
 	/**
-	 * Incluye una animación al iniciar la ventana
-	 */
-	private void card_animation(){
-		TranslateTransition translate = new TranslateTransition();
-		translate.setFromY(900);
-		translate.setToY(0);
-		translate.setDuration(Duration.millis(1000));
-		translate.setAutoReverse(false);
-		translate.setNode(login_card);
-		translate.play();
-
-		FadeTransition fade = new FadeTransition();
-		fade.setDuration(Duration.millis(1500));
-		fade.setFromValue(0);
-		fade.setToValue(1);
-		fade.setAutoReverse(false);
-		fade.setNode(login_card);
-		fade.play();
-
-	}
-
-	/**
 	 * Oculta el mensaje de error de cuando no se introducen correctamente las credenciales al iniciar la sesión.
 	 */
 	private void ocultarError(){
@@ -66,11 +47,11 @@ public class LogInController {
 	 * Trata de validar que las credenciales introducidas son correctas y coiniden con los datos de un usuario de
 	 * nuestra base de datos
 	 */
-	private void iniciarSesion(){
+	private void iniciarSesion(Event event){
 		try {
 			DBUtils.connectDB();
 			if (DBUtils.employeeLogin(id.getText(), DBUtils.encrypt(password.getText(), password.getText()))){
-				//Se inicia sesión como ese usuario.
+				Credentials.loadUserWindow(event);
 			} else {
 				login_warning.setVisible(true);
 				id.getStyleClass().remove(0);
@@ -91,14 +72,14 @@ public class LogInController {
 	 */
 	EventHandler<MouseEvent> loginOnClick = event -> {
 		login_card.requestFocus();
-		iniciarSesion();
+		iniciarSesion(event);
 	};
 
 	//Soporte para cuando se presiona ENTER
 	EventHandler<KeyEvent> loginOnEnter = event -> {
 		if (event.getCode() == KeyCode.ENTER){
 			login_card.requestFocus();
-			iniciarSesion();
+			iniciarSesion(event);
 		}
 	};
 
@@ -109,7 +90,7 @@ public class LogInController {
 
 	@FXML
 	private void initialize(){
-		card_animation();
+		Animation.card_animation_BOTTOM_TOP(login_card);
 		ocultarError();
 		acceder.setOnMouseClicked(loginOnClick);
 		id.setOnKeyPressed(loginOnEnter);

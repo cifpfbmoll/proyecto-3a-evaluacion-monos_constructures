@@ -9,9 +9,9 @@ import java.sql.*;
  * Desde aquí se creará y cerrará la conexión, se crearán los métodos pertinentes para realizar diversas actividades.
  */
 public class DBUtils {
-	private static final String DB_PATH = "localhost/mce_cruceros";
-	private static final String DB_USER = "root";
-	private static final String DB_PASSWORD = "";
+	private static final String DB_PATH = "51.178.152.222:3306/mce_cruceros";
+	private static final String DB_USER = "mce_cruceros";
+	private static final String DB_PASSWORD = "a223@sign@l:23:sign&%lo@d::bl0ck";
 
 	private static Connection connectionDB;
 	private static Statement statementDB;

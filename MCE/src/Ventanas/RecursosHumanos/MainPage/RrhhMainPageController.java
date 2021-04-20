@@ -18,6 +18,7 @@ import java.util.logging.Handler;
 
 public class RrhhMainPageController {
 
+
 	@FXML
 	AnchorPane mainCard;
 
@@ -28,9 +29,14 @@ public class RrhhMainPageController {
 	VBox addUser;
 
 	@FXML
+	Label fechaYHora;
+
+	@FXML
 	private void initialize(){
 		Animation.card_animation_LEFT_RIGHT(mainCard);
 		welcomeMessage.setText(Mensajes.getMensajeBienvenida());
+		Animation.setFechaYHora(fechaYHora);
+
 	}
 
 

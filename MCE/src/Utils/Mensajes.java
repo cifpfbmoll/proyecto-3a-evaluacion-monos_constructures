@@ -8,16 +8,16 @@ public class Mensajes {
 
 	public static String getUserInfo(){
 		return new String(
-				Credentials.getLoggedUser().getNieEmpleado() + "\n" +
-						Credentials.getLoggedUser().getNombreEmpleado() +"\n" +
-						Credentials.getLoggedUser().getApellidoEmpleado() + "\n" +
+				Credentials.getLoggedUser().getNie() + "\n" +
+						Credentials.getLoggedUser().getNombre() +"\n" +
+						Credentials.getLoggedUser().getApellidos() + "\n" +
 						Credentials.getLoggedUser().getCodigoEmpleado() + "\n" +
 						Credentials.getLoggedUser().getNombreServicio()
 				);
 	}
 
 	public static String getMensajeBienvenida(){
-		String nombreUsuario = Credentials.getLoggedUser().getNombreEmpleado();
+		String nombreUsuario = Credentials.getLoggedUser().getNombre();
 		String[] welcomeMessages = new String[]{
 				"¡Buenos días " + nombreUsuario + " !",
 				"¿Le apetece un café,  " + nombreUsuario + "?",

@@ -1,7 +1,7 @@
 package Utils;
 
 import ObjetosCrucero.Servicios.RecursosHumanos;
-import ObjetosCrucero.Servicios.Usuario;
+import ObjetosCrucero.Servicios.Empleado;
 import javafx.event.Event;
 
 import java.io.IOException;
@@ -10,11 +10,11 @@ import java.sql.SQLException;
 
 public class Credentials {
 
-	private static Usuario loggedUser;
+	private static Empleado loggedUser;
 
 
 	//Getter general para extraer la información del usuario actual.
-	public static Usuario getLoggedUser() {
+	public static Empleado getLoggedUser() {
 		return loggedUser;
 	}
 
@@ -50,7 +50,7 @@ public class Credentials {
 	 * @throws IOException Excepción al no poder leer el archivo en el FXMLPath.
 	 */
 	public static void loadUserWindow(Event event) throws IOException {
-		String nombreEmpleadoCompleto = loggedUser.getNombreEmpleado() + " " + loggedUser.getApellidoEmpleado();
+		String nombreEmpleadoCompleto = loggedUser.getNombre() + " " + loggedUser.getApellidos();
 
 		if ( loggedUser instanceof RecursosHumanos ){
 			WindowUtils.cambiarVentana(

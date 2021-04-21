@@ -1,6 +1,6 @@
 package ObjetosCrucero.Servicios;
 
-public class RecursosHumanos extends Usuario {
+public class RecursosHumanos extends Empleado {
 
 
 	/**

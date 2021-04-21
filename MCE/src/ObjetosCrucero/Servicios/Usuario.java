@@ -2,52 +2,52 @@ package ObjetosCrucero.Servicios;
 
 public abstract class Usuario {
 
-	private String nifUsuario;
-	private String nombreUsuario;
-	private String apellidoUsuario;
-	private String direccionUsuario;
+	private String dni;
+	private String nombre;
+	private String apellido;
+	private String direccion;
 
 	//Getters y setters
 
-	public String getNifUsuario() {
-		return nifUsuario;
+	public String getDni() {
+		return dni;
 	}
 
-	public void setNifUsuario(String nifUsuario) {
-		this.nifUsuario = nifUsuario;
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
 
-	public String getNombreUsuario() {
-		return nombreUsuario;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public String getApellidoUsuario() {
-		return apellidoUsuario;
+	public String getApellido() {
+		return apellido;
 	}
 
-	public void setApellidoUsuario(String apellidoUsuario) {
-		this.apellidoUsuario = apellidoUsuario;
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
-	public String getDireccionUsuario() {
-		return direccionUsuario;
+	public String getDireccion() {
+		return direccion;
 	}
 
-	public void setDireccionUsuario(String direccionUsuario) {
-		this.direccionUsuario = direccionUsuario;
+	public void setDireccion(String direccionUsuario) {
+		this.direccion = direccionUsuario;
 	}
 
 	/**
 	 * Constructor con todos los parámetros
 	 */
-	public Usuario(String nifUsuario, String nombreUsuario, String apellidoUsuario) {
-		this.setNifUsuario(nifUsuario);
-		this.setNombreUsuario(nombreUsuario);
-		this.setApellidoUsuario(apellidoUsuario);
-		this.setDireccionUsuario(direccionUsuario);
+	public Usuario(String dni, String nombre, String apellido, String direccion) {
+		this.setDni(dni);
+		this.setNombre(nombre);
+		this.setApellido(apellido);
+		this.setDireccion(direccion);
 	}
 }

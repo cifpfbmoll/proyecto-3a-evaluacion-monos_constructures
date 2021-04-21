@@ -2,64 +2,42 @@ package ObjetosCrucero.Servicios;
 
 public abstract class Usuario {
 
-	private String codigoEmpleado;
-	private String nieEmpleado;
-	private String nombreEmpleado;
-	private String apellidoEmpleado;
-	private String nombreServicio;
+	private String nifUsuario;
+	private String nombreUsuario;
+	private String apellidoUsuario;
 
 	//Getters y setters
 
-	public String getCodigoEmpleado() {
-		return codigoEmpleado;
+	public String getNifUsuario() {
+		return nifUsuario;
 	}
 
-	public void setCodigoEmpleado(String codigoEmpleado) {
-		this.codigoEmpleado = codigoEmpleado;
+	public void setNifUsuario(String nifUsuario) {
+		this.nifUsuario = nifUsuario;
 	}
 
-	public String getNieEmpleado() {
-		return nieEmpleado;
+	public String getNombreUsuario() {
+		return nombreUsuario;
 	}
 
-	public void setNieEmpleado(String nieEmpleado) {
-		this.nieEmpleado = nieEmpleado;
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
 	}
 
-	public String getNombreEmpleado() {
-		return nombreEmpleado;
+	public String getApellidoUsuario() {
+		return apellidoUsuario;
 	}
 
-	public void setNombreEmpleado(String nombreEmpleado) {
-		this.nombreEmpleado = nombreEmpleado;
-	}
-
-	public String getApellidoEmpleado() {
-		return apellidoEmpleado;
-	}
-
-	public void setApellidoEmpleado(String apellidoEmpleado) {
-		this.apellidoEmpleado = apellidoEmpleado;
-	}
-
-	public String getNombreServicio() {
-		return nombreServicio;
-	}
-
-	public void setNombreServicio(String nombreServicio) {
-		this.nombreServicio = nombreServicio;
+	public void setApellidoUsuario(String apellidoUsuario) {
+		this.apellidoUsuario = apellidoUsuario;
 	}
 
 	/**
 	 * Constructor con todos los parámetros
 	 */
-	public Usuario(String codigoEmpleado, String nieEmpleado, String nombreEmpleado, String apellidoEmpleado, String nombreServicio) {
-		this.setCodigoEmpleado(codigoEmpleado);
-		this.setNieEmpleado(nieEmpleado);
-		this.setNombreEmpleado(nombreEmpleado);
-		this.setApellidoEmpleado(apellidoEmpleado);
-		this.setNombreServicio(nombreServicio);
+	public Usuario(String nifUsuario, String nombreUsuario, String apellidoUsuario) {
+		this.nifUsuario = nifUsuario;
+		this.nombreUsuario = nombreUsuario;
+		this.apellidoUsuario = apellidoUsuario;
 	}
-
-
 }

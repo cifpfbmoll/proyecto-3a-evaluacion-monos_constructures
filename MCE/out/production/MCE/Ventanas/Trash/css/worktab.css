@@ -3,3 +3,11 @@
      -fx-background-radius: 60;
      -fx-effect: dropshadow(three-pass-box, #bbb, 30, 0, 0.1, 0.1);
 }
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .viewport {
+       -fx-background-color: transparent;
+}

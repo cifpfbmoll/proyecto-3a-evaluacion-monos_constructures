@@ -21,9 +21,8 @@ public class DBUtils {
 	 * Se debe llamar desde clases externas, NUNCA desde un método interno de esta clase.
 	 * @throws SQLException Devuelve una excepción en caso de no poder conectarse a la base de datos.
 	 */
-	public static void connectDB() throws SQLException {
-		connectionDB = DriverManager.getConnection("jdbc:mysql://" + DB_PATH, DB_USER, DB_PASSWORD);
-		statementDB = connectionDB.createStatement();
+	public static Connection getConnectionDB() throws SQLException {
+		return DriverManager.getConnection("jdbc:mysql://" + DB_PATH, DB_USER, DB_PASSWORD);
 	}
 
 	/**
@@ -57,18 +56,34 @@ public class DBUtils {
 	 * @throws SQLException Lanza una excepción en caso de no estar bien formulada la consulta [NO DEBERÍA].
 	 */
 	public static boolean employeeLogin(String nombre, String password) throws SQLException {
-		ResultSet resultSet = searchInTable(
-				"EMPLEADO",
-				"CODIGO_EMPLEADO, NIE_EMPLEADO, NOMBRE_EMPLEADO, APELLIDO_EMPLEADO, CODIGO_SERVICIO",
-				"NIE_EMPLEADO LIKE '" + nombre + "' AND CONTRASEÑA_EMPLEADO LIKE '"
-				+ password + "'");
+		String log = "select " +
+				"               codigo_empleado, " +
+				"               nie_empleado, " +
+				"               nombre_empleado, " +
+				"               apellido_empleado, " +
+				"               codigo_servicio " +
+				"          from " +
+				"               empleado " +
+				"          where " +
+				"               nie_empleado LIKE ? AND contraseña_empleado LIKE ?";
+		PreparedStatement sentencia= getConnectionDB().prepareStatement(log);
+		sentencia.setString(1, nombre);
+		sentencia.setString(2, password);
+		ResultSet resultSet = sentencia.executeQuery();
+
+		boolean isValidLogin;
+
 		if (resultSet.next()){
 			Credentials.setUserAtService(resultSet);
-			return true;
+			isValidLogin = true;
 		} else {
-			return false;
+			isValidLogin = false;
 		}
+
+		getConnectionDB().close();
+		return isValidLogin;
 	}
+
 
 	/**
 	 * Encriptación de una cadena de texto, funciona para añadir privacidad a nuestra base de datos, de forma que sea

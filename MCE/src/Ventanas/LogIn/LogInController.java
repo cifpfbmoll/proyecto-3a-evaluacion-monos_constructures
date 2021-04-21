@@ -49,7 +49,6 @@ public class LogInController {
 	 */
 	private void iniciarSesion(Event event){
 		try {
-			DBUtils.connectDB();
 			if (DBUtils.employeeLogin(id.getText(), DBUtils.encrypt(password.getText(), password.getText()))){
 				Credentials.loadUserWindow(event);
 			} else {
@@ -60,7 +59,6 @@ public class LogInController {
 				password.getStyleClass().add("text_field_error");
 				WindowUtils.errorShakeScreen(login_card);
 			}
-			DBUtils.closeDB();
 		} catch (Exception throwables) {
 			throwables.printStackTrace();
 		}

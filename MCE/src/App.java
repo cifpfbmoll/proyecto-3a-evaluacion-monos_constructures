@@ -50,15 +50,6 @@ public class App extends Application {
         System.out.println("-------> Testing for class App.java");
         LaunchInterpreter.replaceValue(LaunchInterpreter.TERMINOS_Y_CONDICIONES, " = denegado");
 
-        System.out.print("--------------------> Login Status :");
-        DBUtils.connectDB();
-        if (DBUtils.employeeLogin("Jose Luis", "1234")){
-            System.out.print(" Signed in as Jose\n");
-        } else {
-            System.out.print(" Login incorrecto\n");
-        }
-        DBUtils.closeDB();
-
         //encript
         System.out.println(DBUtils.encrypt("1234", "1234"));
     }

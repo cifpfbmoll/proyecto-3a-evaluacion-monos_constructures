@@ -1,8 +1,20 @@
 package Utils;
 
+import ObjetosCrucero.Servicios.RecursosHumanos;
+
 import java.util.Random;
 
 public class Mensajes {
+
+	public static String getUserInfo(){
+		return new String(
+				Credentials.getLoggedUser().getNieEmpleado() + "\n" +
+						Credentials.getLoggedUser().getNombreEmpleado() +"\n" +
+						Credentials.getLoggedUser().getApellidoEmpleado() + "\n" +
+						Credentials.getLoggedUser().getCodigoEmpleado() + "\n" +
+						Credentials.getLoggedUser().getNombreServicio()
+				);
+	}
 
 	public static String getMensajeBienvenida(){
 		String nombreUsuario = Credentials.getLoggedUser().getNombreEmpleado();

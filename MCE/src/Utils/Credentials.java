@@ -35,12 +35,12 @@ public class Credentials {
 						userInfo.getString(1),
 						userInfo.getString(2),
 						userInfo.getString(3),
-						userInfo.getString(4)
+						userInfo.getString(4),
+						"Recursos Humanos"
 				);
 				break;
 			//Aquí se irán añadiendo los distintos servicios de la aplicación
 		}
-		testing();
 	}
 
 
@@ -63,15 +63,18 @@ public class Credentials {
 	}
 
 	/**
-	 * [TESTING]
-	 * Este método está enfocado especialmente para el PROCESO DE DESARROLLO de la aplicación
-	 * Este debe ser eliminado de la versión final junto a todas sus referencias en el código final.
+	 * Método para cerrar la sesión del usuario actual y volver a mostrar la pantalla del log in.
+	 * @param event el evento por el cual se está accediendo al método (REQUISITO).
+	 * @throws IOException lanza una excepción en caso de que no se pueda cargar la ventana.
 	 */
-	private static void testing(){
-		System.out.println("Bienvenido, " + getLoggedUser().getNombreEmpleado());
-		if (loggedUser instanceof RecursosHumanos){
-			System.out.println("Esperamos que le vaya bien su día en RRHH");
-		}
+	public static void logOut(Event event) throws IOException {
+		loggedUser = null;
+		WindowUtils.cambiarVentana(
+				event,
+				"Iniciar sesión",
+				"../Ventanas/LogIn/log_in.fxml",
+				false
+		);
 	}
 
 }

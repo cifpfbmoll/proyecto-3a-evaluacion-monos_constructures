@@ -5,6 +5,7 @@ public abstract class Usuario {
 	private String nifUsuario;
 	private String nombreUsuario;
 	private String apellidoUsuario;
+	private String direccionUsuario;
 
 	//Getters y setters
 
@@ -32,12 +33,21 @@ public abstract class Usuario {
 		this.apellidoUsuario = apellidoUsuario;
 	}
 
+	public String getDireccionUsuario() {
+		return direccionUsuario;
+	}
+
+	public void setDireccionUsuario(String direccionUsuario) {
+		this.direccionUsuario = direccionUsuario;
+	}
+
 	/**
 	 * Constructor con todos los parámetros
 	 */
 	public Usuario(String nifUsuario, String nombreUsuario, String apellidoUsuario) {
-		this.nifUsuario = nifUsuario;
-		this.nombreUsuario = nombreUsuario;
-		this.apellidoUsuario = apellidoUsuario;
+		this.setNifUsuario(nifUsuario);
+		this.setNombreUsuario(nombreUsuario);
+		this.setApellidoUsuario(apellidoUsuario);
+		this.setDireccionUsuario(direccionUsuario);
 	}
 }

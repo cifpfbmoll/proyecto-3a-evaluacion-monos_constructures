@@ -50,4 +50,10 @@ public abstract class Usuario {
 		this.setApellido(apellido);
 		this.setDireccion(direccion);
 	}
+
+	public Usuario(String dni, String nombre, String apellido) {
+		this.setDni(dni);
+		this.setNombre(nombre);
+		this.setApellido(apellido);
+	}
 }

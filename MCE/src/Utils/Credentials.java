@@ -50,7 +50,7 @@ public class Credentials {
 	 * @throws IOException Excepción al no poder leer el archivo en el FXMLPath.
 	 */
 	public static void loadUserWindow(Event event) throws IOException {
-		String nombreEmpleadoCompleto = loggedUser.getNombre() + " " + loggedUser.getApellidos();
+		String nombreEmpleadoCompleto = loggedUser.getNombre() + " " + loggedUser.getApellido();
 
 		if ( loggedUser instanceof RecursosHumanos ){
 			WindowUtils.cambiarVentana(

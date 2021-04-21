@@ -26,8 +26,8 @@ public abstract class Empleado extends Usuario{
 	/**
 	 * Constructor con todos los parámetros
 	 */
-	public Empleado(String codigoEmpleado, String nieEmpleado, String nombreEmpleado, String apellidoEmpleado, String nombreServicio) {
-		super(nombreEmpleado, apellidoEmpleado, nieEmpleado);
+	public Empleado(String codigoEmpleado, String dni, String nombre, String apellido, String nombreServicio) {
+		super( dni, nombre, apellido);
 		this.setCodigoEmpleado(codigoEmpleado);
 		this.setNombreServicio(nombreServicio);
 	}

@@ -8,9 +8,9 @@ public class Mensajes {
 
 	public static String getUserInfo(){
 		return new String(
-				Credentials.getLoggedUser().getNie() + "\n" +
+				Credentials.getLoggedUser().getDni() + "\n" +
 						Credentials.getLoggedUser().getNombre() +"\n" +
-						Credentials.getLoggedUser().getApellidos() + "\n" +
+						Credentials.getLoggedUser().getApellido() + "\n" +
 						Credentials.getLoggedUser().getCodigoEmpleado() + "\n" +
 						Credentials.getLoggedUser().getNombreServicio()
 				);

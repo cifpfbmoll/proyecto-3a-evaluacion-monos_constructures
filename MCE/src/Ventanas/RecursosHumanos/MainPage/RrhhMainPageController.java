@@ -1,5 +1,6 @@
 package Ventanas.RecursosHumanos.MainPage;
 
+import ObjetosCrucero.Servicios.RecursosHumanos;
 import Utils.Credentials;
 import Utils.Mensajes;
 import Ventanas.Fx.Animation;
@@ -15,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 
 public class RrhhMainPageController {

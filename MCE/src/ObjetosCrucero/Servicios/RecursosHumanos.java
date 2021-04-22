@@ -50,6 +50,7 @@ public class RecursosHumanos extends Empleado {
 			};
 			listaEmpleados.add(infoEmpleado);
 		}
+		DBUtils.getConnectionDB().close();
 		return listaEmpleados;
 	}
 

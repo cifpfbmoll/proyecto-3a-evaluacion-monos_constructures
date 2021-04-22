@@ -51,6 +51,9 @@ public abstract class Usuario {
 		this.setDireccion(direccion);
 	}
 
+	/**
+	 * Constructor esencial
+	 */
 	public Usuario(String dni, String nombre, String apellido) {
 		this.setDni(dni);
 		this.setNombre(nombre);

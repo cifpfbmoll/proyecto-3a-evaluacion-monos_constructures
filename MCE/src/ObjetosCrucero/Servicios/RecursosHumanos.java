@@ -46,7 +46,7 @@ public class RecursosHumanos extends Empleado {
 				resultSet.getString("APELLIDO_EMPLEADO"),
 				resultSet.getString("DOMICILIACION_EMPLEADO"),
 				resultSet.getString("FECHA_NACIMIENTO_EMPLEADO"),
-					resultSet.getString("CODIGO_SERVICIO")
+				resultSet.getString("CODIGO_SERVICIO")
 			};
 			listaEmpleados.add(infoEmpleado);
 		}

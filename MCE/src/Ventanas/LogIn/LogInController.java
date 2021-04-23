@@ -19,6 +19,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
+import java.util.concurrent.TimeUnit;
+
 public class LogInController {
 	@FXML
 	TextField id;
@@ -87,13 +89,18 @@ public class LogInController {
 	EventHandler<KeyEvent> ocultarAlEscribir = event -> ocultarError();
 
 	@FXML
-	private void initialize(){
-		Animation.card_animation_BOTTOM_TOP(login_card);
+	private void initialize() throws InterruptedException {
+
 		ocultarError();
+
+		//Añadiendo las funcionalidades a los nodos
 		acceder.setOnMouseClicked(loginOnClick);
 		id.setOnKeyPressed(loginOnEnter);
 		password.setOnKeyPressed(loginOnEnter);
 		id.addEventHandler(KeyEvent.KEY_PRESSED, ocultarAlEscribir);
 		password.addEventHandler(KeyEvent.KEY_PRESSED, ocultarAlEscribir);
+
+		//Creando la animación de entrada
+		Animation.card_animation_BOTTOM_CENTER(login_card);
 	}
 }

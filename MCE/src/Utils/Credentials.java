@@ -7,6 +7,8 @@ import javafx.event.Event;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Credentials {
 
@@ -75,6 +77,25 @@ public class Credentials {
 				"../Ventanas/LogIn/log_in.fxml",
 				false
 		);
+	}
+
+	public static boolean validarDni(String dni) {
+		String listaLetras = "TRWAGMYFPDXBNJZSQVHLCKE";
+		dni = dni.toUpperCase();
+		Pattern patronDni = Pattern.compile("[0-9]{8}[A-Z]");
+		Matcher validadorPatron = patronDni.matcher(dni);
+		if (validadorPatron.matches()) {
+			int letra = (int) (Long.parseLong(dni.replaceAll("([A-Z])",""))%23);
+			if (listaLetras.charAt(letra) == dni.charAt(9)) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			return false;
+		}
 	}
 
 }

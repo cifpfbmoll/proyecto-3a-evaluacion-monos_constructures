@@ -7,6 +7,7 @@ import javafx.event.Event;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -92,6 +93,17 @@ public class Credentials {
 			else {
 				return false;
 			}
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean validarNombre(String nombre) {
+		Pattern patronNombre = Pattern.compile("[A-Z]{2,30}");
+		Matcher validadorPatron = patronNombre.matcher(nombre.toUpperCase(Locale.ROOT));
+		if (validadorPatron.matches()) {
+			return true;
 		}
 		else {
 			return false;

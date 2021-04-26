@@ -86,7 +86,7 @@ public class Credentials {
 		Matcher validadorPatron = patronDni.matcher(dni);
 		if (validadorPatron.matches()) {
 			int letra = (int) (Long.parseLong(dni.replaceAll("([A-Z])",""))%23);
-			if (listaLetras.charAt(letra) == dni.charAt(9)) {
+			if (listaLetras.charAt(letra) == dni.charAt(8)) {
 				return true;
 			}
 			else {

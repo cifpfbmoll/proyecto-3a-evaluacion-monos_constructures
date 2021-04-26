@@ -1,6 +1,6 @@
 package ObjetosCrucero.Servicios;
 
-public class Administrativo extends Usuario{
+public class Administrativo extends Empleado{
     //private int nivelAcceso;???
     //private String seccion;???
 

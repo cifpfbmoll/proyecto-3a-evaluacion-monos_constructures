@@ -14,8 +14,8 @@ public class RecursosHumanos extends Empleado {
 	/**
 	 * Constructor con todos los parámetros
 	 */
-	public RecursosHumanos(String codigoEmpleado, String nieEmpleado, String nombreEmpleado, String apellidoEmpleado, String nombreServicio) {
-		super(codigoEmpleado, nieEmpleado, nombreEmpleado, apellidoEmpleado, nombreServicio);
+	public RecursosHumanos(String codigoEmpleado, String nieEmpleado, String nombreEmpleado, String apellidoEmpleado, TipoServicio servicio) {
+		super(codigoEmpleado, nieEmpleado, nombreEmpleado, apellidoEmpleado, servicio);
 	}
 
 
@@ -47,7 +47,7 @@ public class RecursosHumanos extends Empleado {
 					resultSet.getString("NIE_EMPLEADO"),
 					resultSet.getString("NOMBRE_EMPLEADO"),
 					resultSet.getString("APELLIDO_EMPLEADO"),
-					resultSet.getString("CODIGO_SERVICIO"),
+					TipoServicio.valueOf(resultSet.getString("CODIGO_SERVICIO")),
 					resultSet.getString("DOMICILIACION_EMPLEADO"),
 					Date.valueOf(resultSet.getString("FECHA_NACIMIENTO_EMPLEADO"))
 			);

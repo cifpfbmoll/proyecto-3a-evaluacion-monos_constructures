@@ -2,6 +2,7 @@ package Utils;
 
 import ObjetosCrucero.Servicios.RecursosHumanos;
 import ObjetosCrucero.Servicios.Empleado;
+import ObjetosCrucero.Servicios.TipoServicio;
 import javafx.event.Event;
 
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class Credentials {
 						userInfo.getString(2),
 						userInfo.getString(3),
 						userInfo.getString(4),
-						"Recursos Humanos"
+						TipoServicio.valueOf("RRHH")
 				);
 				break;
 			//Aquí se irán añadiendo los distintos servicios de la aplicación

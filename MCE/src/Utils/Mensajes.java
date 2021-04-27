@@ -12,7 +12,7 @@ public class Mensajes {
 						Credentials.getLoggedUser().getNombre() +"\n" +
 						Credentials.getLoggedUser().getApellido() + "\n" +
 						Credentials.getLoggedUser().getCodigoEmpleado() + "\n" +
-						Credentials.getLoggedUser().getNombreServicio()
+						Credentials.getLoggedUser().getTipoServicio()
 				);
 	}
 

@@ -9,9 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
 import java.time.LocalDate;
-import java.util.concurrent.TimeUnit;
 
 public class RrhhAddStaffController {
 

@@ -6,6 +6,7 @@ public class Empleado extends Usuario{
 
 	private String codigoEmpleado;
 	private String nombreServicio;
+	private TiposServicios tiposServicios;
 
 	//Getters y setters
 
@@ -23,6 +24,16 @@ public class Empleado extends Usuario{
 
 	public void setNombreServicio(String nombreServicio) {
 		this.nombreServicio = nombreServicio;
+	}
+	/**
+	 * Getter y setter de TiposServicios
+	 */
+	public TiposServicios getTiposServicios() {
+		return tiposServicios;
+	}
+
+	public void setTiposServicios(TiposServicios tiposServicios) {
+		this.tiposServicios = tiposServicios;
 	}
 
 	/**

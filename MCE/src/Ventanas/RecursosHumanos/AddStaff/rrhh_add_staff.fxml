@@ -2,11 +2,15 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -21,7 +25,7 @@
             </Label>
             <ImageView fitHeight="73.0" fitWidth="71.0" layoutX="1544.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../Trash/img/MC_logo_Icon.png" />
+                  <Image url="@../../Trash/img/ic_add_user.png" />
                </image>
             </ImageView>
             <AnchorPane layoutX="75.0" layoutY="122.0" prefHeight="608.0" prefWidth="1452.0" styleClass="worktab" stylesheets="@../../Trash/css/worktab.css" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="122.0">
@@ -33,7 +37,230 @@
                   </Label>
                   <ScrollPane fx:id="wtabScroll" cache="true" focusTraversable="false" hbarPolicy="NEVER" layoutX="27.0" layoutY="69.0" prefHeight="442.0" prefWidth="752.0" stylesheets="@../../Trash/css/worktab.css" vbarPolicy="NEVER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="69.0">
                      <content>
-                        <AnchorPane fx:id="wtabContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="456.0" prefWidth="1470.0" />
+                        <AnchorPane fx:id="wtabContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="683.0" prefWidth="1470.0">
+                           <children>
+                              <VBox layoutX="9.0" layoutY="27.0" prefHeight="642.0" prefWidth="1402.0">
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="150.0" prefWidth="1279.0">
+                                       <children>
+                                          <ImageView fitHeight="111.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../Trash/img/ic_logged_user.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets left="175.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="22.0" prefWidth="1268.0">
+                                       <children>
+                                          <ImageView fitHeight="16.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../Trash/img/warning_icon.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets left="180.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                          <Label text="El nombre introducido no es correcto" textFill="#b20000">
+                                             <HBox.margin>
+                                                <Insets left="6.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="40.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="50.0" prefWidth="1374.0">
+                                       <children>
+                                          <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="174.0">
+                                             <children>
+                                                <Label text="Nombre:" />
+                                             </children>
+                                          </HBox>
+                                          <TextField prefHeight="18.0" prefWidth="258.0" styleClass="text_field" stylesheets="@../../Trash/css/text_field.css">
+                                             <HBox.margin>
+                                                <Insets left="20.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="22.0" prefWidth="1268.0">
+                                       <children>
+                                          <ImageView fitHeight="16.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../Trash/img/warning_icon.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets left="180.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                          <Label text="El apellido introducido no es válido" textFill="#b20000">
+                                             <HBox.margin>
+                                                <Insets left="6.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="40.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="50.0" prefWidth="1374.0">
+                                       <children>
+                                          <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="174.0">
+                                             <children>
+                                                <Label text="Apellidos:" />
+                                             </children>
+                                          </HBox>
+                                          <TextField prefHeight="18.0" prefWidth="258.0" styleClass="text_field" stylesheets="@../../Trash/css/text_field.css">
+                                             <HBox.margin>
+                                                <Insets left="20.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="22.0" prefWidth="1268.0">
+                                       <children>
+                                          <ImageView fitHeight="16.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../Trash/img/warning_icon.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets left="180.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                          <Label text="El DNI no cumple con los requisitos establecidos" textFill="#b20000">
+                                             <HBox.margin>
+                                                <Insets left="6.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="40.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="50.0" prefWidth="1374.0">
+                                       <children>
+                                          <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="174.0">
+                                             <children>
+                                                <Label text="DNI:" />
+                                             </children>
+                                          </HBox>
+                                          <TextField prefHeight="18.0" prefWidth="258.0" styleClass="text_field" stylesheets="@../../Trash/css/text_field.css">
+                                             <HBox.margin>
+                                                <Insets left="20.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="22.0" prefWidth="1268.0">
+                                       <children>
+                                          <ImageView fitHeight="16.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../Trash/img/warning_icon.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets left="180.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                          <Label text="La domiciliación no es correcta" textFill="#b20000">
+                                             <HBox.margin>
+                                                <Insets left="6.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="40.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="50.0" prefWidth="1374.0">
+                                       <children>
+                                          <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="174.0">
+                                             <children>
+                                                <Label text="Domiciliación:" />
+                                             </children>
+                                          </HBox>
+                                          <TextField prefHeight="18.0" prefWidth="258.0" styleClass="text_field" stylesheets="@../../Trash/css/text_field.css">
+                                             <HBox.margin>
+                                                <Insets left="20.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="22.0" prefWidth="1268.0">
+                                       <children>
+                                          <ImageView fitHeight="16.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../Trash/img/warning_icon.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets left="180.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                          <Label text="El empleado debe tener al menos 18 años" textFill="#b20000">
+                                             <HBox.margin>
+                                                <Insets left="6.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="40.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="50.0" prefWidth="1374.0">
+                                       <children>
+                                          <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="174.0">
+                                             <children>
+                                                <Label text="Fecha nacimiento:" />
+                                             </children>
+                                          </HBox>
+                                          <DatePicker fx:id="fechaNacimiento" prefHeight="26.0" prefWidth="252.0">
+                                             <HBox.margin>
+                                                <Insets left="20.0" />
+                                             </HBox.margin>
+                                          </DatePicker>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="50.0" prefWidth="1374.0">
+                                       <children>
+                                          <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="174.0">
+                                             <children>
+                                                <Label text="Servicio:" />
+                                             </children>
+                                          </HBox>
+                                          <ChoiceBox fx:id="tipoServicio" prefHeight="26.0" prefWidth="250.0">
+                                             <HBox.margin>
+                                                <Insets left="20.0" />
+                                             </HBox.margin>
+                                          </ChoiceBox>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="40.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets right="200.0" />
+                                 </padding>
+                              </VBox>
+                           </children></AnchorPane>
                      </content>
                   </ScrollPane>
                </children>

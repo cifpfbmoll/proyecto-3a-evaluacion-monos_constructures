@@ -1,13 +1,25 @@
 package ObjetosCrucero.Servicios;
 
+import java.util.Date;
+
 public abstract class Usuario {
 
 	private String dni;
 	private String nombre;
 	private String apellido;
 	private String direccion;
+	private Date fechaNacimiento;
+
 
 	//Getters y setters
+
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
 
 	public String getDni() {
 		return dni;
@@ -44,11 +56,12 @@ public abstract class Usuario {
 	/**
 	 * Constructor con todos los parámetros
 	 */
-	public Usuario(String dni, String nombre, String apellido, String direccion) {
+	public Usuario(String dni, String nombre, String apellido, String direccion, Date fechaNacimiento) {
 		this.setDni(dni);
 		this.setNombre(nombre);
 		this.setApellido(apellido);
 		this.setDireccion(direccion);
+		this.setFechaNacimiento(fechaNacimiento);
 	}
 
 	/**

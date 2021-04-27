@@ -110,4 +110,14 @@ public class Credentials {
 		}
 	}
 
+	public static boolean validarApellido(String apellido) {
+		Pattern patronNombre = Pattern.compile("[A-Z]{2,30}");
+		Matcher validadorPatron = patronNombre.matcher(apellido.toUpperCase(Locale.ROOT));
+		if (validadorPatron.matches()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }

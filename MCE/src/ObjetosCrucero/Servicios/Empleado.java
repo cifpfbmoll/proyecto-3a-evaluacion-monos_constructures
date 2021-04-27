@@ -1,6 +1,8 @@
 package ObjetosCrucero.Servicios;
 
-public abstract class Empleado extends Usuario{
+import java.util.Date;
+
+public class Empleado extends Usuario{
 
 	private String codigoEmpleado;
 	private String nombreServicio;
@@ -26,8 +28,17 @@ public abstract class Empleado extends Usuario{
 	/**
 	 * Constructor con todos los parámetros
 	 */
-	public Empleado(String codigoEmpleado, String dni, String nombre, String apellido, String nombreServicio) {
-		super( dni, nombre, apellido);
+	public Empleado(String codigoEmpleado, String dni, String nombre, String apellido, String nombreServicio, String direccion, Date fechaNacimiento) {
+		super( dni, nombre, apellido, direccion, fechaNacimiento);
+		this.setCodigoEmpleado(codigoEmpleado);
+		this.setNombreServicio(nombreServicio);
+	}
+
+	/**
+	 * Constructor esencial
+	 */
+	public Empleado(String codigoEmpleado, String dni, String nombre, String apellido, String nombreServicio){
+		super(dni, nombre, apellido);
 		this.setCodigoEmpleado(codigoEmpleado);
 		this.setNombreServicio(nombreServicio);
 	}

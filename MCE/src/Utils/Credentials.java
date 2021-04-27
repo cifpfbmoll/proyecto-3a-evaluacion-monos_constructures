@@ -121,5 +121,14 @@ public class Credentials {
 		}
 	}
 
-
+	public static boolean validarDireccion(String direccion) {
+		Pattern patronNombre = Pattern.compile("[A-Z ]{10,50}{0,1}[A-Z 0-9,º']{0,25}");
+		Matcher validadorPatron = patronNombre.matcher(direccion.toUpperCase(Locale.ROOT));
+		if (validadorPatron.matches()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }

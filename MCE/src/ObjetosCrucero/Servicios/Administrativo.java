@@ -46,8 +46,30 @@ public class Administrativo extends Empleado{
         return listaCruceros;
     }
 
-    public static ArrayList<Cliente> getListaPasajeros() {
-        return null;
+    public static ArrayList<Cliente> getListaPasajeros() throws SQLException {
+        ArrayList<Cliente> listaClientes = new ArrayList();
+
+        DBUtils.createConnectionDB();
+        //PENSAR SENTENCIA
+        String clientesSQL = ";";
+        PreparedStatement sentencia = DBUtils.getConnectionDB().prepareStatement(clientesSQL);
+        ResultSet resultSet = sentencia.executeQuery();
+
+        Cliente cliente;
+
+        while (resultSet.next()) {
+            cliente = new Cliente(
+                    resultSet.getString("NIE"),
+                    resultSet.getString("NOMBRE_CLIENTE"),
+                    resultSet.getString("APELLIDOS_CLIENTE"),
+                    Date.valueOf(resultSet.getString("FECHA_NACIMIENTO_CLIENTE")),
+                    resultSet.getString("CODIGO_DESCUENTO"),
+                    resultSet.getString("TELEFONO_CLIENTE")
+            );
+            listaClientes.add(cliente);
+        }
+        DBUtils.getConnectionDB().close();
+        return listaClientes;
     }
 
     public static ArrayList<Empleado> getListaTripulacion() throws SQLException {

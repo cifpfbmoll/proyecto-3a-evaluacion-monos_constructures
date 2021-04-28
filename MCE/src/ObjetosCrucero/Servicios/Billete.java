@@ -1,9 +1,10 @@
 package ObjetosCrucero.Servicios;
+import java.sql.PreparedStatement;
 import java.util.Date;
 
 public class Billete {
     //Atributos
-    
+
     private String nie;
     private Date fechaEmbarque;
     private String codigoCamarote;
@@ -42,9 +43,14 @@ public class Billete {
         this.setCodigoCamarote(codigoCamarote);
     }
     /*//Métodos
+    PreparedStatement pstInsertarBillete;
     String sqlNuevoBillete = "INSERT INTO Billete VALUES (?,?,?)";
-    */
-
+    pstInsertarBillete = cn.preparedStatement(sqlNuevoBillete);
+    pstInsertarBillete.setString(1, NIE);
+    pstInsertarBillete.setDate(2, FECHA_EMBARQUE_VIAJE);
+    pstInsertarBillete.setString(3, CODIGO_CAMAROTE);
+    pstInsertarBillete.executeUpdate();
+     */
 }
 
 

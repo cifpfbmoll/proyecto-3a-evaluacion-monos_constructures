@@ -13,8 +13,8 @@ public class Administrativo extends Empleado{
     /**
      * Constructor con parametros de superclase
      */
-    public Administrativo(String codigoEmpleado, String nieEmpleado, String nombreEmpleado, String apellidoEmpleado, String nombreServicio) {
-        super(codigoEmpleado, nieEmpleado, nombreEmpleado, apellidoEmpleado, nombreServicio);
+    public Administrativo(String codigoEmpleado, String nieEmpleado, String nombreEmpleado, String apellidoEmpleado, TipoServicio servicio) {
+        super(codigoEmpleado, nieEmpleado, nombreEmpleado, apellidoEmpleado, servicio);
     }
 
     /*Metodos de clase

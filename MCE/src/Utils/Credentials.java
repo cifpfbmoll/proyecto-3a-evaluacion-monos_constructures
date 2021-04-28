@@ -129,13 +129,13 @@ public class Credentials {
 
 	/**
 	 * valida que el apellido solo contiene letras y como maximo un espacio
-	 * el apellido es de minimo 4 letras y meximo de 40 + espacio
+	 * el apellido es de minimo 4 letras y meximo de 39 + espacio
 	 *
 	 * @param apellido
 	 * @return true si es valido, false si no
 	 */
 	public static boolean validarApellido(String apellido) {
-		Pattern patronApellido = Pattern.compile("[A-Z]{2,20}[ ]{0,1}[A-Z]{2,20}");
+		Pattern patronApellido = Pattern.compile("[A-Z]{2,19}[ ]{0,1}[A-Z]{2,20}");
 		Matcher validadorPatron = patronApellido.matcher(apellido.toUpperCase(Locale.ROOT));
 		if (validadorPatron.matches()) {
 			return true;
@@ -147,13 +147,13 @@ public class Credentials {
 
 	/**
 	 * valida que una direccion solo contenga letras, numeros, espacios, o º y '
-	 * la direccion debe tener entre 10 y 70 caracteres
+	 * la direccion debe tener entre 10 y 40 caracteres
 	 *
 	 * @param direccion
 	 * @return true si es valido, false si no
 	 */
 	public static boolean validarDireccion(String direccion) {
-		Pattern patronDireccion = Pattern.compile("[A-Z 0-9,º']{10,70}");
+		Pattern patronDireccion = Pattern.compile("[A-Z 0-9,º']{10,40}");
 		Matcher validadorPatron = patronDireccion.matcher(direccion.toUpperCase(Locale.ROOT));
 		if (validadorPatron.matches()) {
 			return true;

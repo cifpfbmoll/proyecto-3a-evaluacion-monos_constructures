@@ -83,6 +83,13 @@ public class Credentials {
 		);
 	}
 
+	/**
+	 * Este metodo te dice si un dni es valido segun si esta bien formatado
+	 * y mira si la letra es valida.
+	 *
+	 * @param dni
+	 * @return true si es valido, false si no
+	 */
 	public static boolean validarDni(String dni) {
 		String listaLetras = "TRWAGMYFPDXBNJZSQVHLCKE";
 		dni = dni.toUpperCase();
@@ -102,6 +109,13 @@ public class Credentials {
 		}
 	}
 
+	/**
+	 * valida un nombre para asegurarse de que solo contiene letras
+	 * y entre 2 y 30 caracteres
+	 *
+	 * @param nombre
+	 * @return true si es valido, false si no
+	 */
 	public static boolean validarNombre(String nombre) {
 		Pattern patronNombre = Pattern.compile("[A-Z]{2,30}");
 		Matcher validadorPatron = patronNombre.matcher(nombre.toUpperCase(Locale.ROOT));
@@ -113,6 +127,13 @@ public class Credentials {
 		}
 	}
 
+	/**
+	 * valida que el apellido solo contiene letras y como maximo un espacio
+	 * el apellido es de minimo 4 letras y meximo de 40 + espacio
+	 *
+	 * @param apellido
+	 * @return true si es valido, false si no
+	 */
 	public static boolean validarApellido(String apellido) {
 		Pattern patronApellido = Pattern.compile("[A-Z]{2,20}[ ]{0,1}[A-Z]{2,20}");
 		Matcher validadorPatron = patronApellido.matcher(apellido.toUpperCase(Locale.ROOT));
@@ -124,8 +145,15 @@ public class Credentials {
 		}
 	}
 
+	/**
+	 * valida que una direccion solo contenga letras, numeros, espacios, o º y '
+	 * la direccion debe tener entre 10 y 70 caracteres
+	 *
+	 * @param direccion
+	 * @return true si es valido, false si no
+	 */
 	public static boolean validarDireccion(String direccion) {
-		Pattern patronDireccion = Pattern.compile("[A-Z ]{10,50}[A-Z 0-9,º']{0,50}");
+		Pattern patronDireccion = Pattern.compile("[A-Z 0-9,º']{10,70}");
 		Matcher validadorPatron = patronDireccion.matcher(direccion.toUpperCase(Locale.ROOT));
 		if (validadorPatron.matches()) {
 			return true;
@@ -135,6 +163,13 @@ public class Credentials {
 		}
 	}
 
+	/**
+	 * valida que el poseedor de la fecha de nacimiento introducida tenga minimo 18 años y maximo 100
+	 * resta la fecha introducida a la actual en milisegundos y hace un cambio de unidad de milisegundos a años
+	 *
+	 * @param fecha
+	 * @return true si es valido, false si no
+	 */
 	public static boolean validarFecha(Date fecha) {
 		int diaHoy = LocalDate.now().getDayOfMonth();
 		int mesHoy = LocalDate.now().getMonthValue();

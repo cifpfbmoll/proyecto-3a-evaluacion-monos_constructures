@@ -1,17 +1,15 @@
 package Ventanas.RecursosHumanos.AddStaff;
 
 import Utils.Credentials;
-import Utils.Mensajes;
 import Ventanas.Fx.Animation;
+import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.util.concurrent.TimeUnit;
+import java.time.LocalDate;
 
 public class RrhhAddStaffController {
 
@@ -23,6 +21,15 @@ public class RrhhAddStaffController {
 
 	@FXML
 	VBox backButton;
+
+	@FXML
+	ScrollPane wtabScroll;
+
+	@FXML
+	ChoiceBox tipoServicio;
+
+	@FXML
+	DatePicker fechaNacimiento;
 
 
 	EventHandler<MouseEvent> goBack = event -> {
@@ -39,15 +46,35 @@ public class RrhhAddStaffController {
 	@FXML
 	private void initialize() throws InterruptedException {
 
+		// Ajustamos la opacidad de entrada
+		mainCard.setOpacity(0);
+
+		// Ajustando la velocidad de "Scroll" del ScrollPane
+		final double SPEED = 0.005;
+		wtabScroll.getContent().setOnScroll(scrollEvent -> {
+			double deltaY = scrollEvent.getDeltaY() * SPEED;
+			wtabScroll.setVvalue(wtabScroll.getVvalue() - deltaY);
+		});
+
+
 		//Ajustamos los distintos textos del panel
 		Animation.setFechaYHora(fechaYHora);
+		tipoServicio.setItems(FXCollections.observableArrayList(
+				"Recursos Humanos", "Administración", "Ventas"
+		));
+		tipoServicio.setValue(tipoServicio.getItems().get(0));
+		fechaNacimiento.setValue(LocalDate.of(
+				LocalDate.now().getYear() - 18,
+				LocalDate.now().getMonth(),
+				LocalDate.now().getDayOfMonth()
+		));
+
 
 		//Añadimos la funcionalidad a los botones
 		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, goBack);
 
 		//Creando la animación de entrada
 		Animation.card_animation_RIGHT_CENTER(mainCard);
-
 	}
 
 }

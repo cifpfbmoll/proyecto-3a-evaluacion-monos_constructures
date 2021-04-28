@@ -68,6 +68,9 @@ public class RrhhMainPageController {
 	@FXML
 	private void initialize() throws InterruptedException {
 
+		// Ajustamos la opacidad de entrada
+		mainCard.setOpacity(0);
+
 		// Ajustando la velocidad de "Scroll" del ScrollPane
 		final double SPEED = 0.005;
 		wtabScroll.getContent().setOnScroll(scrollEvent -> {

@@ -1,9 +1,11 @@
 package ObjetosCrucero.Servicios;
 
-public abstract class Empleado extends Usuario{
+import java.util.Date;
+
+public class Empleado extends Usuario{
 
 	private String codigoEmpleado;
-	private String nombreServicio;
+	private TipoServicio tiposServicios;
 
 	//Getters y setters
 
@@ -15,21 +17,30 @@ public abstract class Empleado extends Usuario{
 		this.codigoEmpleado = codigoEmpleado;
 	}
 
-	public String getNombreServicio() {
-		return nombreServicio;
+	public TipoServicio getTipoServicio() {
+		return tiposServicios;
 	}
 
-	public void setNombreServicio(String nombreServicio) {
-		this.nombreServicio = nombreServicio;
+	public void setTipoServicio(TipoServicio tiposServicios) {
+		this.tiposServicios = tiposServicios;
 	}
 
 	/**
 	 * Constructor con todos los parámetros
 	 */
-	public Empleado(String codigoEmpleado, String dni, String nombre, String apellido, String nombreServicio) {
-		super( dni, nombre, apellido);
+	public Empleado(String codigoEmpleado, String dni, String nombre, String apellido, TipoServicio servicio, String direccion, Date fechaNacimiento) {
+		super( dni, nombre, apellido, direccion, fechaNacimiento);
 		this.setCodigoEmpleado(codigoEmpleado);
-		this.setNombreServicio(nombreServicio);
+		this.setTipoServicio(servicio);
+	}
+
+	/**
+	 * Constructor esencial
+	 */
+	public Empleado(String codigoEmpleado, String dni, String nombre, String apellido, TipoServicio servicio){
+		super(dni, nombre, apellido);
+		this.setCodigoEmpleado(codigoEmpleado);
+		this.setTipoServicio(servicio);
 	}
 
 

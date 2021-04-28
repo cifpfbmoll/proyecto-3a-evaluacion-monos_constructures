@@ -2,11 +2,17 @@ package Utils;
 
 import ObjetosCrucero.Servicios.RecursosHumanos;
 import ObjetosCrucero.Servicios.Empleado;
+import ObjetosCrucero.Servicios.TipoServicio;
 import javafx.event.Event;
 
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Credentials {
 
@@ -36,7 +42,7 @@ public class Credentials {
 						userInfo.getString(2),
 						userInfo.getString(3),
 						userInfo.getString(4),
-						"Recursos Humanos"
+						TipoServicio.valueOf("RRHH")
 				);
 				break;
 			//Aquí se irán añadiendo los distintos servicios de la aplicación
@@ -75,6 +81,72 @@ public class Credentials {
 				"../Ventanas/LogIn/log_in.fxml",
 				false
 		);
+	}
+
+	public static boolean validarDni(String dni) {
+		String listaLetras = "TRWAGMYFPDXBNJZSQVHLCKE";
+		dni = dni.toUpperCase();
+		Pattern patronDni = Pattern.compile("[0-9]{8}[A-Z]");
+		Matcher validadorPatron = patronDni.matcher(dni);
+		if (validadorPatron.matches()) {
+			int letra = (int) (Long.parseLong(dni.replaceAll("([A-Z])",""))%23);
+			if (listaLetras.charAt(letra) == dni.charAt(8)) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean validarNombre(String nombre) {
+		Pattern patronNombre = Pattern.compile("[A-Z]{2,30}");
+		Matcher validadorPatron = patronNombre.matcher(nombre.toUpperCase(Locale.ROOT));
+		if (validadorPatron.matches()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean validarApellido(String apellido) {
+		Pattern patronApellido = Pattern.compile("[A-Z]{2,20}[ ]{0,1}[A-Z]{2,20}");
+		Matcher validadorPatron = patronApellido.matcher(apellido.toUpperCase(Locale.ROOT));
+		if (validadorPatron.matches()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean validarDireccion(String direccion) {
+		Pattern patronDireccion = Pattern.compile("[A-Z ]{10,50}[A-Z 0-9,º']{0,50}");
+		Matcher validadorPatron = patronDireccion.matcher(direccion.toUpperCase(Locale.ROOT));
+		if (validadorPatron.matches()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean validarFecha(Date fecha) {
+		int diaHoy = LocalDate.now().getDayOfMonth();
+		int mesHoy = LocalDate.now().getMonthValue();
+		int anoHoy = LocalDate.now().getYear();
+		Date hoy = new Date(anoHoy, mesHoy, diaHoy);
+		int anos = (int) (hoy.getTime()-fecha.getTime())/(31556952*1000);
+		if (anos > 18 && anos < 100) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }

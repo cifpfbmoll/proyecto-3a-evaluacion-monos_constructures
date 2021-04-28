@@ -1,7 +1,7 @@
 package ObjetosCrucero.Servicios;
 
 import Utils.DBUtils;
-
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,8 +14,8 @@ public class RecursosHumanos extends Empleado {
 	/**
 	 * Constructor con todos los parámetros
 	 */
-	public RecursosHumanos(String codigoEmpleado, String nieEmpleado, String nombreEmpleado, String apellidoEmpleado, String nombreServicio) {
-		super(codigoEmpleado, nieEmpleado, nombreEmpleado, apellidoEmpleado, nombreServicio);
+	public RecursosHumanos(String codigoEmpleado, String nieEmpleado, String nombreEmpleado, String apellidoEmpleado, TipoServicio servicio) {
+		super(codigoEmpleado, nieEmpleado, nombreEmpleado, apellidoEmpleado, servicio);
 	}
 
 
@@ -27,28 +27,31 @@ public class RecursosHumanos extends Empleado {
 	 * @return Devuelve una lista con toda la información referente a los empleados de la empresa
 	 * @throws SQLException Lanza una excepción cuando no se puede acceder a la base de datos
 	 */
-	public static List<String[]> getListaEmpleados() throws SQLException {
-		List<String[]> listaEmpleados = new ArrayList<>();
+	public static List<Empleado> getListaEmpleados() throws SQLException {
+
+		List<Empleado> listaEmpleados = new ArrayList<Empleado>();
 
 		//Sentencia SQL para obtener la información
+		DBUtils.createConnectionDB();
 		String empleadosSQL = ("SELECT * FROM EMPLEADO;");
 		PreparedStatement sentencia= DBUtils.getConnectionDB().prepareStatement(empleadosSQL);
 		ResultSet resultSet = sentencia.executeQuery();
 
-		String[] infoEmpleado;
+
 
 		//Rellenamos la lista con los datos obtenidos
 		while ( resultSet.next() ){
-			infoEmpleado = new String[]{
-				resultSet.getString("CODIGO_EMPLEADO"),
-				resultSet.getString("NIE_EMPLEADO"),
-				resultSet.getString("NOMBRE_EMPLEADO"),
-				resultSet.getString("APELLIDO_EMPLEADO"),
-				resultSet.getString("DOMICILIACION_EMPLEADO"),
-				resultSet.getString("FECHA_NACIMIENTO_EMPLEADO"),
-				resultSet.getString("CODIGO_SERVICIO")
-			};
-			listaEmpleados.add(infoEmpleado);
+
+			Empleado empleadoItr = new Empleado(
+					resultSet.getString("CODIGO_EMPLEADO"),
+					resultSet.getString("NIE_EMPLEADO"),
+					resultSet.getString("NOMBRE_EMPLEADO"),
+					resultSet.getString("APELLIDO_EMPLEADO"),
+					TipoServicio.valueOf(resultSet.getString("CODIGO_SERVICIO")),
+					resultSet.getString("DOMICILIACION_EMPLEADO"),
+					Date.valueOf(resultSet.getString("FECHA_NACIMIENTO_EMPLEADO"))
+			);
+			listaEmpleados.add(empleadoItr);
 		}
 		DBUtils.getConnectionDB().close();
 		return listaEmpleados;

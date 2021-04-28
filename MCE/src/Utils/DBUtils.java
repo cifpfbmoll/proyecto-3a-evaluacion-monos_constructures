@@ -14,15 +14,22 @@ public class DBUtils {
 	private static final String DB_PASSWORD = "a223@sign@l:23:sign&%lo@d::bl0ck";
 
 	private static Connection connectionDB;
-	private static Statement statementDB;
 
 	/**
 	 * Esta función se encarga de conectar el programa a la base de datos mediante un usuario y contraseña.
 	 * Se debe llamar desde clases externas, NUNCA desde un método interno de esta clase.
 	 * @throws SQLException Devuelve una excepción en caso de no poder conectarse a la base de datos.
 	 */
-	public static Connection getConnectionDB() throws SQLException {
-		return DriverManager.getConnection("jdbc:mysql://" + DB_PATH, DB_USER, DB_PASSWORD);
+	public static void createConnectionDB() throws SQLException {
+		connectionDB = DriverManager.getConnection("jdbc:mysql://" + DB_PATH, DB_USER, DB_PASSWORD);
+	}
+
+	/**
+	 * Obtenemos la conexión a la base de datos
+	 * @return devolvemos la conexión creada anteriormente
+	 */
+	public static Connection getConnectionDB(){
+		return connectionDB;
 	}
 
 	/**
@@ -37,18 +44,6 @@ public class DBUtils {
 	}
 
 	/**
-	 * Función genérica para hacer una consulta dentro de la BBDD.
-	 * @param tableName Nombre de la tabla donde vamos a hacer una consulta.
-	 * @param rows Los campos implicados en la búsqueda.
-	 * @param Where El apartado Where donde establecemos las condiciones de búsqueda.
-	 * @return Devuelve un set de resultados que deben ser tratados.
-	 * @throws SQLException Lanza una excepción cuando la consulta es incorrecta [NO DEBERÍA].
-	 */
-	public static ResultSet searchInTable(String tableName, String rows, String Where) throws SQLException {
-		return statementDB.executeQuery("SELECT " + rows + " FROM " + tableName + " WHERE " + Where);
-	}
-
-	/**
 	 * Esta función se encarga de autentificar la identidad de un empleado dentro de la DDBB
 	 * @param nombre El nombre de nuestro empleado
 	 * @param password La contraseña correspondiente.
@@ -56,6 +51,7 @@ public class DBUtils {
 	 * @throws SQLException Lanza una excepción en caso de no estar bien formulada la consulta [NO DEBERÍA].
 	 */
 	public static boolean employeeLogin(String nombre, String password) throws SQLException {
+		createConnectionDB();
 		String log = "select " +
 				"               codigo_empleado, " +
 				"               nie_empleado, " +

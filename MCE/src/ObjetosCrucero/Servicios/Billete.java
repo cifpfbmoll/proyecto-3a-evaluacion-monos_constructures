@@ -1,6 +1,9 @@
 package ObjetosCrucero.Servicios;
+import Utils.DBUtils;
+
 import java.sql.PreparedStatement;
-import java.util.Date;
+import java.sql.SQLException;
+import java.sql.Date;
 
 public class Billete {
     //Atributos
@@ -42,15 +45,19 @@ public class Billete {
         this.setFechaEmbarque(fechaEmbarque);
         this.setCodigoCamarote(codigoCamarote);
     }
-    //Métodos
-    /*PreparedStatement pstInsertarBillete;
-    String sqlNuevoBillete = "INSERT INTO Billete VALUES (?,?,?)";
-    pstInsertarBillete = cn.preparedStatement(sqlNuevoBillete);
-    pstInsertarBillete.setString(1, "43217180L");
-    pstInsertarBillete.setDate(2, "14/07/1996");
-    pstInsertarBillete.setString(3, "HDF23");
-    pstInsertarBillete.executeUpdate();
-*/
+    //Ejemplo estructura insert. Tener en cuenta el objeto billete y atributos
+    public void insertar() throws SQLException {
+        Date fecha = new Date(1921, 3, 1);
+        fecha.getTime();
+        DBUtils.createConnectionDB();
+        String sqlNuevoBillete = "INSERT INTO Billete VALUES (?,?,?)";
+        PreparedStatement pstInsertarBillete = DBUtils.getConnectionDB().prepareStatement(sqlNuevoBillete);
+        pstInsertarBillete.setString(1, "43217180L");
+        pstInsertarBillete.setDate(2, fecha);
+        pstInsertarBillete.setString(3, "HDF23");
+        pstInsertarBillete.executeUpdate();
+        pstInsertarBillete.close();
+    }
 }
 
 

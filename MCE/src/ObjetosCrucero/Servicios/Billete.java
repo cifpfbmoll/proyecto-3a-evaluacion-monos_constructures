@@ -42,15 +42,15 @@ public class Billete {
         this.setFechaEmbarque(fechaEmbarque);
         this.setCodigoCamarote(codigoCamarote);
     }
-    /*//Métodos
-    PreparedStatement pstInsertarBillete;
+    //Métodos
+    /*PreparedStatement pstInsertarBillete;
     String sqlNuevoBillete = "INSERT INTO Billete VALUES (?,?,?)";
     pstInsertarBillete = cn.preparedStatement(sqlNuevoBillete);
-    pstInsertarBillete.setString(1, NIE);
-    pstInsertarBillete.setDate(2, FECHA_EMBARQUE_VIAJE);
-    pstInsertarBillete.setString(3, CODIGO_CAMAROTE);
+    pstInsertarBillete.setString(1, "43217180L");
+    pstInsertarBillete.setDate(2, "14/07/1996");
+    pstInsertarBillete.setString(3, "HDF23");
     pstInsertarBillete.executeUpdate();
-     */
+*/
 }
 
 

@@ -1,4 +1,5 @@
 import Launch.LaunchInterpreter;
+import ObjetosCrucero.Servicios.Empleado;
 import ObjetosCrucero.Servicios.RecursosHumanos;
 import Utils.DBUtils;
 import javafx.application.Application;
@@ -7,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+import java.util.List;
 
 /**
  * Esta es la clase principal del programa.
@@ -18,7 +21,7 @@ public class App extends Application {
     public void start(Stage primaryStage) throws Exception{
 
         //[TESTING]
-        //testing();
+        testing();
 
         if (LaunchInterpreter.checkTermsAndConditions()){
             Parent root = FXMLLoader.load(getClass().getResource("Ventanas/LogIn/log_in.fxml"));
@@ -53,6 +56,17 @@ public class App extends Application {
 
         //encript
         System.out.println(DBUtils.encrypt("1234", "1234"));
+
+
+        DBUtils.createConnectionDB();
+
+        //Obtener la lista de empleados desde la BBDD
+        List<Empleado> listaTest = RecursosHumanos.getListaEmpleados();
+        for (Empleado empleado : listaTest){
+            System.out.println(empleado.getNombre() + " " + empleado.getApellido());
+        }
+
+
     }
 
 }

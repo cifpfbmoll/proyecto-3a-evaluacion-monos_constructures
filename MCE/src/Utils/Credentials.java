@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Date;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -73,8 +74,9 @@ public class Credentials {
 	 * @param event el evento por el cual se está accediendo al método (REQUISITO).
 	 * @throws IOException lanza una excepción en caso de que no se pueda cargar la ventana.
 	 */
-	public static void logOut(Event event) throws IOException {
+	public static void logOut(Event event) throws IOException, SQLException {
 		loggedUser = null;
+		DBUtils.getConnectionDB().close();
 		WindowUtils.cambiarVentana(
 				event,
 				"Iniciar sesión",
@@ -102,8 +104,13 @@ public class Credentials {
 		}
 	}
 
+
+	public static boolean validarCodigoEmpleado(String codigo){
+		return codigo.matches("[0-9]{3}");
+	}
+
 	public static boolean validarNombre(String nombre) {
-		Pattern patronNombre = Pattern.compile("[A-Z]{2,30}");
+		Pattern patronNombre = Pattern.compile("[A-Z]{2,20}[ ]?[A-Z]{2,20}");
 		Matcher validadorPatron = patronNombre.matcher(nombre.toUpperCase(Locale.ROOT));
 		if (validadorPatron.matches()) {
 			return true;
@@ -114,39 +121,21 @@ public class Credentials {
 	}
 
 	public static boolean validarApellido(String apellido) {
-		Pattern patronApellido = Pattern.compile("[A-Z]{2,20}[ ]{0,1}[A-Z]{2,20}");
+		Pattern patronApellido = Pattern.compile("[A-Z]{2,20}[ ]?[A-Z]{2,20}");
 		Matcher validadorPatron = patronApellido.matcher(apellido.toUpperCase(Locale.ROOT));
-		if (validadorPatron.matches()) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return validadorPatron.matches();
 	}
 
 	public static boolean validarDireccion(String direccion) {
-		Pattern patronDireccion = Pattern.compile("[A-Z ]{10,50}[A-Z 0-9,º']{0,50}");
+		Pattern patronDireccion = Pattern.compile("[A-Z 0-9,º'/]{10,50}");
 		Matcher validadorPatron = patronDireccion.matcher(direccion.toUpperCase(Locale.ROOT));
-		if (validadorPatron.matches()) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return validadorPatron.matches();
 	}
 
-	public static boolean validarFecha(Date fecha) {
-		int diaHoy = LocalDate.now().getDayOfMonth();
-		int mesHoy = LocalDate.now().getMonthValue();
-		int anoHoy = LocalDate.now().getYear();
-		Date hoy = new Date(anoHoy, mesHoy, diaHoy);
-		int anos = (int) (hoy.getTime()-fecha.getTime())/(31556952*1000);
-		if (anos > 18 && anos < 100) {
-			return true;
-		}
-		else {
-			return false;
-		}
+	public static boolean validarFecha(LocalDate fechaNacimiento) {
+		LocalDate fechaDeHoy = LocalDate.now();
+		int edad = Period.between(fechaNacimiento, fechaDeHoy).getYears();
+		return edad >= 18 && edad <= 120;
 	}
 
 }

@@ -19,17 +19,23 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
 
 public class LogInController {
 	@FXML
 	TextField id;
+
 	@FXML
 	PasswordField password;
+
 	@FXML
 	Button acceder;
+
 	@FXML
 	AnchorPane login_card;
+
 	@FXML
 	HBox login_warning;
 
@@ -49,7 +55,7 @@ public class LogInController {
 	 * Trata de validar que las credenciales introducidas son correctas y coiniden con los datos de un usuario de
 	 * nuestra base de datos
 	 */
-	private void iniciarSesion(Event event){
+	private void iniciarSesion(Event event) {
 		try {
 			if (DBUtils.employeeLogin(id.getText(), DBUtils.encrypt(password.getText(), password.getText()))){
 				Credentials.loadUserWindow(event);
@@ -61,8 +67,8 @@ public class LogInController {
 				password.getStyleClass().add("text_field_error");
 				WindowUtils.errorShakeScreen(login_card);
 			}
-		} catch (Exception throwables) {
-			throwables.printStackTrace();
+		} catch (Exception sqle) {
+			sqle.printStackTrace();
 		}
 	}
 

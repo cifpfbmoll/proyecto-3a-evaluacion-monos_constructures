@@ -1,17 +1,25 @@
 package Ventanas.RecursosHumanos.AddStaff;
 
+import ObjetosCrucero.Servicios.Empleado;
+import ObjetosCrucero.Servicios.RecursosHumanos;
+import ObjetosCrucero.Servicios.TipoServicio;
 import Utils.Credentials;
+import Utils.WindowUtils;
 import Ventanas.Fx.Animation;
+import Ventanas.Fx.ShakeTransition;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import java.time.LocalDate;
 
 public class RrhhAddStaffController {
+
+	//Elementos gráficos
 
 	@FXML
 	AnchorPane mainCard;
@@ -20,18 +28,66 @@ public class RrhhAddStaffController {
 	Label fechaYHora;
 
 	@FXML
+	ScrollPane wtabScroll;
+
+
+
+	//Botones
+
+	@FXML
 	VBox backButton;
 
 	@FXML
-	ScrollPane wtabScroll;
+	Button crearEmpleado;
+
+
+
+	//Formulario
 
 	@FXML
-	ChoiceBox tipoServicio;
+	TextField codigoEmpleado;
+
+	@FXML
+	TextField nombre;
+
+	@FXML
+	TextField apellidos;
+
+	@FXML
+	TextField dni;
+
+	@FXML
+	TextField domiciliacion;
 
 	@FXML
 	DatePicker fechaNacimiento;
 
+	@FXML
+	ChoiceBox<TipoServicio> tipoServicio;
 
+
+
+	// Errores
+	@FXML
+	HBox errorCodigoEmpleado;
+
+	@FXML
+	HBox errorNombre;
+
+	@FXML
+	HBox errorApellidos;
+
+	@FXML
+	HBox errorDNI;
+
+	@FXML
+	HBox errorDomiciliacion;
+
+	@FXML
+	HBox errorFechaNacimiento;
+
+
+	//Evento para volver a la anterior pantalla
 	EventHandler<MouseEvent> goBack = event -> {
 		String nombreEmpleadoCompleto = Credentials.getLoggedUser().getNombre() + " " + Credentials.getLoggedUser().getApellido();
 		Animation.card_animation_EXIT_TO_RIGHT(
@@ -42,6 +98,70 @@ public class RrhhAddStaffController {
 				);
 	};
 
+	//Evento para añadir un nuevo empleado a la base de datos
+	EventHandler<MouseEvent> addEmpleado = event -> {
+		ocultarErrores();
+		if (camposValidos()){
+			try {
+				Empleado newEmpleado = new Empleado (
+						codigoEmpleado.getText(),
+						dni.getText(),
+						nombre.getText(),
+						apellidos.getText(),
+						tipoServicio.getValue(),
+						domiciliacion.getText(),
+						fechaNacimiento.getValue()
+				);
+				RecursosHumanos.addEmpleado(newEmpleado);
+			} catch (Exception exception) {
+				exception.printStackTrace();
+			}
+		} else {
+			WindowUtils.errorShakeScreen(mainCard);
+		}
+	};
+
+	//Método para comprobar que los datos introducidos son válidos.
+	private boolean camposValidos(){
+		boolean esValido = true;
+		if (!Credentials.validarCodigoEmpleado(codigoEmpleado.getText())){
+			esValido = false;
+			errorCodigoEmpleado.setVisible(true);
+		}
+		if (!Credentials.validarNombre(nombre.getText())){
+			esValido = false;
+			errorNombre.setVisible(true);
+		}
+		if (!Credentials.validarApellido(apellidos.getText())){
+			esValido = false;
+			errorApellidos.setVisible(true);
+		}
+		if (!Credentials.validarDni(dni.getText())){
+			esValido = false;
+			errorDNI.setVisible(true);
+		}
+		if (!Credentials.validarDireccion(domiciliacion.getText())){
+			esValido = false;
+			errorDomiciliacion.setVisible(true);
+		}
+		if (!Credentials.validarFecha(fechaNacimiento.getValue())){
+			esValido = false;
+			errorFechaNacimiento.setVisible(true);
+		}
+		return esValido;
+	}
+
+
+	//Método para reestablecer todos los errores en la pantalla
+	public void ocultarErrores(){
+		errorCodigoEmpleado.setVisible(false);
+		errorNombre.setVisible(false);
+		errorApellidos.setVisible(false);
+		errorDNI.setVisible(false);
+		errorDomiciliacion.setVisible(false);
+		errorFechaNacimiento.setVisible(false);
+	}
+
 
 	@FXML
 	private void initialize() throws InterruptedException {
@@ -50,7 +170,7 @@ public class RrhhAddStaffController {
 		mainCard.setOpacity(0);
 
 		// Ajustando la velocidad de "Scroll" del ScrollPane
-		final double SPEED = 0.005;
+		final double SPEED = 0.002;
 		wtabScroll.getContent().setOnScroll(scrollEvent -> {
 			double deltaY = scrollEvent.getDeltaY() * SPEED;
 			wtabScroll.setVvalue(wtabScroll.getVvalue() - deltaY);
@@ -60,7 +180,7 @@ public class RrhhAddStaffController {
 		//Ajustamos los distintos textos del panel
 		Animation.setFechaYHora(fechaYHora);
 		tipoServicio.setItems(FXCollections.observableArrayList(
-				"Recursos Humanos", "Administración", "Ventas"
+				TipoServicio.values()
 		));
 		tipoServicio.setValue(tipoServicio.getItems().get(0));
 		fechaNacimiento.setValue(LocalDate.of(
@@ -68,10 +188,12 @@ public class RrhhAddStaffController {
 				LocalDate.now().getMonth(),
 				LocalDate.now().getDayOfMonth()
 		));
+		ocultarErrores();
 
 
 		//Añadimos la funcionalidad a los botones
 		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, goBack);
+		crearEmpleado.addEventHandler(MouseEvent.MOUSE_CLICKED, addEmpleado);
 
 		//Creando la animación de entrada
 		Animation.card_animation_RIGHT_CENTER(mainCard);

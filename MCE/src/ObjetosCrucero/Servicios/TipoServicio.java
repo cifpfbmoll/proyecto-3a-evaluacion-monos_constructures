@@ -16,6 +16,20 @@ public enum TipoServicio {
         this.salario = salario;
     }
 
+    /**
+     * Obtener un tipo de servicio a partir de una String
+     * @param valor la string con el valor
+     * @return devuelve el tipo de servicio en caso de encontrarse, o nulo en caso contrario.
+     */
+    public static TipoServicio fromString(String valor) {
+        for (TipoServicio ts : TipoServicio.values()) {
+            if (ts.value.equalsIgnoreCase(valor)) {
+                return ts;
+            }
+        }
+        return null;
+    }
+
     public String getValue(){
         return value;
     }

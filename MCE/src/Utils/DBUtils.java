@@ -76,7 +76,6 @@ public class DBUtils {
 			isValidLogin = false;
 		}
 
-		getConnectionDB().close();
 		return isValidLogin;
 	}
 

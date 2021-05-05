@@ -11,6 +11,7 @@ public class Billete {
     private String nie;
     private Date fechaEmbarque;
     private String codigoCamarote;
+    private String codigoCrucero;
 
     //Getter&Setter
 
@@ -38,12 +39,17 @@ public class Billete {
         this.codigoCamarote = codigoCamarote;
     }
 
+    public String getCodigoCrucero() { return codigoCrucero; }
+
+    public void setCodigoCrucero(String codigoCrucero) { this.codigoCrucero = codigoCrucero;}
+
     //Construsctor
 
-    public Billete(String nie, Date fechaEmbarque, String codigoCamarote) {
+    public Billete(String nie, Date fechaEmbarque, String codigoCamarote, String codigoCrucero) {
         this.setNie(nie);
         this.setFechaEmbarque(fechaEmbarque);
         this.setCodigoCamarote(codigoCamarote);
+        this.setCodigoCrucero(codigoCrucero);
     }
     //Ejemplo estructura insert. Tener en cuenta el objeto billete y atributos
     public void insertar() throws SQLException {

@@ -49,7 +49,7 @@ public class RrhhMainPageController {
 	EventHandler<MouseEvent> logOut = event ->{
 		try {
 			Credentials.logOut(event);
-		} catch (IOException e) {
+		} catch (IOException | SQLException e) {
 			e.printStackTrace();
 		}
 	};

@@ -113,6 +113,12 @@ public class RrhhAddStaffController {
 						fechaNacimiento.getValue()
 				);
 				RecursosHumanos.addEmpleado(newEmpleado);
+				WindowUtils.cambiarVentana(
+						event,
+						"Crear un nuevo usuario",
+						"../Ventanas/RecursosHumanos/AddStaff/Completed/rrhh_add_completed.fxml",
+						false
+				);
 			} catch (Exception exception) {
 				exception.printStackTrace();
 			}

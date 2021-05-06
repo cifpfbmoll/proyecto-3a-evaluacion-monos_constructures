@@ -17,11 +17,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.util.Duration;
-
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.concurrent.TimeUnit;
 
 public class LogInController {
 	@FXML
@@ -58,7 +53,16 @@ public class LogInController {
 	private void iniciarSesion(Event event) {
 		try {
 			if (DBUtils.employeeLogin(id.getText(), DBUtils.encrypt(password.getText(), password.getText()))){
-				Credentials.loadUserWindow(event);
+				if (password.getText().equals("MCE123")){
+					WindowUtils.cambiarVentana(
+						event,
+						"Cambiar contraseña",
+						"/Ventanas/LogIn/changePasssword/changePassword.fxml",
+						false
+					);
+				} else {
+					Credentials.loadUserWindow(event);
+				}
 			} else {
 				login_warning.setVisible(true);
 				id.getStyleClass().remove(0);

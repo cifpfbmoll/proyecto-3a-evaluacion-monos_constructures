@@ -1,5 +1,13 @@
 package ObjetosCrucero;
 
+import ObjetosCrucero.Servicios.Camarote;
+import Utils.DBUtils;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 public class Crucero {
     String codigoCrucero;
     String nombreCrucero;
@@ -7,17 +15,21 @@ public class Crucero {
     int eslora;
     int manga;
     int calado;
+    int nCamarotes;
+    Camarote listaCamarotes[];
 
     public Crucero() {
     }
 
-    public Crucero(String codigoCrucero, String nombreCrucero, String modeloCrucero, int eslora, int manga, int calado) {
+    public Crucero(String codigoCrucero, String nombreCrucero, String modeloCrucero, int eslora, int manga, int calado, int nCamarotes) {
         this.setCodigoCrucero(codigoCrucero);
         this.setNombreCrucero(nombreCrucero);
         this.setModeloCrucero(modeloCrucero);
         this.setEslora(eslora);
         this.setManga(manga);
         this.setCalado(calado);
+        this.setnCamarotes(nCamarotes);
+        this.listaCamarotes = new Camarote[nCamarotes];
     }
 
     public Crucero(Crucero cCopia) {
@@ -27,6 +39,8 @@ public class Crucero {
         this.setEslora(cCopia.getEslora());
         this.setManga(cCopia.getManga());
         this.setCalado(cCopia.getCalado());
+        this.setnCamarotes(cCopia.getnCamarotes());
+        this.setListaCamarotes(cCopia.getListaCamarotes());
     }
 
     public String getCodigoCrucero() {
@@ -87,5 +101,47 @@ public class Crucero {
                 ", manga=" + manga +
                 ", calado=" + calado +
                 '}';
+    }
+
+    public int getnCamarotes() {
+        return nCamarotes;
+    }
+
+    public void setnCamarotes(int nCamarotes) {
+        this.nCamarotes = nCamarotes;
+    }
+
+    public Camarote[] getListaCamarotes() {
+        return listaCamarotes;
+    }
+
+    public void setListaCamarotes(Camarote[] listaCamarotes) {
+        this.listaCamarotes = listaCamarotes;
+    }
+
+    //crea una lista con todos los cruceros y su informacion
+    public static ArrayList<Crucero> getListaCrucero() throws SQLException {
+        ArrayList<Crucero> listaCrucero = new ArrayList<>();
+
+        String cruceroSQL = ("SELECT * FROM CRUCERO");
+        PreparedStatement sentencia = DBUtils.getConnectionDB().prepareStatement(cruceroSQL);
+        ResultSet resultset = sentencia.executeQuery();
+
+        while (resultset.next()) {
+            Crucero crucero = new Crucero(
+                    resultset.getString("CODIGO_CRUCERO"),
+                    resultset.getString("NOMBRE_CRUCERO"),
+                    resultset.getString("MODELO_CRUCERO"),
+                    resultset.getInt("ESLORA"),
+                    resultset.getInt("MANGA"),
+                    resultset.getInt("CALADO"),
+                    resultset.getInt(null)//corresponde a nCamarotes, actualizar BBDD
+            );
+            //crucero.setListaCamarotes(Camarotes.getListaCamarotes());
+            listaCrucero.add(crucero);
+        }
+        resultset.close();
+
+        return listaCrucero;
     }
 }

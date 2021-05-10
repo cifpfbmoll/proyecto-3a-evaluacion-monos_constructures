@@ -6,7 +6,7 @@ import ObjetosCrucero.Servicios.TipoServicio;
 import Utils.Credentials;
 import Utils.WindowUtils;
 import Ventanas.Fx.Animation;
-import Ventanas.Fx.ShakeTransition;
+import Ventanas.RecursosHumanos.AddStaff.Completed.RrhhAddCompleted;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -113,6 +113,7 @@ public class RrhhAddStaffController {
 						fechaNacimiento.getValue()
 				);
 				RecursosHumanos.addEmpleado(newEmpleado);
+				RrhhAddCompleted.setInformacionEmpleado(newEmpleado);
 				WindowUtils.cambiarVentana(
 						event,
 						"Crear un nuevo usuario",

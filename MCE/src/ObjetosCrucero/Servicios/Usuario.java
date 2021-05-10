@@ -1,6 +1,6 @@
 package ObjetosCrucero.Servicios;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public abstract class Usuario {
 
@@ -8,16 +8,16 @@ public abstract class Usuario {
 	private String nombre;
 	private String apellido;
 	private String direccion;
-	private Date fechaNacimiento;
+	private LocalDate fechaNacimiento;
 
 
 	//Getters y setters
 
-	public Date getFechaNacimiento() {
+	public LocalDate getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
@@ -56,7 +56,7 @@ public abstract class Usuario {
 	/**
 	 * Constructor con todos los parámetros
 	 */
-	public Usuario(String dni, String nombre, String apellido, String direccion, Date fechaNacimiento) {
+	public Usuario(String dni, String nombre, String apellido, String direccion, LocalDate fechaNacimiento) {
 		this.setDni(dni);
 		this.setNombre(nombre);
 		this.setApellido(apellido);

@@ -17,19 +17,20 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.util.Duration;
-
-import java.util.concurrent.TimeUnit;
 
 public class LogInController {
 	@FXML
 	TextField id;
+
 	@FXML
 	PasswordField password;
+
 	@FXML
 	Button acceder;
+
 	@FXML
 	AnchorPane login_card;
+
 	@FXML
 	HBox login_warning;
 
@@ -49,10 +50,19 @@ public class LogInController {
 	 * Trata de validar que las credenciales introducidas son correctas y coiniden con los datos de un usuario de
 	 * nuestra base de datos
 	 */
-	private void iniciarSesion(Event event){
+	private void iniciarSesion(Event event) {
 		try {
 			if (DBUtils.employeeLogin(id.getText(), DBUtils.encrypt(password.getText(), password.getText()))){
-				Credentials.loadUserWindow(event);
+				if (password.getText().equals("MCE123")){
+					WindowUtils.cambiarVentana(
+						event,
+						"Cambiar contraseña",
+						"/Ventanas/LogIn/changePasssword/changePassword.fxml",
+						false
+					);
+				} else {
+					Credentials.loadUserWindow(event);
+				}
 			} else {
 				login_warning.setVisible(true);
 				id.getStyleClass().remove(0);
@@ -61,8 +71,8 @@ public class LogInController {
 				password.getStyleClass().add("text_field_error");
 				WindowUtils.errorShakeScreen(login_card);
 			}
-		} catch (Exception throwables) {
-			throwables.printStackTrace();
+		} catch (Exception sqle) {
+			sqle.printStackTrace();
 		}
 	}
 

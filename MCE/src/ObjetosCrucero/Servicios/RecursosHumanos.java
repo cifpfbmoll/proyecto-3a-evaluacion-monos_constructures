@@ -1,10 +1,11 @@
 package ObjetosCrucero.Servicios;
 
 import Utils.DBUtils;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,11 +33,9 @@ public class RecursosHumanos extends Empleado {
 		List<Empleado> listaEmpleados = new ArrayList<Empleado>();
 
 		//Sentencia SQL para obtener la información
-		DBUtils.createConnectionDB();
 		String empleadosSQL = ("SELECT * FROM EMPLEADO;");
 		PreparedStatement sentencia= DBUtils.getConnectionDB().prepareStatement(empleadosSQL);
 		ResultSet resultSet = sentencia.executeQuery();
-
 
 
 		//Rellenamos la lista con los datos obtenidos
@@ -49,12 +48,46 @@ public class RecursosHumanos extends Empleado {
 					resultSet.getString("APELLIDO_EMPLEADO"),
 					TipoServicio.valueOf(resultSet.getString("CODIGO_SERVICIO")),
 					resultSet.getString("DOMICILIACION_EMPLEADO"),
-					Date.valueOf(resultSet.getString("FECHA_NACIMIENTO_EMPLEADO"))
+					LocalDate.parse(resultSet.getString("FECHA_NACIMIENTO_EMPLEADO"))
 			);
 			listaEmpleados.add(empleadoItr);
 		}
-		DBUtils.getConnectionDB().close();
+		resultSet.close();
 		return listaEmpleados;
 	}
 
+
+	/**
+	 * Añadimos un empleado a nuestra base de datos, obteniendo la información desde el formulario de la ventana.
+	 * @param empleado el empleado que va a ser añadido
+	 * @throws Exception SQLException: la consulta falla, Encrypt: Cuando no se puede cifrar la contraseña.
+	 */
+	public static void addEmpleado(Empleado empleado) throws Exception {
+
+		try {
+			//Sentencia SQL para añadir la información
+			DBUtils.getConnectionDB().setAutoCommit(false);
+
+			String empleadosSQL = ("INSERT INTO EMPLEADO VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
+			PreparedStatement sentencia= DBUtils.getConnectionDB().prepareStatement(empleadosSQL);
+			sentencia.setString(1, empleado.getCodigoEmpleado());
+			sentencia.setString(2, empleado.getDni());
+			sentencia.setString(3, empleado.getNombre());
+			sentencia.setString(4, empleado.getApellido());
+			sentencia.setString(5, empleado.getDireccion());
+			sentencia.setString(6, empleado.getFechaNacimiento().format(DateTimeFormatter.ofPattern("yyyy-dd-MM")));
+			sentencia.setString(7, empleado.getTipoServicio().getValue());
+			sentencia.setString(8, DBUtils.encrypt("MCE123", "MCE123"));
+			sentencia.executeUpdate();
+
+			DBUtils.getConnectionDB().commit();
+
+		} catch (SQLException sqle){
+			sqle.printStackTrace();
+			DBUtils.getConnectionDB().rollback();
+		} finally {
+			DBUtils.getConnectionDB().setAutoCommit(true);
+		}
+
+	}
 }

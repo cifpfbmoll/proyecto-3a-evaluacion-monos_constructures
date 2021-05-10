@@ -6,21 +6,23 @@ public class Nomina {
 
     //Atributos
 
-    LocalDate fechaNomina;
-    int horasOrdinarias;
-    int horasExtra;
-    int plus;
+    private LocalDate fechaNomina;
+    private int horasOrdinarias;
+    private int horasExtra;
+    private float salario;
+    private int plus;
 
     //Constructor
 
     public Nomina() {
     }
 
-    public Nomina(LocalDate fechaNomina, int horasOrdinarias, int horasExtra, int plus) {
+    public Nomina(LocalDate fechaNomina, int horasOrdinarias, int horasExtra, int plus, int salario) {
         setFechaNomina(fechaNomina);
         setHorasOrdinarias(horasOrdinarias);
         setHorasExtra(horasExtra);
         setPlus(plus);
+        setSalario(salario);
     }
 
     public Nomina(Nomina original) {
@@ -28,6 +30,7 @@ public class Nomina {
         setHorasOrdinarias(original.getHorasExtra());
         setHorasExtra(original.getHorasOrdinarias());
         setPlus(original.getPlus());
+        setSalario(original.getSalario());
     }
 
     //Getters y Setters
@@ -64,6 +67,14 @@ public class Nomina {
         this.plus = plus;
     }
 
+    public float getSalario() {
+        return salario;
+    }
+
+    public void setSalario(float salario) {
+        this.salario = salario;
+    }
+
     //toString
 
 
@@ -79,6 +90,33 @@ public class Nomina {
 
     //Metodos
 
+    public float calcularSalario() {
 
+        LocalDate fechaNomina = this.getFechaNomina();
+        int horasExtra = this.getHorasExtra();
+        int horasOrdinarias = this.getHorasOrdinarias();
+        float salario = this.salario;
+        int plus = this.getPlus();
+
+        //percepciones
+
+        float salarioHora = salario/30;
+        float salarioHorasExtras = (float) (salarioHora*1.75*horasExtra);
+        float salarioDiario = salarioHora*horasOrdinarias;
+        float bccc = (salarioDiario*16/14) + plus;
+        float bccp = bccc + salarioHorasExtras;
+        float salarioBruto = salario + salarioHorasExtras + plus;
+
+        //deducciones
+
+        float dcc = (float) (bccc*4.7);
+        float dParo = (float) (bccp*1.55);
+        float dfp = (float) (bccp*0.10);
+        float dirpf = (float) (salarioBruto*14.75);
+
+        float salarioNeto = salarioBruto - (dcc + dParo + dfp + dirpf);
+
+        return salarioNeto;
+    }
 
 }

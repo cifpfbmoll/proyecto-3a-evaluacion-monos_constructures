@@ -1,4 +1,4 @@
-package ObjetosCrucero.Servicios;
+package ObjetosCrucero;
 
 
 public class Camarote{

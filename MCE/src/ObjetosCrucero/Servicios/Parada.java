@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package ObjetosCrucero.Servicios;
 
 import java.sql.Date;
@@ -88,8 +87,4 @@ public class Parada {
                 ", fechaSalida=" + fechaSalida +
                 '}';
     }
-    //METODOS
-=======
-package ObjetosCrucero.Servicios;public class parada {
->>>>>>> clase-parada
-}
+//METODOS

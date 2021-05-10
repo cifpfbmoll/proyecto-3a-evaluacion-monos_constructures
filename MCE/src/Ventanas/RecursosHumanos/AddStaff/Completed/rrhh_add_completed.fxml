@@ -41,12 +41,12 @@
                         <Image url="@../../../Trash/img/MC_logo_Icon.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="TOP_LEFT" contentDisplay="TOP" layoutX="565.0" layoutY="282.0" lineSpacing="3.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="177.0" prefWidth="161.0" text="MCE Code:&#10;DNI:&#10;Nombre:&#10;Apellidos:&#10;Fecha de nacimiento:&#10;Domiciliación:&#10;" textFill="#680000" wrapText="true">
+                  <Label alignment="TOP_LEFT" contentDisplay="TOP" layoutX="565.0" layoutY="282.0" lineSpacing="3.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="208.0" prefWidth="161.0" text="MCE Codigo:&#10;DNI:&#10;Nombre:&#10;Apellidos:&#10;Fecha de nacimiento:&#10;Domiciliación:&#10;Servicio:&#10;" textFill="#680000" wrapText="true">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label alignment="TOP_LEFT" contentDisplay="TOP" layoutX="801.0" layoutY="282.0" lineSpacing="3.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="208.0" prefWidth="346.0" text="100&#10;33333333A&#10;Jose Luis&#10;Saiz Lopez&#10;02-03-2001&#10;C/Caracas nº4, Palma de Mallorca" wrapText="true">
+                  <Label fx:id="userInfo" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="801.0" layoutY="282.0" lineSpacing="3.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="208.0" prefWidth="346.0" text="100&#10;33333333A&#10;Jose Luis&#10;Saiz Lopez&#10;02-03-2001&#10;C/Caracas nº4, Palma de Mallorca" wrapText="true">
                      <font>
                         <Font size="16.0" />
                      </font>

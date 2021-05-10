@@ -20,7 +20,7 @@ public class Parada {
                   Date fechaLlegada, Date fechaSalida, int numeroParada) {
         this.codigoCrucero = codigoCrucero;
         this.fechaEmbarque = fechaEmbarque;
-        this.numeroParada =numeroParada;
+        this.numeroParada = numeroParada;
         this.codigoPuerto = codigoPuerto;
         this.fechaLlegada = fechaLlegada;
         this.fechaSalida = fechaSalida;
@@ -87,4 +87,5 @@ public class Parada {
                 ", fechaSalida=" + fechaSalida +
                 '}';
     }
+}
 //METODOS

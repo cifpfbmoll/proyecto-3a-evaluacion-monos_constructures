@@ -1,6 +1,11 @@
 package ObjetosCrucero.Servicios;
 import Utils.DBUtils;
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -62,9 +67,10 @@ public class Billete {
         DBUtils.createConnectionDB();
         String billetesSQL = "INSERT INTO BILLETE VALUES (?,?,?)";
         PreparedStatement pstInsertarBillete = DBUtils.getConnectionDB().prepareStatement(billetesSQL);
-        pstInsertarBillete.setString(1, "43217180L");
-        pstInsertarBillete.setDate(2, fecha);
-        pstInsertarBillete.setString(3, "HDF23");
+        pstInsertarBillete.setString(1, codigoBillete);
+        pstInsertarBillete.setDate(2, fechaEmbarque);
+        pstInsertarBillete.setString(3, codigoCamarote);
+        pstInsertarBillete.setString(4, codigoCrucero);
         pstInsertarBillete.executeUpdate();
         pstInsertarBillete.close();
     }
@@ -75,7 +81,7 @@ public class Billete {
 
         //Sentencia SQL para obtener la información
         DBUtils.createConnectionDB();
-        String billetesSQL= ("SELECT * FROM BILLETE;");
+        String billetesSQL= ("SELECT * FROM BILLETE GROUP BY CODIGO_CRUCERO;");
         PreparedStatement sentencia= DBUtils.getConnectionDB().prepareStatement(billetesSQL);
         ResultSet resultSet = sentencia.executeQuery();
 
@@ -92,6 +98,23 @@ public class Billete {
         }
         DBUtils.getConnectionDB().close();
         return listaBilletes;
+    }
+    // Metodo para crear el Archivo
+    public void escrituraBilletes() throws IOException{
+
+        File archivoSalida = new File("listadoBilletes.txt");
+        //Definimos el contenido
+        String linea1 = "LISTADO BILLETES DE MCE CRUCEROS ENTERPRISE";
+        String linea2 = "CRUCERO: " + this.getCodigoCrucero();
+        BufferedWriter bw;
+        if (archivoSalida.exists()){
+            bw = new BufferedWriter(new FileWriter(archivoSalida));
+            bw.write("El fichero de texto ya esta creado.");
+        } else {
+            bw = new BufferedWriter(new FileWriter(archivoSalida));
+            bw.write("Se ha creado el fichero.");
+
+        }
     }
 
 }

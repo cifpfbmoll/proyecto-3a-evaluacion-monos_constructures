@@ -1,4 +1,6 @@
 package ObjetosCrucero.Servicios;
+import java.util.Scanner;
+import java.util.ArrayList;
 public class Puerto {
     //ATRIBUTOS
     private String codigoCrucero;
@@ -15,6 +17,7 @@ public class Puerto {
         this.nombreCrucero = nombreCrucero;
         this.codigoCiudad = codigoCiudad;
     }
+
     //GETTERS Y SETTERS
     public String getCodigoCrucero() {
         return codigoCrucero;
@@ -49,4 +52,34 @@ public class Puerto {
                 ", codigoCiudad='" + codigoCiudad + '\'' +
                 '}';
     }
+
+    //METODO SOLICITAR DATOS
+    public void SolicitarDatos(){
+        Scanner sc = new Scanner (System.in);
+        System.out.println("Introduce el codigo del crucero");
+        this.setCodigoCrucero(codigoCrucero);
+        System.out.println("Introduce el nombre del crucero");
+        this.setNombreCrucero(nombreCrucero);
+        System.out.println("Introduce el codigo de la ciudad");
+        this.setCodigoCiudad(codigoCiudad);
+    }
+
+    //BUSCAMOS PARADA
+    public static void buscarParada (ArrayList <Puerto> listaPuertos){
+        Scanner sc = new Scanner (System.in);
+        System.out.println("Dime el numero de la parada que quieres buscar");
+        int numeroParada = sc.nextInt();
+
+        for (int i =0; i<listaPuertos.size();i++){
+            if (listaPuertos.get(i) instanceof Parada){
+                if (((Parada) listaPuertos.get(i)).getNumeroParada()==numeroParada){
+                    System.out.println(((Parada)listaPuertos.get(i)).toString());
+                }
+            }else{
+                System.out.println("Numero de parada incorrecto");
+            }
+        }
+
+    }
+
 }

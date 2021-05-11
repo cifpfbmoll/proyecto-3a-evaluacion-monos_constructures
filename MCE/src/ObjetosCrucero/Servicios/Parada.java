@@ -1,15 +1,17 @@
 package ObjetosCrucero.Servicios;
 
 import java.sql.Date;
+import java.util.Scanner;
+import java.util.ArrayList;
 
-public class Parada {
+//PARADA HEREDA DE PUERTO
+public class Parada extends Puerto{
     //ATRIBUTOS
-    private String codigoCrucero;
     private Date fechaEmbarque;
-    private String codigoPuerto;
     private int numeroParada;
     private Date fechaLlegada;
     private Date fechaSalida;
+
 
     //CONSTRUCTOR VACIO
     public Parada() {
@@ -18,37 +20,19 @@ public class Parada {
     //COSNTRUCTOR CON TODOS LOS PARAMETROS
     public Parada(String codigoCrucero, String codigoPuerto, Date fechaEmbarque,
                   Date fechaLlegada, Date fechaSalida, int numeroParada) {
-        this.codigoCrucero = codigoCrucero;
         this.fechaEmbarque = fechaEmbarque;
-        this.numeroParada =numeroParada;
-        this.codigoPuerto = codigoPuerto;
+        this.numeroParada = numeroParada;
         this.fechaLlegada = fechaLlegada;
         this.fechaSalida = fechaSalida;
     }
 
     //GETTERS Y SETTERS
-    public String getCodigoCrucero() {
-        return codigoCrucero;
-    }
-
-    public void setCodigoCrucero(String codigoCrucero) {
-        this.codigoCrucero = codigoCrucero;
-    }
-
     public Date getFechaEmbarque() {
         return fechaEmbarque;
     }
 
     public void setFechaEmbarque(Date fechaEmbarque) {
         this.fechaEmbarque = fechaEmbarque;
-    }
-
-    public String getCodigoPuerto() {
-        return codigoPuerto;
-    }
-
-    public void setCodigoPuerto(String codigoPuerto) {
-        this.codigoPuerto = codigoPuerto;
     }
 
     public int getNumeroParada() {
@@ -79,12 +63,49 @@ public class Parada {
     @Override
     public String toString() {
         return "Parada{" +
-                "codigoCrucero='" + codigoCrucero + '\'' +
                 ", fechaEmbarque=" + fechaEmbarque +
-                ", codigoPuerto='" + codigoPuerto + '\'' +
                 ", numeroParada=" + numeroParada +
                 ", fechaLlegada=" + fechaLlegada +
                 ", fechaSalida=" + fechaSalida +
                 '}';
     }
-//METODOS
+
+    //METODOS
+    //SOLICITAR DATOS PARADA
+    public void SolicitarDatosParada (){
+        Scanner sc = new Scanner(System.in);
+        super.SolicitarDatos();
+        System.out.println("Introduce la fecha de embarque");
+        this.setFechaEmbarque(fechaEmbarque);
+        System.out.println("Introduce el numero de la parada");
+        this.setNumeroParada(numeroParada);
+        System.out.println("Introduce la fehca de llegada");
+        this.setFechaLlegada(fechaLlegada);
+        System.out.println("Introduce la fecha de salida");
+        this.setFechaSalida(fechaSalida);
+    }
+
+    //ELIMINAR PARADA
+    public static void eliminarParada (ArrayList <Parada> listaParadas){
+        Scanner sc = new Scanner (System.in);
+        System.out.println("introduce el numero de la parada");
+        int numeroParada = sc.nextInt();
+
+        for (int i =0; i<listaParadas.size(); i++){
+            //eliminamos los datos de parada si esta en la lista
+            if (listaParadas.get(i).getNumeroParada() == numeroParada){
+                listaParadas.remove(i);
+                System.out.println("La parada ha sido eliminada");
+            }else {
+                System.out.println("Numero de parada incorrecto");
+            }
+        }
+    }
+
+}
+
+
+
+
+
+

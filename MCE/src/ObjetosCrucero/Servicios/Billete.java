@@ -102,17 +102,17 @@ public class Billete {
     // Metodo para crear el Archivo
     public void escrituraBilletes() throws IOException{
 
-        File archivoSalida = new File("listadoBilletes.txt");
+        File archivoSalida = new File("MCE\src\listadoBilletes.txt");
         //Definimos el contenido
-        String linea1 = "LISTADO BILLETES DE MCE CRUCEROS ENTERPRISE";
-        String linea2 = "CRUCERO: " + this.getCodigoCrucero();
+        String linea1 = "LISTADO BILLETES DE MCE CRUCEROS ENTERPRISE \n";
+        String linea2 = "CRUCERO: \n" + this.getCodigoCrucero();
         BufferedWriter bw;
         if (archivoSalida.exists()){
             bw = new BufferedWriter(new FileWriter(archivoSalida));
-            bw.write("El fichero de texto ya esta creado.");
+            bw.write("El fichero de texto ya esta creado. \n");
         } else {
             bw = new BufferedWriter(new FileWriter(archivoSalida));
-            bw.write("Se ha creado el fichero.");
+            bw.write("Se ha creado el fichero. \n");
 
         }
     }

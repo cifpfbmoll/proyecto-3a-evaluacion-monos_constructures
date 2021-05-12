@@ -38,7 +38,8 @@ public class Billete {
     }
 
     public void setFechaEmbarque(Date fechaEmbarque) {
-        this.fechaEmbarque = fechaEmbarque;
+        java.sql.Date fecha = new java.sql.Date(0); //Milisegundo cero
+        this.fechaEmbarque = fecha;
     }
 
     public String getCodigoCamarote() {
@@ -62,17 +63,27 @@ public class Billete {
         this.setCodigoCrucero(codigoCrucero);
     }
     //Ejemplo estructura insert. Tener en cuenta el objeto billete y atributos
-     public void insertar() throws SQLException {
-        java.sql.Date fecha = new java.sql.Date(0); //Milisegundo cero
-        DBUtils.createConnectionDB();
-        String billetesSQL = "INSERT INTO BILLETE VALUES (?,?,?)";
-        PreparedStatement pstInsertarBillete = DBUtils.getConnectionDB().prepareStatement(billetesSQL);
-        pstInsertarBillete.setString(1, codigoBillete);
-        pstInsertarBillete.setDate(2, fechaEmbarque);
-        pstInsertarBillete.setString(3, codigoCamarote);
-        pstInsertarBillete.setString(4, codigoCrucero);
-        pstInsertarBillete.executeUpdate();
-        pstInsertarBillete.close();
+     public void addBillete() throws Exception {
+         PreparedStatement insertarBillete = null;
+         try{
+            //Sentencia SQL para añadir la información.
+            DBUtils.getConnectionDB().setAutoCommit(false);
+
+            String billetesSQL = ("INSERT INTO BILLETE VALUES (?,?,?);");
+            insertarBillete = DBUtils.getConnectionDB().prepareStatement(billetesSQL);
+            insertarBillete.setString(1, getCodigoBillete());
+            insertarBillete.setDate(2, getFechaEmbarque());
+            insertarBillete.setString(3, getCodigoCamarote());
+            insertarBillete.setString(4, getCodigoCrucero());
+            insertarBillete.executeUpdate();
+            DBUtils.getConnectionDB().commit();
+        } catch (SQLException sqle){
+            sqle.printStackTrace();
+            DBUtils.getConnectionDB().rollback();
+        } finally {
+            DBUtils.getConnectionDB().setAutoCommit(true);
+            insertarBillete.close();
+        }
     }
 
     public static List<Billete> getListaBilletes() throws SQLException{
@@ -102,7 +113,7 @@ public class Billete {
     // Metodo para crear el Archivo
     public void escrituraBilletes() throws IOException{
 
-        File archivoSalida = new File("MCE\src\listadoBilletes.txt");
+        File archivoSalida = new File("./archivos/listadoBilletes.txt");
         //Definimos el contenido
         String linea1 = "LISTADO BILLETES DE MCE CRUCEROS ENTERPRISE \n";
         String linea2 = "CRUCERO: \n" + this.getCodigoCrucero();
@@ -113,10 +124,11 @@ public class Billete {
         } else {
             bw = new BufferedWriter(new FileWriter(archivoSalida));
             bw.write("Se ha creado el fichero. \n");
-
         }
+        bw.write(linea1);
+        bw.write(linea2);
+        bw.close();
     }
-
 }
 
 

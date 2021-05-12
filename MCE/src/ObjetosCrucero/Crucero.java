@@ -144,4 +144,31 @@ public class Crucero {
 
         return listaCrucero;
     }
+
+    //argumentos de entrada?
+    public static void insertarCrucero() {
+        try {
+            //CRUCERO VACIO PARA PRUEBAS
+            Crucero crucero = new Crucero();
+
+            DBUtils.getConnectionDB().setAutoCommit(false);
+            //necesaria lista de camarotes?
+            String empleadosSQL = ("INSERT INTO CRUCERO VALUES (?, ?, ?, ?, ?, ?)");
+            PreparedStatement sentencia = DBUtils.getConnectionDB().prepareStatement(empleadosSQL);
+            sentencia.setString(1, crucero.getCodigoCrucero());
+            sentencia.setString(2, crucero.getNombreCrucero());
+            sentencia.setString(3, crucero.getModeloCrucero());
+            sentencia.setString(4, crucero.getEslora());
+            sentencia.setString(5, crucero.getManga());
+            sentencia.setString(6, crucero.getCalado());
+            sentencia.executeUpdate();
+
+            DBUtils.getConnectionDB().commit();
+        } catch (SQLException sqlE) {
+            sqlE.printStackTrace();
+            DBUtils.getConnectionDB().rollback();
+        } finally {
+            DBUtils.getConnectionDB().setAutoCommit(true);
+        }
+    }
 }

@@ -6,7 +6,12 @@ public class Camarote{
     //Atributos
 
     private String codigoCamarote;
-    private float tarifa;
+
+    /*
+        La tarifa del camarote es un valor calculado, este proviene a traves del TIPO_CAMAROTE, la tarifa se calcula
+        a traves de ese atributo mediante una query.
+     */
+    private float tarifa; // private String tipoCamarote; // private TipoCamarote tipoCamarote;
     private int numeroCamas;
 
     //Construcctor
@@ -14,7 +19,7 @@ public class Camarote{
     public Camarote() {
     }
 
-    public Camarote(String codigoCrucero, String nombreCrucero, String modeloCrucero, int eslora, int manga, int calado, String codigoCamarote, float tarifa, int numeroCamas) {
+    public Camarote(String codigoCamarote, float tarifa, int numeroCamas) {
         setCodigoCamarote(codigoCamarote);
         setTarifa(tarifa);
         setNumeroCamas(numeroCamas);
@@ -25,6 +30,7 @@ public class Camarote{
         setTarifa(original.getTarifa());
         setNumeroCamas(original.getNumeroCamas());
     }
+
 
     //Getters y setters
 

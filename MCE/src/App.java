@@ -21,14 +21,14 @@ public class App extends Application {
     public void start(Stage primaryStage) throws Exception{
 
         //[TESTING]
-        testing();
+        //testing();
 
         if (LaunchInterpreter.checkTermsAndConditions()){
             Parent root = FXMLLoader.load(getClass().getResource("Ventanas/LogIn/log_in.fxml"));
             primaryStage.setTitle("Iniciar sesión");
             primaryStage.getIcons().add(new Image("Ventanas/Trash/img/MC_Logo.png"));
             primaryStage.setScene(new Scene(root));
-            primaryStage.setResizable(false);
+            primaryStage.setResizable(true);
             primaryStage.show();
         } else {
             Parent root = FXMLLoader.load(getClass().getResource("Ventanas/TermsAndConditions/terms_and_conditions.fxml"));

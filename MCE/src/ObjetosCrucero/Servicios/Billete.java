@@ -19,6 +19,7 @@ public class Billete {
     //Atributos
 
     private String codigoBillete;
+    private String nie;
     private Date fechaEmbarque;
     private String codigoCamarote;
     private String codigoCrucero;
@@ -33,13 +34,20 @@ public class Billete {
         this.codigoBillete = codigoBillete;
     }
 
+    public String getNie() {
+        return nie;
+    }
+
+    public void setNie(String nie) {
+        this.nie = nie;
+    }
+
     public Date getFechaEmbarque() {
         return fechaEmbarque;
     }
 
     public void setFechaEmbarque(Date fechaEmbarque) {
-        java.sql.Date fecha = new java.sql.Date(0); //Milisegundo cero
-        this.fechaEmbarque = fecha;
+        this.fechaEmbarque = fechaEmbarque;
     }
 
     public String getCodigoCamarote() {
@@ -56,25 +64,27 @@ public class Billete {
 
     //Construsctor
 
-    public Billete(String codigoBillete, Date fechaEmbarque, String codigoCamarote, String codigoCrucero) {
+    public Billete(String codigoBillete,String nie, Date fechaEmbarque, String codigoCamarote, String codigoCrucero) {
         this.setCodigoBillete(codigoBillete);
+        this.setNie(nie);
         this.setFechaEmbarque(fechaEmbarque);
         this.setCodigoCamarote(codigoCamarote);
         this.setCodigoCrucero(codigoCrucero);
     }
-    //Ejemplo estructura insert. Tener en cuenta el objeto billete y atributos
+
      public void addBillete() throws Exception {
          PreparedStatement insertarBillete = null;
          try{
             //Sentencia SQL para añadir la información.
             DBUtils.getConnectionDB().setAutoCommit(false);
 
-            String billetesSQL = ("INSERT INTO BILLETE VALUES (?,?,?);");
+            String billetesSQL = ("INSERT INTO BILLETE VALUES (?,?,?,?);");
             insertarBillete = DBUtils.getConnectionDB().prepareStatement(billetesSQL);
             insertarBillete.setString(1, getCodigoBillete());
-            insertarBillete.setDate(2, getFechaEmbarque());
-            insertarBillete.setString(3, getCodigoCamarote());
-            insertarBillete.setString(4, getCodigoCrucero());
+            insertarBillete.setString(2, getNie());
+            insertarBillete.setDate(3, getFechaEmbarque());
+            insertarBillete.setString(4, getCodigoCamarote());
+            insertarBillete.setString(5, getCodigoCrucero());
             insertarBillete.executeUpdate();
             DBUtils.getConnectionDB().commit();
         } catch (SQLException sqle){
@@ -101,7 +111,8 @@ public class Billete {
 
             Billete billeteItr = new Billete(
                     resultSet.getString("CODIGO_BILLETE"),
-                    Date.valueOf(resultSet.getString("FECHA_EMBARQUE_VIAJE")),
+                    resultSet.getString("NIE"),
+                    Date.valueOf(resultSet.getString("FECHA_EMBARQUE_BILLETE")),
                     resultSet.getString("CODIGO_CAMAROTE"),
                     resultSet.getString("CODIGO_CRUCERO")
             );

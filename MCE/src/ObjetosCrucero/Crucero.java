@@ -123,7 +123,7 @@ public class Crucero {
     public static ArrayList<Crucero> getListaCrucero() throws SQLException {
         ArrayList<Crucero> listaCrucero = new ArrayList<>();
 
-        String cruceroSQL = ("SELECT * FROM CRUCERO");
+        String cruceroSQL = ("SELECT * FROM CRUCERO;");
         PreparedStatement sentencia = DBUtils.getConnectionDB().prepareStatement(cruceroSQL);
         ResultSet resultset = sentencia.executeQuery();
 
@@ -145,22 +145,43 @@ public class Crucero {
         return listaCrucero;
     }
 
+    public static Crucero recuperarCrucero(String idCrucero) throws  SQLException{
+        String cruceroSQL = ("SELECT * FROM CRUCERO WHERE CODIGO_CRUCERO = '" + idCrucero + "';");
+
+        PreparedStatement sentencia = DBUtils.getConnectionDB().prepareStatement(cruceroSQL);
+        ResultSet resultSet = sentencia.executeQuery();
+
+        Crucero crucero = new Crucero(
+            resultSet.getString("CODIGO_CRUCERO"),
+            resultSet.getString("NOMBRE_CRUCERO"),
+            resultSet.getString("MODELO_CRUCERO"),
+            resultSet.getInt("ESLORA"),
+            resultSet.getInt("MANGA"),
+            resultSet.getInt("CALADO"),
+            resultSet.getInt(null)//corresponde a nCamarotes
+        );
+        //crucero.setListaCamarotes(Camarotes.getListaCamarotes());
+        resultSet.close();
+
+        return crucero;
+    }
+
     //argumentos de entrada?
-    public static void insertarCrucero() {
+    public static void insertarCrucero() throws Exception{
         try {
             //CRUCERO VACIO PARA PRUEBAS
             Crucero crucero = new Crucero();
 
             DBUtils.getConnectionDB().setAutoCommit(false);
             //necesaria lista de camarotes?
-            String empleadosSQL = ("INSERT INTO CRUCERO VALUES (?, ?, ?, ?, ?, ?)");
+            String empleadosSQL = ("INSERT INTO CRUCERO VALUES (?, ?, ?, ?, ?, ?);");
             PreparedStatement sentencia = DBUtils.getConnectionDB().prepareStatement(empleadosSQL);
             sentencia.setString(1, crucero.getCodigoCrucero());
             sentencia.setString(2, crucero.getNombreCrucero());
             sentencia.setString(3, crucero.getModeloCrucero());
-            sentencia.setString(4, crucero.getEslora());
-            sentencia.setString(5, crucero.getManga());
-            sentencia.setString(6, crucero.getCalado());
+            sentencia.setInt(4, crucero.getEslora());
+            sentencia.setInt(5, crucero.getManga());
+            sentencia.setInt(6, crucero.getCalado());
             sentencia.executeUpdate();
 
             DBUtils.getConnectionDB().commit();

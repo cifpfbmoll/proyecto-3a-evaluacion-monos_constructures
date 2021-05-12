@@ -14,7 +14,7 @@ public class Camarote{
     public Camarote() {
     }
 
-    public Camarote(String codigoCrucero, String nombreCrucero, String modeloCrucero, int eslora, int manga, int calado, String codigoCamarote, float tarifa, int numeroCamas) {
+    public Camarote(String codigoCamarote, float tarifa, int numeroCamas) {
         setCodigoCamarote(codigoCamarote);
         setTarifa(tarifa);
         setNumeroCamas(numeroCamas);

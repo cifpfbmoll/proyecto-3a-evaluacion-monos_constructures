@@ -124,20 +124,22 @@ public class Billete {
     // Metodo para crear el Archivo
     public void escrituraBilletes() throws IOException{
 
-        File archivoSalida = new File("./archivos/listadoBilletes.txt");
+        File archivoSalida = new File("./archivos/bill_" + this.getCodigoBillete() + ".txt");
         //Definimos el contenido
-        String linea1 = "LISTADO BILLETES DE MCE CRUCEROS ENTERPRISE \n";
-        String linea2 = "CRUCERO: \n" + this.getCodigoCrucero();
         BufferedWriter bw;
         if (archivoSalida.exists()){
             bw = new BufferedWriter(new FileWriter(archivoSalida));
-            bw.write("El fichero de texto ya esta creado. \n");
+            bw.write("Se ha modificado tú billete. \n");
         } else {
             bw = new BufferedWriter(new FileWriter(archivoSalida));
-            bw.write("Se ha creado el fichero. \n");
+            bw.write("Se ha generado el billete de tu Crucero de ensueño. \n");
         }
-        bw.write(linea1);
-        bw.write(linea2);
+        bw.write(
+                "LISTADO BILLETES DE MCE CRUCEROS ENTERPRISE \n" +
+                        "CRUCERO: " + this.getCodigoCrucero() + "\n" +
+                        "BILLETE \t \t DNI \t \t CRUCERO \t \t CAMAROTE \t \t FECHA \t \t" + "\n" +
+                        this.getCodigoBillete() + "\t" + "\t" + this.getNie() + "\t" + "\t" + this.getCodigoCrucero() + "\t" + "\t" + this.getCodigoCamarote()  + "\t" + "\t" + this.getFechaEmbarque()
+        );
         bw.close();
     }
 }

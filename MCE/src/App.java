@@ -1,4 +1,5 @@
 import Launch.LaunchInterpreter;
+import ObjetosCrucero.Servicios.Billete;
 import ObjetosCrucero.Servicios.Empleado;
 import ObjetosCrucero.Servicios.RecursosHumanos;
 import Utils.DBUtils;
@@ -9,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -66,6 +68,9 @@ public class App extends Application {
             System.out.println(empleado.getNombre() + " " + empleado.getApellido());
         }
 
+        Billete billete = new Billete("4354345", "33333333a", new java.sql.Date(0), "20004d", "fqg325rr");
+
+        billete.escrituraBilletes();
 
     }
 

@@ -2,7 +2,7 @@ package Ventanas.RecursosHumanos.AddStaff;
 
 import ObjetosCrucero.Servicios.Empleado;
 import ObjetosCrucero.Servicios.RecursosHumanos;
-import ObjetosCrucero.Servicios.TipoServicio;
+import ObjetosCrucero.Servicios.Servicio;
 import Utils.Credentials;
 import Utils.WindowUtils;
 import Ventanas.Fx.Animation;
@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import java.time.LocalDate;
+import java.util.List;
 
 public class RrhhAddStaffController {
 
@@ -63,7 +64,7 @@ public class RrhhAddStaffController {
 	DatePicker fechaNacimiento;
 
 	@FXML
-	ChoiceBox<TipoServicio> tipoServicio;
+	ChoiceBox<Servicio> servicio;
 
 
 
@@ -108,7 +109,7 @@ public class RrhhAddStaffController {
 						dni.getText(),
 						nombre.getText(),
 						apellidos.getText(),
-						tipoServicio.getValue(),
+						servicio.getValue(),
 						domiciliacion.getText(),
 						fechaNacimiento.getValue()
 				);
@@ -186,10 +187,10 @@ public class RrhhAddStaffController {
 
 		//Ajustamos los distintos textos del panel
 		Animation.setFechaYHora(fechaYHora);
-		tipoServicio.setItems(FXCollections.observableArrayList(
-				TipoServicio.values()
+		servicio.setItems(FXCollections.observableArrayList(
+				Servicio.listaServicios
 		));
-		tipoServicio.setValue(tipoServicio.getItems().get(0));
+		servicio.setValue(servicio.getItems().get(0));
 		fechaNacimiento.setValue(LocalDate.of(
 				LocalDate.now().getYear() - 18,
 				LocalDate.now().getMonth(),

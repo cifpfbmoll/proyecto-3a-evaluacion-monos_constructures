@@ -135,12 +135,6 @@ public class Crucero {
             while (resultado.next()) {
                 listaCamarotes.add(new Camarote(
                         resultado.getString("CODIGO_CAMAROTE"),
-
-                        /*
-                            La tarifa podemos hacer que se complete a traves de la clase Camarote gracias a su tipo,
-                            [ no nos importa introducir la tarifa a traves del constructor, solo el tipo de camarote ]
-                         */
-                        resultado.getFloat("TARIFA--?"),
                         resultado.getInt("NUMERO_CAMAS")
                 ));
             }

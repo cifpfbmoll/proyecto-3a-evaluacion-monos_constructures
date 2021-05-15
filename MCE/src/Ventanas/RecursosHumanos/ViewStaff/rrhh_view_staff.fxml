@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="900.0" minWidth="1800.0" prefHeight="900.0" prefWidth="1800.0" styleClass="background" stylesheets="@../../Trash/css/background.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Ventanas.RecursosHumanos.ViewStaff.RrhhViewStaffController">
+   <children>
+      <AnchorPane fx:id="mainCard" layoutX="79.0" layoutY="61.0" prefHeight="739.0" prefWidth="1234.0" styleClass="inner_panel" stylesheets="@../../Trash/css/inner_panel.css" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="50.0">
+         <children>
+            <Label fx:id="welcomeMessage" layoutX="110.0" layoutY="26.0" prefHeight="52.0" prefWidth="1430.0" text="Lista de empleados" textFill="#515151" AnchorPane.bottomAnchor="728.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="73.0" fitWidth="71.0" layoutX="1544.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Trash/img/ic_user_list.png" />
+               </image>
+            </ImageView>
+            <AnchorPane layoutX="75.0" layoutY="122.0" prefHeight="608.0" prefWidth="1452.0" styleClass="worktab" stylesheets="@../../Trash/css/worktab.css" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="122.0">
+               <children>
+                  <VBox prefHeight="650.0" prefWidth="1402.0">
+                     <padding>
+                        <Insets left="40.0" right="40.0" />
+                     </padding>
+                  </VBox>
+                  <Label layoutX="562.0" layoutY="14.0" prefHeight="36.0" prefWidth="329.0" text="••• Todos los empleados •••" textFill="#676767">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" prefHeight="37.0" prefWidth="1337.0" style="-fx-background-color: #DDD; -fx-background-radius: 26 26 0 0; -fx-border-radius: 26 26 0 0; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 2, 0, 0, 0);" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="60.0">
+                     <children>
+                        <Label text="Nombre">
+                           <HBox.margin>
+                              <Insets right="170.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label text="Apellidos">
+                           <HBox.margin>
+                              <Insets right="170.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label text="DNI">
+                           <HBox.margin>
+                              <Insets right="170.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label text="Codigo">
+                           <HBox.margin>
+                              <Insets right="170.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label text="Domiciliacion">
+                           <HBox.margin>
+                              <Insets right="170.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label text="Servicio" />
+                     </children>
+                     <padding>
+                        <Insets left="40.0" right="40.0" />
+                     </padding>
+                  </HBox>
+                  <ScrollPane fx:id="wtabScroll" cache="true" focusTraversable="false" hbarPolicy="NEVER" layoutX="70.0" layoutY="95.0" prefHeight="504.0" prefWidth="1352.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 3, 0, 0, 0);" stylesheets="@../../Trash/css/worktab.css" vbarPolicy="NEVER" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="95.0">
+                     <content>
+                        <VBox fx:id="usersPane" prefHeight="481.0" prefWidth="1364.0" style="-fx-background-color: #fff;" />
+                     </content>
+                  </ScrollPane>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" />
+               </padding>
+            </AnchorPane>
+            <Label fx:id="fechaYHora" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="1359.0" layoutY="769.0" prefHeight="26.0" prefWidth="762.0" text="00:00" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="50.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <VBox fx:id="backButton" layoutX="28.0" layoutY="19.0" prefHeight="52.0" prefWidth="60.0" styleClass="button_resizable" stylesheets="@../../Trash/css/button_resizable.css">
+               <children>
+                  <ImageView fitHeight="58.0" fitWidth="62.0" opacity="0.33" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Trash/img/ic_back_button.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

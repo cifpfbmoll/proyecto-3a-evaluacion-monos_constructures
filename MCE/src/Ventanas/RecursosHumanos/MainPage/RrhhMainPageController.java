@@ -23,24 +23,35 @@ import java.util.concurrent.TimeUnit;
 
 public class RrhhMainPageController {
 
-
+	//Elementos graficos
 	@FXML
 	AnchorPane mainCard;
-
-	@FXML
-	Label welcomeMessage;
-
-	@FXML
-	VBox addUser;
 
 	@FXML
 	Label fechaYHora;
 
 	@FXML
-	ImageView logout;
+	Label welcomeMessage;
 
 	@FXML
 	Label userInfo;
+
+
+	//Botones del Worktab
+
+	@FXML
+	VBox addUser;
+
+	@FXML
+	VBox listUser;
+
+
+	//Botones GUI
+
+	@FXML
+	ImageView logout;
+
+
 
 	@FXML
 	ScrollPane wtabScroll;
@@ -60,6 +71,16 @@ public class RrhhMainPageController {
 				mainCard,
 				"Añadir un empleado",
 				"/Ventanas/RecursosHumanos/AddStaff/rrhh_add_staff.fxml",
+				event
+		);
+	};
+
+	//Ver lista de empleados
+	EventHandler<MouseEvent> verListaEmpledos = event -> {
+		Animation.card_animation_EXIT_TO_LEFT(
+				mainCard,
+				"Lista de empleados",
+				"/Ventanas/RecursosHumanos/ViewStaff/rrhh_view_staff.fxml",
 				event
 		);
 	};
@@ -85,6 +106,8 @@ public class RrhhMainPageController {
 
 		// Asignando los eventos a los botones
 		addUser.addEventHandler(MouseEvent.MOUSE_CLICKED, crearEmpleado);
+		listUser.addEventHandler(MouseEvent.MOUSE_CLICKED, verListaEmpledos);
+
 		logout.addEventHandler(MouseEvent.MOUSE_CLICKED, logOut);
 		Tooltip.install(logout, new Tooltip("Cerrar sesión")); //etiqueta del logout
 

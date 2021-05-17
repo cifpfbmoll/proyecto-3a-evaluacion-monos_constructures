@@ -2,7 +2,7 @@ package Utils;
 
 import ObjetosCrucero.Servicios.RecursosHumanos;
 import ObjetosCrucero.Servicios.Empleado;
-import ObjetosCrucero.Servicios.TipoServicio;
+import ObjetosCrucero.Servicios.Servicio;
 import javafx.event.Event;
 
 import java.io.IOException;
@@ -43,13 +43,16 @@ public class Credentials {
 						userInfo.getString(2),
 						userInfo.getString(3),
 						userInfo.getString(4),
-						TipoServicio.valueOf("RRHH")
+						Servicio.buscarCodigo("RRHH")
 				);
 				break;
 			//Aquí se irán añadiendo los distintos servicios de la aplicación
 		}
 	}
 
+	public static boolean validarCodigoEmpleado(String codigo){
+		return codigo.matches("[0-9]{3}");
+	}
 
 	/**
 	 * Función para mostrar la pantalla de inicio de un empleado dependiendo de su servicio.
@@ -130,6 +133,12 @@ public class Credentials {
 		Pattern patronDireccion = Pattern.compile("[A-Z 0-9,º'/]{10,50}");
 		Matcher validadorPatron = patronDireccion.matcher(direccion.toUpperCase(Locale.ROOT));
 		return validadorPatron.matches();
+	}
+
+	public static boolean validarFecha(LocalDate fechaNacimiento) {
+		LocalDate fechaDeHoy = LocalDate.now();
+		int edad = Period.between(fechaNacimiento, fechaDeHoy).getYears();
+		return edad >= 18 && edad <= 120;
 	}
 
 	public static boolean validarFecha(LocalDate fechaNacimiento) {

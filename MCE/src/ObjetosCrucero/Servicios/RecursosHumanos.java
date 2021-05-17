@@ -17,7 +17,7 @@ public class RecursosHumanos extends Empleado {
 	/**
 	 * Constructor con todos los parámetros
 	 */
-	public RecursosHumanos(String codigoEmpleado, String nieEmpleado, String nombreEmpleado, String apellidoEmpleado, TipoServicio servicio) {
+	public RecursosHumanos(String codigoEmpleado, String nieEmpleado, String nombreEmpleado, String apellidoEmpleado, Servicio servicio) {
 		super(codigoEmpleado, nieEmpleado, nombreEmpleado, apellidoEmpleado, servicio);
 	}
 
@@ -40,6 +40,8 @@ public class RecursosHumanos extends Empleado {
 		ResultSet resultSet = sentencia.executeQuery();
 
 
+		ArrayList<Servicio> listaServicios = Servicio.getListaServicios();
+
 		//Rellenamos la lista con los datos obtenidos
 		while ( resultSet.next()){
 
@@ -58,6 +60,7 @@ public class RecursosHumanos extends Empleado {
 			}
 		}
 		resultSet.close();
+		sentencia.close();
 		return listaEmpleados;
 	}
 
@@ -69,7 +72,9 @@ public class RecursosHumanos extends Empleado {
 	 */
 	public static void addEmpleado(Empleado empleado) throws Exception {
 
-		try {
+		String empleadosSQL = ("INSERT INTO EMPLEADO VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
+
+		try (PreparedStatement sentencia= DBUtils.getConnectionDB().prepareStatement(empleadosSQL)) {
 			//Sentencia SQL para añadir la información
 			DBUtils.getConnectionDB().setAutoCommit(false);
 

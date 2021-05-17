@@ -63,8 +63,8 @@ public class RrhhMainPageController {
 	EventHandler<MouseEvent> logOut = event ->{
 		try {
 			Credentials.logOut(event);
-		} catch (IOException | SQLException e) {
-			e.printStackTrace();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
 		}
 	};
 

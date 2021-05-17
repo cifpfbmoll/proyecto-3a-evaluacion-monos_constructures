@@ -1,6 +1,11 @@
 package ObjetosCrucero.Servicios;
 
+import Utils.DBUtils;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Nomina {
 
@@ -119,4 +124,33 @@ public class Nomina {
         return salarioNeto;
     }
 
+    /*public static void addNomina(Nomina nomina) throws Exception {
+
+        try {
+            //Sentencia SQL para añadir la información
+            DBUtils.getConnectionDB().setAutoCommit(false);
+
+            String empleadosSQL = ("INSERT INTO EMPLEADO VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
+            PreparedStatement sentencia= DBUtils.getConnectionDB().prepareStatement(empleadosSQL);
+            sentencia.setString(1, nomina.getCodigoEmpleado());
+            sentencia.setString(2, nomina.getDni());
+            sentencia.setString(3, nomina.getNombre());
+            sentencia.setString(4, nomina.getApellido());
+            sentencia.setString(5, nomina.getDireccion());
+            sentencia.setString(6, nomina.getFechaNacimiento().format(DateTimeFormatter.ofPattern("yyyy-dd-MM")));
+            sentencia.setString(7, nomina.getTipoServicio().getValue());
+            sentencia.setString(8, DBUtils.encrypt("MCE123", "MCE123"));
+            sentencia.executeUpdate();
+
+            DBUtils.getConnectionDB().commit();
+
+        } catch (SQLException sqle){
+            sqle.printStackTrace();
+            DBUtils.getConnectionDB().rollback();
+        } finally {
+            DBUtils.getConnectionDB().setAutoCommit(true);
+        }
+
+    }
+    */
 }

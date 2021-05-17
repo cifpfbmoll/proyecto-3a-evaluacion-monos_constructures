@@ -1,7 +1,5 @@
 package Utils;
 
-import ObjetosCrucero.Servicios.RecursosHumanos;
-
 import java.util.Random;
 
 public class Mensajes {
@@ -12,7 +10,7 @@ public class Mensajes {
 						Credentials.getLoggedUser().getNombre() +"\n" +
 						Credentials.getLoggedUser().getApellido() + "\n" +
 						Credentials.getLoggedUser().getCodigoEmpleado() + "\n" +
-						Credentials.getLoggedUser().getTipoServicio()
+						Credentials.getLoggedUser().getServicio()
 				);
 	}
 

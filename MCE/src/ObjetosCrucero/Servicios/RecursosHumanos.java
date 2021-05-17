@@ -15,7 +15,7 @@ public class RecursosHumanos extends Empleado {
 	/**
 	 * Constructor con todos los parámetros
 	 */
-	public RecursosHumanos(String codigoEmpleado, String nieEmpleado, String nombreEmpleado, String apellidoEmpleado, TipoServicio servicio) {
+	public RecursosHumanos(String codigoEmpleado, String nieEmpleado, String nombreEmpleado, String apellidoEmpleado, Servicio servicio) {
 		super(codigoEmpleado, nieEmpleado, nombreEmpleado, apellidoEmpleado, servicio);
 	}
 
@@ -38,6 +38,8 @@ public class RecursosHumanos extends Empleado {
 		ResultSet resultSet = sentencia.executeQuery();
 
 
+		ArrayList<Servicio> listaServicios = Servicio.getListaServicios();
+
 		//Rellenamos la lista con los datos obtenidos
 		while ( resultSet.next() ){
 
@@ -46,13 +48,14 @@ public class RecursosHumanos extends Empleado {
 					resultSet.getString("NIE_EMPLEADO"),
 					resultSet.getString("NOMBRE_EMPLEADO"),
 					resultSet.getString("APELLIDO_EMPLEADO"),
-					TipoServicio.valueOf(resultSet.getString("CODIGO_SERVICIO")),
+					Servicio.buscarCodigo(resultSet.getString("CODIGO_SERVICIO")),
 					resultSet.getString("DOMICILIACION_EMPLEADO"),
 					LocalDate.parse(resultSet.getString("FECHA_NACIMIENTO_EMPLEADO"))
 			);
 			listaEmpleados.add(empleadoItr);
 		}
 		resultSet.close();
+		sentencia.close();
 		return listaEmpleados;
 	}
 
@@ -64,19 +67,20 @@ public class RecursosHumanos extends Empleado {
 	 */
 	public static void addEmpleado(Empleado empleado) throws Exception {
 
-		try {
+		String empleadosSQL = ("INSERT INTO EMPLEADO VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
+
+		try (PreparedStatement sentencia= DBUtils.getConnectionDB().prepareStatement(empleadosSQL)) {
 			//Sentencia SQL para añadir la información
 			DBUtils.getConnectionDB().setAutoCommit(false);
 
-			String empleadosSQL = ("INSERT INTO EMPLEADO VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
-			PreparedStatement sentencia= DBUtils.getConnectionDB().prepareStatement(empleadosSQL);
+
 			sentencia.setString(1, empleado.getCodigoEmpleado());
 			sentencia.setString(2, empleado.getDni());
 			sentencia.setString(3, empleado.getNombre());
 			sentencia.setString(4, empleado.getApellido());
 			sentencia.setString(5, empleado.getDireccion());
 			sentencia.setString(6, empleado.getFechaNacimiento().format(DateTimeFormatter.ofPattern("yyyy-dd-MM")));
-			sentencia.setString(7, empleado.getTipoServicio().getValue());
+			sentencia.setString(7, empleado.getServicio().getCodigo());
 			sentencia.setString(8, DBUtils.encrypt("MCE123", "MCE123"));
 			sentencia.executeUpdate();
 

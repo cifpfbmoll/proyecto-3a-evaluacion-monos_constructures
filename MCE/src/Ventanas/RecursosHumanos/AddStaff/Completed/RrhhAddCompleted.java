@@ -1,26 +1,16 @@
 package Ventanas.RecursosHumanos.AddStaff.Completed;
 
 import ObjetosCrucero.Servicios.Empleado;
-import ObjetosCrucero.Servicios.RecursosHumanos;
-import ObjetosCrucero.Servicios.TipoServicio;
-import Utils.Credentials;
-import Utils.Mensajes;
 import Utils.WindowUtils;
 import Ventanas.Fx.Animation;
-import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
-import java.awt.*;
 import java.io.IOException;
-import java.time.LocalDate;
 
 public class RrhhAddCompleted {
 
@@ -99,7 +89,7 @@ public class RrhhAddCompleted {
 						nuevoEmpleado.getApellido() + "\n" +
 						nuevoEmpleado.getFechaNacimiento() + "\n" +
 						nuevoEmpleado.getDireccion() + "\n" +
-						nuevoEmpleado.getTipoServicio()
+						nuevoEmpleado.getServicio()
 		);
 
 		//Añadimos la funcionalidad a los botones

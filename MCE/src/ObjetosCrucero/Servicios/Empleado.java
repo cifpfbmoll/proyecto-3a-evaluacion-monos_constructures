@@ -1,14 +1,11 @@
 package ObjetosCrucero.Servicios;
 
 import java.time.LocalDate;
-import java.time.temporal.TemporalAmount;
-import java.time.temporal.TemporalField;
-import java.util.Date;
 
 public class Empleado extends Usuario{
 
 	private String codigoEmpleado;
-	private TipoServicio tipoServicio;
+	private Servicio Servicio;
 
 	//Getters y setters
 
@@ -20,18 +17,18 @@ public class Empleado extends Usuario{
 		this.codigoEmpleado = codigoEmpleado;
 	}
 
-	public TipoServicio getTipoServicio() {
-		return tipoServicio;
+	public Servicio getServicio() {
+		return Servicio;
 	}
 
-	public void setTipoServicio(TipoServicio tiposServicios) {
-		this.tipoServicio = tiposServicios;
+	public void setTipoServicio(Servicio tiposServicios) {
+		this.Servicio = tiposServicios;
 	}
 
 	/**
 	 * Constructor con todos los parámetros
 	 */
-	public Empleado(String codigoEmpleado, String dni, String nombre, String apellido, TipoServicio servicio, String direccion, LocalDate fechaNacimiento) {
+	public Empleado(String codigoEmpleado, String dni, String nombre, String apellido, Servicio servicio, String direccion, LocalDate fechaNacimiento) {
 		super( dni, nombre, apellido, direccion, fechaNacimiento);
 		this.setCodigoEmpleado(codigoEmpleado);
 		this.setTipoServicio(servicio);
@@ -40,7 +37,7 @@ public class Empleado extends Usuario{
 	/**
 	 * Constructor esencial
 	 */
-	public Empleado(String codigoEmpleado, String dni, String nombre, String apellido, TipoServicio servicio){
+	public Empleado(String codigoEmpleado, String dni, String nombre, String apellido, Servicio servicio){
 		super(dni, nombre, apellido);
 		this.setCodigoEmpleado(codigoEmpleado);
 		this.setTipoServicio(servicio);

@@ -1,6 +1,13 @@
 package ObjetosCrucero.Servicios;
 
+import Utils.DBUtils;
+import javafx.scene.control.TextField;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAmount;
 import java.time.temporal.TemporalField;
 import java.util.Date;
@@ -10,7 +17,7 @@ public class Empleado extends Usuario{
 	private String codigoEmpleado;
 	private TipoServicio tipoServicio;
 
-	//Getters y setters
+    //Getters y setters
 
 	public String getCodigoEmpleado() {
 		return codigoEmpleado;
@@ -46,5 +53,42 @@ public class Empleado extends Usuario{
 		this.setTipoServicio(servicio);
 	}
 
+	/**
+	 * Constructor basico (solo para obtener info de la bbdd)
+	 */
+	public Empleado(String dni) {
+		super(dni);
+	}
+
+
+	/**
+	 * Obtenemos el perfil de un empleado a traves de su DNI
+	 * @param dni el dni del empleado a buscar
+	 * @return devuelve un empleado o nulo en caso de excepcion o busqueda sin resultados.
+	 */
+	public static Empleado getEmbleadoByDNI(String dni){
+		Empleado empleado = null;
+		String sentenciaSQL = "SELECT * FROM EMPLEADO WHERE NIE_EMPLEADO = ?";
+
+		try (PreparedStatement busquedaDDBB = DBUtils.getConnectionDB().prepareStatement(sentenciaSQL)) {
+			busquedaDDBB.setString(1, dni);
+			ResultSet resultados = busquedaDDBB.executeQuery();
+			if (resultados.next()){
+				empleado = new Empleado(
+						resultados.getString("CODIGO_EMPLEADO"),
+						resultados.getString("NIE_EMPLEADO"),
+						resultados.getString("NOMBRE_EMPLEADO"),
+						resultados.getString("APELLIDO_EMPLEADO"),
+						TipoServicio.fromString(resultados.getString("CODIGO_SERVICIO")),
+						resultados.getString("DOMICILIACION_EMPLEADO"),
+						LocalDate.parse(resultados.getDate("FECHA_NACIMIENTO_EMPLEADO").toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+				);
+			}
+			resultados.close();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		return empleado;
+	}
 
 }

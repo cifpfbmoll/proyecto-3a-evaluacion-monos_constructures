@@ -1,31 +1,22 @@
-package Ventanas.RecursosHumanos.AddStaff.Completed;
+package Ventanas.RecursosHumanos.DeleteStaff.Completed;
 
 import ObjetosCrucero.Servicios.Empleado;
-import ObjetosCrucero.Servicios.RecursosHumanos;
-import ObjetosCrucero.Servicios.TipoServicio;
 import Utils.Credentials;
-import Utils.Mensajes;
 import Utils.WindowUtils;
 import Ventanas.Fx.Animation;
-import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
-import java.awt.*;
 import java.io.IOException;
-import java.time.LocalDate;
 
-public class RrhhAddCompleted {
+public class RrhhDeleteCompleted {
 
 	//Objetos Crucero
-	private static Empleado nuevoEmpleado;
+	private static Empleado empleadoDespedido;
 
 	//Elementos gráficos
 
@@ -42,18 +33,18 @@ public class RrhhAddCompleted {
 	//Botones
 
 	@FXML
-	Button nuevoUsuario;
+	Button despedirEmpleado;
 
 	@FXML
 	Button paginaPrincipal;
 
 
-	EventHandler<MouseEvent> crearUnNNuevoUsuario = event -> {
+	EventHandler<MouseEvent> despedirOtroEmpleado = event -> {
 		try {
 			WindowUtils.cambiarVentana(
 					event,
-					"Crear un nuevo usuario",
-					"/Ventanas/RecursosHumanos/AddStaff/rrhh_add_staff.fxml",
+					"Tramitar despido",
+					"/Ventanas/RecursosHumanos/DeleteStaff/rrhh_delete_staff.fxml",
 					false);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -76,10 +67,10 @@ public class RrhhAddCompleted {
 
 	/**
 	 * Método para obtener la informacion del empleado a través de la ventana anterior.
-	 * @param empleado El empleado recién creado
+	 * @param empleado El empleado recién eliminado.
 	 */
 	public static void setInformacionEmpleado(Empleado empleado){
-		nuevoEmpleado = empleado;
+		empleadoDespedido = empleado;
 	}
 
 	@FXML
@@ -91,19 +82,19 @@ public class RrhhAddCompleted {
 		//Ajustamos los distintos textos del panel
 		Animation.setFechaYHora(fechaYHora);
 
-		//CAMBIAR---- Debe cojer los datos del usuario creado, no del loggeado.
+		//representamos la informacion del empleado despedido
 		userInfo.setText(
-				nuevoEmpleado.getCodigoEmpleado() + "\n" +
-						nuevoEmpleado.getDni() + "\n" +
-						nuevoEmpleado.getNombre() + "\n" +
-						nuevoEmpleado.getApellido() + "\n" +
-						nuevoEmpleado.getFechaNacimiento() + "\n" +
-						nuevoEmpleado.getDireccion() + "\n" +
-						nuevoEmpleado.getTipoServicio()
+			empleadoDespedido.getCodigoEmpleado() + "\n" +
+			empleadoDespedido.getDni() + "\n" +
+			empleadoDespedido.getNombre() + "\n" +
+			empleadoDespedido.getApellido() + "\n" +
+			empleadoDespedido.getFechaNacimiento() + "\n" +
+			empleadoDespedido.getDireccion() + "\n" +
+			empleadoDespedido.getTipoServicio()
 		);
 
 		//Añadimos la funcionalidad a los botones
-		nuevoUsuario.addEventHandler(MouseEvent.MOUSE_CLICKED, crearUnNNuevoUsuario);
+		despedirEmpleado.addEventHandler(MouseEvent.MOUSE_CLICKED, despedirOtroEmpleado);
 		paginaPrincipal.addEventHandler(MouseEvent.MOUSE_CLICKED, volverPaginaPrincipal);
 
 		//Creando la animación de entrada

@@ -10,8 +10,11 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static ObjetosCrucero.Servicios.Servicio.getListaServicios;
 
 /**
  * Esta es la clase principal del programa.
@@ -24,6 +27,10 @@ public class App extends Application {
 
         //[TESTING]
         //testing();
+        DBUtils.createConnectionDB();
+
+        getListaServicios();
+
 
         if (LaunchInterpreter.checkTermsAndConditions()){
             Parent root = FXMLLoader.load(getClass().getResource("Ventanas/LogIn/log_in.fxml"));
@@ -58,9 +65,6 @@ public class App extends Application {
 
         //encript
         System.out.println(DBUtils.encrypt("1234", "1234"));
-
-
-        DBUtils.createConnectionDB();
 
         //Obtener la lista de empleados desde la BBDD
         List<Empleado> listaTest = RecursosHumanos.getListaEmpleados();

@@ -72,9 +72,9 @@ public class App extends Application {
             System.out.println(empleado.getNombre() + " " + empleado.getApellido());
         }
 
-        Billete billete = new Billete("4354345", "33333333a", new java.sql.Date(0), "20004d", "fqg325rr");
-
-        billete.escrituraBilletes();
+        //Encontrar un empleado por DNI
+        Empleado empleado = Empleado.getEmbleadoByDNI("43235841G");
+        System.out.println(empleado.getNombre());
 
     }
 

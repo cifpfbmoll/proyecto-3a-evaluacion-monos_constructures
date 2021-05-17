@@ -45,6 +45,9 @@ public class RrhhMainPageController {
 	@FXML
 	VBox listUser;
 
+	@FXML
+	VBox removeUser;
+
 
 	//Botones GUI
 
@@ -85,6 +88,17 @@ public class RrhhMainPageController {
 		);
 	};
 
+	//Tramitar despido
+	EventHandler<MouseEvent> despedirEmpledo = event -> {
+		Animation.card_animation_EXIT_TO_LEFT(
+				mainCard,
+				"Lista de empleados",
+				"/Ventanas/RecursosHumanos/DeleteStaff/rrhh_delete_staff.fxml",
+				event
+		);
+	};
+
+
 
 	@FXML
 	private void initialize() throws InterruptedException {
@@ -107,6 +121,7 @@ public class RrhhMainPageController {
 		// Asignando los eventos a los botones
 		addUser.addEventHandler(MouseEvent.MOUSE_CLICKED, crearEmpleado);
 		listUser.addEventHandler(MouseEvent.MOUSE_CLICKED, verListaEmpledos);
+		removeUser.addEventHandler(MouseEvent.MOUSE_CLICKED, despedirEmpledo);
 
 		logout.addEventHandler(MouseEvent.MOUSE_CLICKED, logOut);
 		Tooltip.install(logout, new Tooltip("Cerrar sesión")); //etiqueta del logout

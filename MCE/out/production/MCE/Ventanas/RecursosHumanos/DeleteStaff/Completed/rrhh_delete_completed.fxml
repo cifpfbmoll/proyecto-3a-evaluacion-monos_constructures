@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="900.0" minWidth="1800.0" prefHeight="900.0" prefWidth="1800.0" styleClass="background" stylesheets="@../../../Trash/css/background.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Ventanas.RecursosHumanos.DeleteStaff.Completed.RrhhDeleteCompleted">
+   <children>
+      <AnchorPane fx:id="mainCard" layoutX="79.0" layoutY="61.0" prefHeight="739.0" prefWidth="1234.0" styleClass="inner_panel" stylesheets="@../../../Trash/css/inner_panel.css" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="50.0">
+         <children>
+            <Label fx:id="welcomeMessage" layoutX="110.0" layoutY="26.0" prefHeight="52.0" prefWidth="1430.0" text="Despido tramitado correctamente" textFill="#515151" AnchorPane.bottomAnchor="728.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="73.0" fitWidth="71.0" layoutX="1544.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Trash/img/ic_remove-user.png" />
+               </image>
+            </ImageView>
+            <AnchorPane layoutX="75.0" layoutY="122.0" prefHeight="608.0" prefWidth="1452.0" styleClass="worktab" stylesheets="@../../../Trash/css/worktab.css" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="122.0">
+               <children>
+                  <Label layoutX="584.0" layoutY="14.0" prefHeight="36.0" prefWidth="284.0" text="••• Datos del usuario •••" textFill="#676767">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="651.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Trash/img/ic_logged_user.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="93.0" layoutX="765.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Trash/img/MC_logo_Icon.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="TOP_LEFT" contentDisplay="TOP" layoutX="565.0" layoutY="282.0" lineSpacing="3.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="208.0" prefWidth="161.0" text="MCE Codigo:&#10;DNI:&#10;Nombre:&#10;Apellidos:&#10;Fecha de nacimiento:&#10;Domiciliación:&#10;Servicio:&#10;" textFill="#680000" wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="userInfo" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="801.0" layoutY="282.0" lineSpacing="3.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="208.0" prefWidth="346.0" text="100&#10;33333333A&#10;Jose Luis&#10;Saiz Lopez&#10;02-03-2001&#10;C/Caracas nº4, Palma de Mallorca" wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="despedirEmpleado" layoutX="521.0" layoutY="508.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="161.0" styleClass="buttonGreen" stylesheets="@../../../Trash/css/button.css" text="Realizar otro despido" />
+                  <Button fx:id="paginaPrincipal" layoutX="824.0" layoutY="508.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="150.0" stylesheets="@../../../Trash/css/button.css" text="Página principal" />
+                  <ImageView fitHeight="71.0" fitWidth="93.0" layoutX="641.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Trash/img/red_cross.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" />
+               </padding>
+            </AnchorPane>
+            <Label fx:id="fechaYHora" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="1359.0" layoutY="769.0" prefHeight="26.0" prefWidth="762.0" text="00:00" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="50.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <VBox fx:id="backButton" layoutX="28.0" layoutY="19.0" prefHeight="52.0" prefWidth="60.0" styleClass="button_resizable" stylesheets="@../../../Trash/css/button_resizable.css">
+               <children>
+                  <ImageView fitHeight="58.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Trash/img/check.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

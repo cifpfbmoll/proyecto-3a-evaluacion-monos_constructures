@@ -57,7 +57,8 @@ public class DBUtils {
 				"               nie_empleado, " +
 				"               nombre_empleado, " +
 				"               apellido_empleado, " +
-				"               codigo_servicio " +
+				"               codigo_servicio, " +
+				"               activo " +
 				"          from " +
 				"               empleado " +
 				"          where " +
@@ -69,7 +70,7 @@ public class DBUtils {
 
 		boolean isValidLogin;
 
-		if (resultSet.next()){
+		if (resultSet.next() && resultSet.getBoolean("ACTIVO")){
 			Credentials.setUserAtService(resultSet);
 			isValidLogin = true;
 		} else {

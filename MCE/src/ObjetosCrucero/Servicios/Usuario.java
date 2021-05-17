@@ -72,4 +72,11 @@ public abstract class Usuario {
 		this.setNombre(nombre);
 		this.setApellido(apellido);
 	}
+
+	/**
+	 * Constructor basico (solo para obtener info de la bbdd)
+	 */
+	public Usuario(String dni){
+		this.setDni(dni);
+	}
 }

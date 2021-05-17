@@ -66,6 +66,9 @@ public class RrhhMainPageController {
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
 	};
 
 	//Añadir un empleado

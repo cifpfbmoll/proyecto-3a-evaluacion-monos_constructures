@@ -125,7 +125,7 @@ public class RrhhViewStaffController {
         domiciliacionBox.setAlignment(Pos.CENTER);
 
         //Servicio
-        Label servicio = new Label(empleado.getServicio().getNombre());
+        Label servicio = new Label(empleado.getServicio().getCodigo());
         servicio.setStyle(estiloTexto);
         HBox servicioBox = new HBox(servicio);
         HBox.setMargin(servicioBox, new Insets(0, 5, 0, 0));
@@ -169,5 +169,4 @@ public class RrhhViewStaffController {
 
         actualizarTabla();
     }
-
 }

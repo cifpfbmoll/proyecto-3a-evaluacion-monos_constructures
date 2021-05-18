@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAmount;
 import java.time.temporal.TemporalField;
 import java.util.Date;
+import ObjetosCrucero.Servicios.Servicio;
 
 public class Empleado extends Usuario{
 
@@ -31,7 +32,7 @@ public class Empleado extends Usuario{
 		return Servicio;
 	}
 
-	public void setTipoServicio(Servicio tiposServicios) {
+	public void setServicio(Servicio tiposServicios) {
 		this.Servicio = tiposServicios;
 	}
 
@@ -41,7 +42,7 @@ public class Empleado extends Usuario{
 	public Empleado(String codigoEmpleado, String dni, String nombre, String apellido, Servicio servicio, String direccion, LocalDate fechaNacimiento) {
 		super( dni, nombre, apellido, direccion, fechaNacimiento);
 		this.setCodigoEmpleado(codigoEmpleado);
-		this.setTipoServicio(servicio);
+		this.setServicio(servicio);
 	}
 
 	/**
@@ -50,7 +51,7 @@ public class Empleado extends Usuario{
 	public Empleado(String codigoEmpleado, String dni, String nombre, String apellido, Servicio servicio){
 		super(dni, nombre, apellido);
 		this.setCodigoEmpleado(codigoEmpleado);
-		this.setTipoServicio(servicio);
+		this.setServicio(servicio);
 	}
 
 	/**
@@ -59,7 +60,6 @@ public class Empleado extends Usuario{
 	public Empleado(String dni) {
 		super(dni);
 	}
-
 
 	/**
 	 * Obtenemos el perfil de un empleado a traves de su DNI
@@ -79,7 +79,7 @@ public class Empleado extends Usuario{
 						resultados.getString("NIE_EMPLEADO"),
 						resultados.getString("NOMBRE_EMPLEADO"),
 						resultados.getString("APELLIDO_EMPLEADO"),
-						TipoServicio.fromString(resultados.getString("CODIGO_SERVICIO")),
+						ObjetosCrucero.Servicios.Servicio.buscarCodigo(resultados.getString("CODIGO_SERVICIO")),
 						resultados.getString("DOMICILIACION_EMPLEADO"),
 						LocalDate.parse(resultados.getDate("FECHA_NACIMIENTO_EMPLEADO").toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd"))
 				);

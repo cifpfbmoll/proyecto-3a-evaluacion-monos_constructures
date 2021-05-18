@@ -1,6 +1,7 @@
 package Ventanas.RecursosHumanos.AddStaff.Completed;
 
 import ObjetosCrucero.Servicios.Empleado;
+import Utils.Credentials;
 import Utils.WindowUtils;
 import Ventanas.Fx.Animation;
 import javafx.event.EventHandler;

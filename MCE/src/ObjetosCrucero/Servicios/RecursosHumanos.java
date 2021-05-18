@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import ObjetosCrucero.Servicios.Servicio;
 
 public class RecursosHumanos extends Empleado {
 
@@ -40,7 +41,7 @@ public class RecursosHumanos extends Empleado {
 		ResultSet resultSet = sentencia.executeQuery();
 
 
-		ArrayList<Servicio> listaServicios = Servicio.getListaServicios();
+		ArrayList<Servicio> listaServicios = Servicio.listaServicios;
 
 		//Rellenamos la lista con los datos obtenidos
 		while ( resultSet.next()){
@@ -52,7 +53,7 @@ public class RecursosHumanos extends Empleado {
 						resultSet.getString("NIE_EMPLEADO"),
 						resultSet.getString("NOMBRE_EMPLEADO"),
 						resultSet.getString("APELLIDO_EMPLEADO"),
-						TipoServicio.valueOf(resultSet.getString("CODIGO_SERVICIO")),
+						Servicio.buscarCodigo(resultSet.getString("CODIGO_SERVICIO")),
 						resultSet.getString("DOMICILIACION_EMPLEADO"),
 						LocalDate.parse(resultSet.getString("FECHA_NACIMIENTO_EMPLEADO"))
 				);
@@ -77,16 +78,13 @@ public class RecursosHumanos extends Empleado {
 		try (PreparedStatement sentencia= DBUtils.getConnectionDB().prepareStatement(empleadosSQL)) {
 			//Sentencia SQL para añadir la información
 			DBUtils.getConnectionDB().setAutoCommit(false);
-
-			String empleadosSQL = ("INSERT INTO EMPLEADO VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);");
-			PreparedStatement sentencia= DBUtils.getConnectionDB().prepareStatement(empleadosSQL);
 			sentencia.setString(1, empleado.getCodigoEmpleado());
 			sentencia.setString(2, empleado.getDni());
 			sentencia.setString(3, empleado.getNombre());
 			sentencia.setString(4, empleado.getApellido());
 			sentencia.setString(5, empleado.getDireccion());
 			sentencia.setString(6, empleado.getFechaNacimiento().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-			sentencia.setString(7, empleado.getTipoServicio().getValue());
+			sentencia.setString(7, empleado.getServicio().getCodigo());
 			sentencia.setString(8, DBUtils.encrypt("MCE123", "MCE123"));
 			sentencia.setBoolean(9, true);
 			sentencia.executeUpdate();

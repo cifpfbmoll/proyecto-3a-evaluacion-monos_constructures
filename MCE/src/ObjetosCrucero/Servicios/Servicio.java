@@ -18,7 +18,7 @@ public class Servicio {
     private String nombre;
     private float salario;
 
-    public static ArrayList<Servicio> listaServicios = new ArrayList<>();
+    public static ArrayList<Servicio> listaServicios;
 
 
     //Constructores
@@ -114,10 +114,9 @@ public class Servicio {
 
     }
 
-    public static ArrayList<Servicio> getListaServicios() throws SQLException {
+    public static void getListaServicios() throws SQLException {
 
-
-
+        ArrayList<Servicio> newListaServicios = new ArrayList<Servicio>();
         String select = ("SELECT * FROM SERVICIO;");
         Statement st = DBUtils.getConnectionDB().createStatement();
         ResultSet resultSet = st.executeQuery(select);
@@ -127,11 +126,11 @@ public class Servicio {
                     resultSet.getString("NOMBRE_SERVICIO"),
                     resultSet.getFloat("SALARIO_SERVICIO")
             );
-            listaServicios.add(serv);
+            newListaServicios.add(serv);
         }
         resultSet.close();
         st.close();
-        return listaServicios;
+        Servicio.listaServicios = newListaServicios;
     }
 
     public static Servicio buscarCodigo(String codigo) {

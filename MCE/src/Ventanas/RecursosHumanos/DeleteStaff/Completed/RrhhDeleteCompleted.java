@@ -90,7 +90,7 @@ public class RrhhDeleteCompleted {
 			empleadoDespedido.getApellido() + "\n" +
 			empleadoDespedido.getFechaNacimiento() + "\n" +
 			empleadoDespedido.getDireccion() + "\n" +
-			empleadoDespedido.getTipoServicio()
+			empleadoDespedido.getServicio().getNombre()
 		);
 
 		//Añadimos la funcionalidad a los botones

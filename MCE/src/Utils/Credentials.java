@@ -107,11 +107,6 @@ public class Credentials {
 		}
 	}
 
-
-	public static boolean validarCodigoEmpleado(String codigo){
-		return codigo.matches("[0-9]{3}");
-	}
-
 	public static boolean validarNombre(String nombre) {
 		Pattern patronNombre = Pattern.compile("[A-Z]{2,20}[ ]?[A-Z]{2,20}");
 		Matcher validadorPatron = patronNombre.matcher(nombre.toUpperCase(Locale.ROOT));
@@ -133,12 +128,6 @@ public class Credentials {
 		Pattern patronDireccion = Pattern.compile("[A-Z 0-9,º'/]{10,50}");
 		Matcher validadorPatron = patronDireccion.matcher(direccion.toUpperCase(Locale.ROOT));
 		return validadorPatron.matches();
-	}
-
-	public static boolean validarFecha(LocalDate fechaNacimiento) {
-		LocalDate fechaDeHoy = LocalDate.now();
-		int edad = Period.between(fechaNacimiento, fechaDeHoy).getYears();
-		return edad >= 18 && edad <= 120;
 	}
 
 	public static boolean validarFecha(LocalDate fechaNacimiento) {

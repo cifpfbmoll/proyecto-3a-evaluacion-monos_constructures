@@ -74,11 +74,7 @@ public class Servicio {
 
     @Override
     public String toString() {
-        return "Servicio{" +
-                "codigo=" + codigo +
-                ", nombre=" + nombre +
-                ", salario=" + salario +
-                '}';
+        return this.getNombre();
     }
 
 
@@ -134,9 +130,9 @@ public class Servicio {
     }
 
     public static Servicio buscarCodigo(String codigo) {
-        for (int i = 0; i < listaServicios.size(); i++) {
-            if (listaServicios.get(i).getCodigo().equals(codigo)) {
-                return listaServicios.get(i);
+        for (Servicio listaServicio : listaServicios) {
+            if (listaServicio.getCodigo().equals(codigo)) {
+                return listaServicio;
             }
         }
         return listaServicios.get(0);

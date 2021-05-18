@@ -73,7 +73,7 @@ public class RecursosHumanos extends Empleado {
 	 */
 	public static void addEmpleado(Empleado empleado) throws Exception {
 
-		String empleadosSQL = ("INSERT INTO EMPLEADO VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
+		String empleadosSQL = ("INSERT INTO EMPLEADO VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);");
 
 		try (PreparedStatement sentencia= DBUtils.getConnectionDB().prepareStatement(empleadosSQL)) {
 			//Sentencia SQL para añadir la información

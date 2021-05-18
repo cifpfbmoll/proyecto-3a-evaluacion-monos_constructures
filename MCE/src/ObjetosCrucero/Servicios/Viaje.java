@@ -1,29 +1,39 @@
 package ObjetosCrucero.Servicios;
 
+import Utils.DBUtils;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.List;
 
 public class Viaje {
     //ATRIBUTOS
     private String codigoCrucero;
     private Date fechaEmbarque;
     private Date fechaLlegada;
-    private int descripcion; //intuyo que es valoracion
+    private String descripcion;
 
     //CONSTRUCTOR VACIO
     public Viaje() {
     }
 
     //CONSTRUCTOR CON TODOS LOS PARAMETROS
-    public Viaje(String codigoCrucero, Date fechaEmbarque, Date fechaLlegada, int descripcion) {
-        this.codigoCrucero = codigoCrucero;
-        this.fechaEmbarque = fechaEmbarque;
-        this.fechaLlegada = fechaLlegada;
-        this.descripcion = descripcion;
+    public Viaje(String codigoCrucero, Date fechaEmbarque, Date fechaLlegada, String descripcion) {
+        this.setCodigoCrucero(codigoCrucero);
+        this.setFechaEmbarque(fechaEmbarque);
+        this.setFechaLlegada(fechaLlegada);
+        this.setDescripcion(descripcion);
     }
 
     //GETTERS Y SETTERS
+
     public String getCodigoCrucero() {
         return codigoCrucero;
     }
@@ -48,11 +58,11 @@ public class Viaje {
         this.fechaLlegada = fechaLlegada;
     }
 
-    public int getDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
-    public void setDescripcion(int descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
@@ -67,23 +77,73 @@ public class Viaje {
                 '}';
     }
     //METODOS
-    //SOLICITAR DATOS Y AÑADIRLOS A LA LISTA
-    public static void SolicitarDatosViaje(ArrayList <Viaje> listaViajes){
-        Viaje NuevoViaje = new Viaje();
-        Scanner sc = new Scanner (System.in);
-        System.out.println("Introduce el codigo del crucero");
-        NuevoViaje.setCodigoCrucero(sc.nextLine());
-        System.out.println("Introduce la fecha de embarque");
-        NuevoViaje.setFechaEmbarque(Date.valueOf(sc.next()));
-        System.out.println("introduce la fecha de llegada");
-        NuevoViaje.setFechaLlegada(Date.valueOf(sc.next()));
-        System.out.println("Introduce la descripcion");
-        NuevoViaje.setDescripcion(sc.nextInt());
+    //Añadir Viaje a la base de Datos
+    public static void addViaje(Viaje trayecto) throws Exception {
+        PreparedStatement insertarViaje = null;
+        try {
+            //Sentencia SQL para añadir la información
+            DBUtils.getConnectionDB().setAutoCommit(false);
+            String viajesSQL = ("INSERT INTO VIAJE VALUES (?, ?, ?, ?);");
+            insertarViaje = DBUtils.getConnectionDB().prepareStatement(viajesSQL);
+            insertarViaje.setString(2, trayecto.getCodigoCrucero());
+            insertarViaje.setDate(3, trayecto.getFechaEmbarque());
+            insertarViaje.setDate(4, trayecto.getFechaLlegada());
+            insertarViaje.setString(5, trayecto.getDescripcion());
+            insertarViaje.executeUpdate();
+            DBUtils.getConnectionDB().commit();
+
+        } catch (SQLException sqle){
+            sqle.printStackTrace();
+            DBUtils.getConnectionDB().rollback();
+        } finally {
+            DBUtils.getConnectionDB().setAutoCommit(true);
+            DBUtils.closeDB();
+        }
 
     }
+    public static List<Viaje> getListaViaje() throws SQLException{
 
-    public static void eliminarViaje (ArrayList<Viaje> listaViajes){
-        //NECESITAMOS ELIMINAR/AÑADIR UN VIAJE? SI ES ASI NECESITAMOS UN CODIGO VIAJE?
+        List<Viaje> listaViaje = new ArrayList<Viaje>();
 
+        //Sentencia SQL para obtener la información
+        DBUtils.createConnectionDB();
+        String viajesSQL= ("SELECT * FROM VIAJE GROUP BY CODIGO_CRUCERO;");
+        PreparedStatement sentencia= DBUtils.getConnectionDB().prepareStatement(viajesSQL);
+        ResultSet resultSet = sentencia.executeQuery();
+
+        //Rellenamos la lista con los datos obtenidos
+        while ( resultSet.next() ){
+
+            Viaje viajeItr = new Viaje(
+                    resultSet.getString("CODIGO_CRUCERO"),
+                    resultSet.getDate("FECHA_EMBARQUE_VIAJE"),
+                    resultSet.getDate("FECHA_LLEGADA_VIAJE"),
+                    resultSet.getString("DESCRIPCION_VIAJE")
+            );
+            listaViaje.add(viajeItr);
+        }
+        DBUtils.getConnectionDB().close();
+        return listaViaje;
+    }
+    // Metodo para crear el Archivo
+    public void escrituraViajes() throws IOException {
+
+        File archivoSalida = new File("./viaje/viaje_" + this.getCodigoCrucero() + this.getFechaEmbarque() + ".txt");
+        //Definimos el contenido
+        BufferedWriter bw;
+        if (archivoSalida.exists()){
+            bw = new BufferedWriter(new FileWriter(archivoSalida));
+            bw.write("Se ha modificado el Viaje. \n");
+        } else {
+            bw = new BufferedWriter(new FileWriter(archivoSalida));
+            bw.write("Se ha generado el viaje. \n");
+        }
+        bw.write(
+                "LISTADO VIAJE DE MCE CRUCEROS ENTERPRISE \n" +
+                        "CRUCERO: " + this.getCodigoCrucero() + "\n" +
+                        "FECHA EMBARQUE \t \t FECHA LLEGADA \t \t FECHA \t \t" + "\n" +
+                        this.getFechaEmbarque() + "\t" + "\t" + this.getFechaLlegada() + "\t" + "\t" + this.getDescripcion()
+        );
+        bw.close();
     }
 }

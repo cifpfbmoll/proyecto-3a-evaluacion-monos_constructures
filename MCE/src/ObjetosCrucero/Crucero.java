@@ -119,63 +119,85 @@ public class Crucero {
         this.listaCamarotes = listaCamarotes;
     }
 
+    //inserta datos a un crucero
+    public void crearCrucero() {}
+
     //crea una lista con todos los cruceros y su informacion
     public static ArrayList<Crucero> getListaCrucero() throws SQLException {
-        ArrayList<Crucero> listaCrucero = new ArrayList<>();
+        PreparedStatement sentencia = null;
+        ResultSet resultSet = null;
+        try {
+            ArrayList<Crucero> listaCrucero = new ArrayList<>();
 
-        String cruceroSQL = ("SELECT * FROM CRUCERO;");
-        PreparedStatement sentencia = DBUtils.getConnectionDB().prepareStatement(cruceroSQL);
-        ResultSet resultset = sentencia.executeQuery();
+            String cruceroSQL = ("SELECT * FROM CRUCERO;");
+            sentencia = DBUtils.getConnectionDB().prepareStatement(cruceroSQL);
+            resultSet = sentencia.executeQuery();
 
-        while (resultset.next()) {
-            Crucero crucero = new Crucero(
-                    resultset.getString("CODIGO_CRUCERO"),
-                    resultset.getString("NOMBRE_CRUCERO"),
-                    resultset.getString("MODELO_CRUCERO"),
-                    resultset.getInt("ESLORA"),
-                    resultset.getInt("MANGA"),
-                    resultset.getInt("CALADO"),
-                    resultset.getInt(null)//corresponde a nCamarotes, actualizar BBDD
-            );
-            //crucero.setListaCamarotes(Camarotes.getListaCamarotes());
-            listaCrucero.add(crucero);
+            while (resultSet.next()) {
+                Crucero crucero = new Crucero(
+                        resultSet.getString("CODIGO_CRUCERO"),
+                        resultSet.getString("NOMBRE_CRUCERO"),
+                        resultSet.getString("MODELO_CRUCERO"),
+                        resultSet.getInt("ESLORA"),
+                        resultSet.getInt("MANGA"),
+                        resultSet.getInt("CALADO"),
+                        resultSet.getInt(null)//corresponde a nCamarotes, actualizar BBDD
+                );
+                //crucero.setListaCamarotes(Camarotes.getListaCamarotes());
+                listaCrucero.add(crucero);
+            }
+            return listaCrucero;
+        } catch (SQLException sqlE) {
+            sqlE.printStackTrace();
+        } finally {
+            sentencia.close();
+            resultSet.close();
         }
-        resultset.close();
 
-        return listaCrucero;
+
     }
 
-    public static Crucero recuperarCrucero(String idCrucero) throws  SQLException{
-        String cruceroSQL = ("SELECT * FROM CRUCERO WHERE CODIGO_CRUCERO = '" + idCrucero + "';");
+    public static Crucero getCrucero(String idCrucero) throws  SQLException {
+        PreparedStatement sentencia = null;
+        ResultSet resultSet = null;
+        try {
+            String cruceroSQL = ("SELECT * FROM CRUCERO WHERE CODIGO_CRUCERO = '" + idCrucero + "';");
 
-        PreparedStatement sentencia = DBUtils.getConnectionDB().prepareStatement(cruceroSQL);
-        ResultSet resultSet = sentencia.executeQuery();
+            sentencia = DBUtils.getConnectionDB().prepareStatement(cruceroSQL);
+            resultSet = sentencia.executeQuery();
 
-        Crucero crucero = new Crucero(
-            resultSet.getString("CODIGO_CRUCERO"),
-            resultSet.getString("NOMBRE_CRUCERO"),
-            resultSet.getString("MODELO_CRUCERO"),
-            resultSet.getInt("ESLORA"),
-            resultSet.getInt("MANGA"),
-            resultSet.getInt("CALADO"),
-            resultSet.getInt(null)//corresponde a nCamarotes
-        );
-        //crucero.setListaCamarotes(Camarotes.getListaCamarotes());
-        resultSet.close();
+            Crucero crucero = new Crucero(
+                    resultSet.getString("CODIGO_CRUCERO"),
+                    resultSet.getString("NOMBRE_CRUCERO"),
+                    resultSet.getString("MODELO_CRUCERO"),
+                    resultSet.getInt("ESLORA"),
+                    resultSet.getInt("MANGA"),
+                    resultSet.getInt("CALADO"),
+                    resultSet.getInt(null)//corresponde a nCamarotes
+            );
+            //crucero.setListaCamarotes(Camarotes.getListaCamarotes());
 
-        return crucero;
+            return crucero;
+        } catch (SQLException sqlE) {
+            sqlE.printStackTrace();
+        } finally {
+            sentencia.close();
+            resultSet.close();
+        }
     }
 
     //argumentos de entrada?
-    public static void insertarCrucero() throws Exception{
+    public static void insertarCrucero() throws SQLException{
+        PreparedStatement sentencia = null;
         try {
             //CRUCERO VACIO PARA PRUEBAS
             Crucero crucero = new Crucero();
+            crucero.crearCrucero();
 
             DBUtils.getConnectionDB().setAutoCommit(false);
             //necesaria lista de camarotes?
             String empleadosSQL = ("INSERT INTO CRUCERO VALUES (?, ?, ?, ?, ?, ?);");
-            PreparedStatement sentencia = DBUtils.getConnectionDB().prepareStatement(empleadosSQL);
+            sentencia = DBUtils.getConnectionDB().prepareStatement(empleadosSQL);
             sentencia.setString(1, crucero.getCodigoCrucero());
             sentencia.setString(2, crucero.getNombreCrucero());
             sentencia.setString(3, crucero.getModeloCrucero());
@@ -190,6 +212,7 @@ public class Crucero {
             DBUtils.getConnectionDB().rollback();
         } finally {
             DBUtils.getConnectionDB().setAutoCommit(true);
+            sentencia.close();
         }
     }
 }

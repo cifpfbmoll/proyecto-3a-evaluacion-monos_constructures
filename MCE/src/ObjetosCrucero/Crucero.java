@@ -149,12 +149,11 @@ public class Crucero {
             return listaCrucero;
         } catch (SQLException sqlE) {
             sqlE.printStackTrace();
+            return null;
         } finally {
             sentencia.close();
             resultSet.close();
         }
-
-
     }
 
     public static Crucero getCrucero(String idCrucero) throws  SQLException {
@@ -180,6 +179,7 @@ public class Crucero {
             return crucero;
         } catch (SQLException sqlE) {
             sqlE.printStackTrace();
+            return null;
         } finally {
             sentencia.close();
             resultSet.close();

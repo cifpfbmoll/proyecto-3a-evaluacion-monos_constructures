@@ -131,6 +131,5 @@ public class RrhhMainPageController {
 
 		//Creando la animación de entrada
 		Animation.card_animation_TOP_CENTER(mainCard);
-
 	}
 }

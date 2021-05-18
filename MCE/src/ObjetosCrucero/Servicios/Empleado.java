@@ -91,4 +91,29 @@ public class Empleado extends Usuario{
 		return empleado;
 	}
 
+	public static Empleado getEmbleadoByCodigo(int codigo){
+		Empleado empleado = null;
+		String sentenciaSQL = "SELECT * FROM EMPLEADO WHERE CODIGO_EMPLEADO = ?";
+
+		try (PreparedStatement busquedaDDBB = DBUtils.getConnectionDB().prepareStatement(sentenciaSQL)) {
+			busquedaDDBB.setInt(1, codigo);
+			ResultSet resultados = busquedaDDBB.executeQuery();
+			if (resultados.next()){
+				empleado = new Empleado(
+						resultados.getString("CODIGO_EMPLEADO"),
+						resultados.getString("NIE_EMPLEADO"),
+						resultados.getString("NOMBRE_EMPLEADO"),
+						resultados.getString("APELLIDO_EMPLEADO"),
+						ObjetosCrucero.Servicios.Servicio.buscarCodigo(resultados.getString("CODIGO_SERVICIO")),
+						resultados.getString("DOMICILIACION_EMPLEADO"),
+						LocalDate.parse(resultados.getDate("FECHA_NACIMIENTO_EMPLEADO").toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+				);
+			}
+			resultados.close();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		return empleado;
+	}
+
 }

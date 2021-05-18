@@ -114,7 +114,7 @@ public class Servicio {
 
     }
 
-    public static void getListaServicios() throws SQLException {
+    public static void pullListaServicios() throws SQLException {
 
         ArrayList<Servicio> newListaServicios = new ArrayList<Servicio>();
         String select = ("SELECT * FROM SERVICIO;");

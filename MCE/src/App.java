@@ -1,5 +1,4 @@
 import Launch.LaunchInterpreter;
-import ObjetosCrucero.Servicios.Billete;
 import ObjetosCrucero.Servicios.Empleado;
 import ObjetosCrucero.Servicios.RecursosHumanos;
 import Utils.DBUtils;
@@ -10,11 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import static ObjetosCrucero.Servicios.Servicio.getListaServicios;
+import static ObjetosCrucero.Servicios.Servicio.pullListaServicios;
 
 /**
  * Esta es la clase principal del programa.
@@ -29,7 +26,7 @@ public class App extends Application {
         //testing();
         DBUtils.createConnectionDB();
 
-        getListaServicios();
+        pullListaServicios();
 
 
         if (LaunchInterpreter.checkTermsAndConditions()){

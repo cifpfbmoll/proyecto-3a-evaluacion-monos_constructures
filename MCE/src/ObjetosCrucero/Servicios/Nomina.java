@@ -248,7 +248,13 @@ public class Nomina {
         }
     }
 
-    public void EscribirNomina() {
+    public static void imprimirTodas() {
+        for (Nomina n : listaNominas) {
+                n.imprimir();
+        }
+    }
+
+    public void imprimir() {
 
         LocalDate fecha = this.getFechaNomina();
         int horas = this.getHorasOrdinarias();
@@ -267,7 +273,7 @@ public class Nomina {
             carpeta.mkdirs();
         }
 
-        try (FileWriter wrtr = new FileWriter(path + "/" + fecha.getMonth().toString()+fecha.getYear() + ".txt")) {
+        try (FileWriter wrtr = new FileWriter(path + "/" + FileUtils.nombreMes(fecha.getMonthValue())+"_"+fecha.getYear() + ".txt")) {
             wrtr.write("Nomina de "+ titular.getNombre() + "" + titular.getApellido() + " de " +
                     FileUtils.nombreMes(fecha.getMonth().getValue()) + " de " + fecha.getYear()+"\n" +
                     "-----------------------------------------------" + "\n" +
@@ -291,6 +297,15 @@ public class Nomina {
             e.printStackTrace();
         }
     }
+
+    public static void imprimir(Empleado empleado) {
+        for (Nomina n : listaNominas) {
+            if (n.titular == empleado) {
+                n.imprimir();
+            }
+        }
+    }
+
 
 
 }

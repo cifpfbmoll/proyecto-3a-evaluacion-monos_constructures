@@ -26,7 +26,7 @@ public class Crucero {
     public Crucero() {
     }
 
-    public Crucero(String codigoCrucero, String nombreCrucero, String modeloCrucero, int eslora, int manga, int calado, int nCamarotes) {
+    public Crucero(String codigoCrucero, String nombreCrucero, String modeloCrucero, int eslora, int manga, int calado) {
         this.setCodigoCrucero(codigoCrucero);
         this.setNombreCrucero(nombreCrucero);
         this.setModeloCrucero(modeloCrucero);
@@ -167,10 +167,8 @@ public class Crucero {
                         resultSet.getString("MODELO_CRUCERO"),
                         resultSet.getInt("ESLORA"),
                         resultSet.getInt("MANGA"),
-                        resultSet.getInt("CALADO"),
-                        resultSet.getInt(null)//corresponde a nCamarotes, actualizar BBDD
+                        resultSet.getInt("CALADO")
                 );
-                //crucero.setListaCamarotes(Camarotes.getListaCamarotes());
                 listaCrucero.add(crucero);
             }
             return listaCrucero;
@@ -198,10 +196,9 @@ public class Crucero {
                     resultSet.getString("MODELO_CRUCERO"),
                     resultSet.getInt("ESLORA"),
                     resultSet.getInt("MANGA"),
-                    resultSet.getInt("CALADO"),
-                    resultSet.getInt(null)//corresponde a nCamarotes
+                    resultSet.getInt("CALADO")
             );
-            //crucero.setListaCamarotes(Camarotes.getListaCamarotes());
+            crucero.setListaCamarotes(crucero.obtenerCamarotes());
 
             return crucero;
         } catch (SQLException sqlE) {
@@ -214,6 +211,7 @@ public class Crucero {
     }
 
     //argumentos de entrada?
+    //inserta lista de camarotes?
     public static void insertarCrucero() throws SQLException{
         PreparedStatement sentencia = null;
         try {

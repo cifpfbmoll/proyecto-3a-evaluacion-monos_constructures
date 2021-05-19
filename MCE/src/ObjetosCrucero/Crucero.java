@@ -1,6 +1,5 @@
 package ObjetosCrucero;
 
-import ObjetosCrucero.Servicios.Camarote;
 import Utils.DBUtils;
 
 import java.sql.PreparedStatement;
@@ -21,7 +20,7 @@ public class Crucero {
     private int calado;
 
     //Lista de camarotes
-    private List<Camarote> listaCamarotes;
+    private ArrayList<Camarote> listaCamarotes;
 
 
     public Crucero() {
@@ -95,11 +94,11 @@ public class Crucero {
         this.calado = calado;
     }
 
-    public List<Camarote> getListaCamarotes() {
+    public ArrayList<Camarote> getListaCamarotes() {
         return listaCamarotes;
     }
 
-    public void setListaCamarotes(List<Camarote> listaCamarotes) {
+    public void setListaCamarotes(ArrayList<Camarote> listaCamarotes) {
         this.listaCamarotes = listaCamarotes;
     }
 
@@ -122,10 +121,10 @@ public class Crucero {
      * Obtenemos la lista de camarotes del crucero y lo rellenamos dentro del constructor
      * @return devuelve la lista (con datos o vacia) de camarotes del crucero en cuestion.
      */
-    public List<Camarote> obtenerCamarotes(){
+    public ArrayList<Camarote> obtenerCamarotes(){
 
         //La lista a retornar
-        List<Camarote> listaCamarotes = new ArrayList<>();
+        ArrayList<Camarote> listaCamarotes = new ArrayList<>();
         String sentenciaSQL = "SELECT * FROM CAMAROTE WHERE CODIGO_CRUCERO = ?";
 
         try (PreparedStatement busquedaDDBB = DBUtils.getConnectionDB().prepareStatement(sentenciaSQL)) {
@@ -145,23 +144,6 @@ public class Crucero {
 
         //Devolvemos la lista vacia, o con datos
         return listaCamarotes;
-    }
-
-
-    public int getnCamarotes() {
-        return nCamarotes;
-    }
-
-    public void setnCamarotes(int nCamarotes) {
-        this.nCamarotes = nCamarotes;
-    }
-
-    public Camarote[] getListaCamarotes() {
-        return listaCamarotes;
-    }
-
-    public void setListaCamarotes(Camarote[] listaCamarotes) {
-        this.listaCamarotes = listaCamarotes;
     }
 
     //inserta datos a un crucero

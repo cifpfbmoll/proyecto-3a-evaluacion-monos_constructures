@@ -1,7 +1,11 @@
 package ObjetosCrucero.Servicios;
 
 import Utils.DBUtils;
+import Utils.FileUtils;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -114,33 +118,52 @@ public class Nomina {
 
     //Metodos
 
+    public float salarioPorHora() {
+        return this.getTitular().getServicio().getSalario()/getFechaNomina().lengthOfMonth();
+    }
+
+    public float salarioHorasExtra() {
+        return (float) (salarioPorHora()*1.75*getHorasExtra());
+    }
+
+    public float salarioDiario() {
+        return salarioPorHora()*getHorasOrdinarias();
+    }
+
+    public float bccc() {
+        return (salarioDiario()*(16/14)) + getPlus();
+    }
+
+    public float bccp() {
+        return bccc() + salarioHorasExtra();
+    }
+
+    public float salarioBruto() {
+        return getTitular().getServicio().getSalario() + salarioHorasExtra() + plus;
+    }
+
+    public float dcc() {
+        return (float) (bccc()*4.7);
+    }
+
+    public float dParo() {
+        return (float) (bccp()*1.55);
+    }
+
+    public float dfp() {
+        return (float) (bccp()*0.10);
+    }
+
+    public float dirpf() {
+        return (float) (salarioBruto()*14.75);
+    }
+
     public float calcularSalario() {
+        return salarioBruto() - (dcc() + dParo() + dfp() + dirpf());
+    }
 
-        LocalDate fechaNomina = this.getFechaNomina();
-        int horasExtra = this.getHorasExtra();
-        int horasOrdinarias = this.getHorasOrdinarias();
-        float salario = this.salario;
-        float plus = this.getPlus();
-
-        //percepciones
-
-        float salarioHora = salario/30;
-        float salarioHorasExtras = (float) (salarioHora*1.75*horasExtra);
-        float salarioDiario = salarioHora*horasOrdinarias;
-        float bccc = (salarioDiario*16/14) + plus;
-        float bccp = bccc + salarioHorasExtras;
-        float salarioBruto = salario + salarioHorasExtras + plus;
-
-        //deducciones
-
-        float dcc = (float) (bccc*4.7);
-        float dParo = (float) (bccp*1.55);
-        float dfp = (float) (bccp*0.10);
-        float dirpf = (float) (salarioBruto*14.75);
-
-        float salarioNeto = salarioBruto - (dcc + dParo + dfp + dirpf);
-
-        return salarioNeto;
+    public void agregarSalario() {
+        setSalario(calcularSalario());
     }
 
     public static void addNomina(Nomina nomina) throws Exception {
@@ -222,6 +245,50 @@ public class Nomina {
         }
         finally {
 
+        }
+    }
+
+    public void EscribirNomina() {
+
+        LocalDate fecha = this.getFechaNomina();
+        int horas = this.getHorasOrdinarias();
+        int horasE = this.getHorasExtra();
+        float salario = this.getSalario();
+
+        float plus = this.getPlus();
+        Empleado titular = this.getTitular();
+        float salarioB = titular.getServicio().getSalario();
+
+        String numeroNomina = "Nominas_" + fecha.getYear();
+        String path = "Nominas_" + this.getTitular() + "/" + numeroNomina;
+
+        File carpeta = new File(path);
+        if (!carpeta.exists()) {
+            carpeta.mkdirs();
+        }
+
+        try (FileWriter wrtr = new FileWriter(path + "/" + fecha.getMonth().toString()+fecha.getYear() + ".txt")) {
+            wrtr.write("Nomina de "+ titular.getNombre() + "" + titular.getApellido() + " de " +
+                    FileUtils.nombreMes(fecha.getMonth().getValue()) + " de " + fecha.getYear()+"\n" +
+                    "-----------------------------------------------" + "\n" +
+                    "Meritos:" + "\n" +
+                    "Horas ordinarias            -        " + horas + "\n" +
+                    "Horas extraordinarias       -        " + horasE + "\n" +
+                    "Pluses                      -        " + plus + "\n" +
+                    "-----------------------------------------------" + "\n" +
+                    "Salario Bruto                        " + salarioBruto() + "\n" +
+                    "-----------------------------------------------" + "\n" +
+                    "Deducciones:" + "\n" +
+                    "Contingencias comunes       -        " + dcc() + "\n" +
+                    "Formacion profesional       -        " + dfp() + "\n" +
+                    "IRPF                        -        " + dirpf() + "\n" +
+                    "Desempleo                   -        " + dParo() + "\n" +
+                    "-----------------------------------------------" + "\n" +
+                    "Salario Neto                         " + calcularSalario() + "\n" +
+                    "-----------------------------------------------" + "\n"
+                    );
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

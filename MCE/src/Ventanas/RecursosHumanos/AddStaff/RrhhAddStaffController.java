@@ -4,7 +4,9 @@ import ObjetosCrucero.Servicios.Empleado;
 import ObjetosCrucero.Servicios.RecursosHumanos;
 import ObjetosCrucero.Servicios.Servicio;
 import Utils.Credentials;
+import Utils.Excepcion;
 import Utils.WindowUtils;
+import Ventanas.Excepciones.ExcepcionesController;
 import Ventanas.Fx.Animation;
 import Ventanas.RecursosHumanos.AddStaff.Completed.RrhhAddCompleted;
 import javafx.collections.FXCollections;
@@ -15,6 +17,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
 
 public class RrhhAddStaffController {
@@ -120,8 +125,8 @@ public class RrhhAddStaffController {
 						"../Ventanas/RecursosHumanos/AddStaff/Completed/rrhh_add_completed.fxml",
 						false
 				);
-			} catch (Exception exception) {
-				exception.printStackTrace();
+			} catch (Exception e){
+				ExcepcionesController.lanzarExcepcion(Excepcion.OPERATION_NOT_COMPLETED);
 			}
 		} else {
 			WindowUtils.errorShakeScreen(mainCard);

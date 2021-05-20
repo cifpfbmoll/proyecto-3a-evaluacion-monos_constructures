@@ -7,6 +7,7 @@ import Ventanas.Excepciones.ExcepcionesController;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -88,8 +89,12 @@ public class RecursosHumanos extends Empleado {
 			sentencia.setBoolean(9, true);
 			sentencia.executeUpdate();
 
-		} catch (SQLException sqle){
+		} catch (SQLIntegrityConstraintViolationException sqle) {
 			sqle.printStackTrace();
+			ExcepcionesController.lanzarExcepcion(Excepcion.SQL_PRIMARY_CONSTRAINT_VIOLATION);
+			throw new Exception();
+		} catch (SQLException sqle) {
+			ExcepcionesController.lanzarExcepcion(Excepcion.SQL_NOT_CONNECTED);
 		}
 	}
 

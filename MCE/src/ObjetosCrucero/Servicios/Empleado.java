@@ -8,10 +8,12 @@ import javafx.scene.control.TextField;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAmount;
 import java.time.temporal.TemporalField;
+import java.util.ArrayList;
 import java.util.Date;
 import ObjetosCrucero.Servicios.Servicio;
 
@@ -118,6 +120,31 @@ public class Empleado extends Usuario{
 			sqle.printStackTrace();
 		}
 		return empleado;
+	}
+
+	public static ArrayList<Empleado> getEmbleadoAll() {
+		ArrayList<Empleado> lista = new ArrayList<Empleado>();
+		String sentenciaSQL = "SELECT * FROM EMPLEADO;";
+
+		try (PreparedStatement busquedaDDBB = DBUtils.getConnectionDB().prepareStatement(sentenciaSQL)) {
+			ResultSet resultados = busquedaDDBB.executeQuery();
+			while (resultados.next()){
+				Empleado e = new Empleado(
+						resultados.getString("CODIGO_EMPLEADO"),
+						resultados.getString("NIE_EMPLEADO"),
+						resultados.getString("NOMBRE_EMPLEADO"),
+						resultados.getString("APELLIDO_EMPLEADO"),
+						ObjetosCrucero.Servicios.Servicio.buscarCodigo(resultados.getString("CODIGO_SERVICIO")),
+						resultados.getString("DOMICILIACION_EMPLEADO"),
+						LocalDate.parse(resultados.getDate("FECHA_NACIMIENTO_EMPLEADO").toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+				);
+				lista.add(e);
+			}
+			resultados.close();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		return lista ;
 	}
 
 }

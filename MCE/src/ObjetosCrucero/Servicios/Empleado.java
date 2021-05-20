@@ -1,6 +1,8 @@
 package ObjetosCrucero.Servicios;
 
 import Utils.DBUtils;
+import Utils.Excepcion;
+import Ventanas.Excepciones.ExcepcionesController;
 import javafx.scene.control.TextField;
 
 import java.sql.PreparedStatement;
@@ -86,6 +88,7 @@ public class Empleado extends Usuario{
 			}
 			resultados.close();
 		} catch (SQLException sqle) {
+			ExcepcionesController.lanzarExcepcion(Excepcion.SQL_NOT_FOUND);
 			sqle.printStackTrace();
 		}
 		return empleado;
@@ -111,6 +114,7 @@ public class Empleado extends Usuario{
 			}
 			resultados.close();
 		} catch (SQLException sqle) {
+			ExcepcionesController.lanzarExcepcion(Excepcion.SQL_NOT_FOUND);
 			sqle.printStackTrace();
 		}
 		return empleado;

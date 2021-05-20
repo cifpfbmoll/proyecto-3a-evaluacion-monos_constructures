@@ -3,6 +3,7 @@ package Utils;
 import ObjetosCrucero.Servicios.RecursosHumanos;
 import ObjetosCrucero.Servicios.Empleado;
 import ObjetosCrucero.Servicios.Servicio;
+import ObjetosCrucero.Servicios.Ventas;
 import javafx.event.Event;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Credentials {
+public abstract class Credentials {
 
 	private static Empleado loggedUser;
 
@@ -46,6 +47,17 @@ public class Credentials {
 						Servicio.buscarCodigo("RRHH")
 				);
 				break;
+
+			case "VENT":
+
+				loggedUser = new Ventas(
+						userInfo.getString(1),
+						userInfo.getString(2),
+						userInfo.getString(3),
+						userInfo.getString(4),
+						Servicio.buscarCodigo("VENT")
+				);
+				break;
 			//Aquí se irán añadiendo los distintos servicios de la aplicación
 		}
 	}
@@ -70,6 +82,17 @@ public class Credentials {
 					true
 			);
 		}
+
+		if ( loggedUser instanceof Ventas ){
+			WindowUtils.cambiarVentana(
+					event,
+					"Ventas ~ " + nombreEmpleadoCompleto,
+					"../Ventanas/Ventas/MainPage/vent_main_page.fxml",
+					true
+			);
+		}
+
+
 	}
 
 	/**

@@ -1,5 +1,7 @@
 package Utils;
 
+import Ventanas.Excepciones.ExcepcionesController;
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.sql.*;
@@ -18,10 +20,15 @@ public class DBUtils {
 	/**
 	 * Esta función se encarga de conectar el programa a la base de datos mediante un usuario y contraseña.
 	 * Se debe llamar desde clases externas, NUNCA desde un método interno de esta clase.
-	 * @throws SQLException Devuelve una excepción en caso de no poder conectarse a la base de datos.
+	 * @catch SQLException Devuelve una excepción en caso de no poder conectarse a la base de datos.
 	 */
-	public static void createConnectionDB() throws SQLException {
-		connectionDB = DriverManager.getConnection("jdbc:mysql://" + DB_PATH, DB_USER, DB_PASSWORD);
+	public static void createConnectionDB() {
+		try {
+			connectionDB = DriverManager.getConnection("jdbc:mysql://" + DB_PATH, DB_USER, DB_PASSWORD);
+		} catch (SQLException sqle){
+			sqle.printStackTrace();
+			ExcepcionesController.lanzarExcepcion(Excepcion.SQL_NOT_CONNECTED);
+		}
 	}
 
 	/**

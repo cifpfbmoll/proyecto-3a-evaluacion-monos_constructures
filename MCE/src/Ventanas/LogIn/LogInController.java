@@ -2,7 +2,9 @@ package Ventanas.LogIn;
 
 import Utils.Credentials;
 import Utils.DBUtils;
+import Utils.Excepcion;
 import Utils.WindowUtils;
+import Ventanas.Excepciones.ExcepcionesController;
 import Ventanas.Fx.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
@@ -17,6 +19,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+
+import java.io.IOException;
+import java.sql.SQLException;
 
 public class LogInController {
 	@FXML
@@ -71,8 +76,10 @@ public class LogInController {
 				password.getStyleClass().add("text_field_error");
 				WindowUtils.errorShakeScreen(login_card);
 			}
-		} catch (Exception sqle) {
-			sqle.printStackTrace();
+		} catch (SQLException sqle){
+			ExcepcionesController.lanzarExcepcion(Excepcion.SQL_NOT_CONNECTED);
+		} catch (Exception e){
+			ExcepcionesController.lanzarExcepcion(Excepcion.FILE_NOT_RECHEABLE);
 		}
 	}
 

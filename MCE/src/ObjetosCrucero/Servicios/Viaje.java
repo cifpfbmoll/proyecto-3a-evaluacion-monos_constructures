@@ -1,24 +1,28 @@
 package ObjetosCrucero.Servicios;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
 
 public class Viaje {
     //ATRIBUTOS
     private String codigoCrucero;
-    private Date fechaEmbarque;
-    private Date fechaLlegada;
-    private int descripcion; //intuyo que es valoracion
+    private LocalDate fechaEmbarque;
+    private LocalDate fechaLlegada;
+    private String descripcion; //intuyo que es valoracion
+    private List<Parada> listaParadas;
 
     //CONSTRUCTOR VACIO
     public Viaje() {
     }
 
     //CONSTRUCTOR CON TODOS LOS PARAMETROS
-    public Viaje(String codigoCrucero, Date fechaEmbarque, Date fechaLlegada, int descripcion) {
+    public Viaje(String codigoCrucero, LocalDate fechaEmbarque, LocalDate fechaLlegada, String descripcion, List<Parada> listaParadas) {
         this.codigoCrucero = codigoCrucero;
         this.fechaEmbarque = fechaEmbarque;
         this.fechaLlegada = fechaLlegada;
         this.descripcion = descripcion;
+        this.listaParadas = listaParadas;
     }
 
     //GETTERS Y SETTERS
@@ -30,28 +34,36 @@ public class Viaje {
         this.codigoCrucero = codigoCrucero;
     }
 
-    public Date getFechaEmbarque() {
+    public LocalDate getFechaEmbarque() {
         return fechaEmbarque;
     }
 
-    public void setFechaEmbarque(Date fechaEmbarque) {
+    public void setFechaEmbarque(LocalDate fechaEmbarque) {
         this.fechaEmbarque = fechaEmbarque;
     }
 
-    public Date getFechaLlegada() {
+    public LocalDate getFechaLlegada() {
         return fechaLlegada;
     }
 
-    public void setFechaLlegada(Date fechaLlegada) {
+    public void setFechaLlegada(LocalDate fechaLlegada) {
         this.fechaLlegada = fechaLlegada;
     }
 
-    public int getDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
-    public void setDescripcion(int descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public List<Parada> getListaParadas() {
+        return listaParadas;
+    }
+
+    public void setListaParadas(List<Parada> listaParadas) {
+        this.listaParadas = listaParadas;
     }
 
     //TOSTRING

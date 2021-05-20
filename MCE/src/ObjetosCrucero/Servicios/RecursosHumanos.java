@@ -1,8 +1,9 @@
 package ObjetosCrucero.Servicios;
 
 import Utils.DBUtils;
+import Utils.Excepcion;
+import Ventanas.Excepciones.ExcepcionesController;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +11,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import ObjetosCrucero.Servicios.Servicio;
 
 public class RecursosHumanos extends Empleado {
 
@@ -77,7 +77,6 @@ public class RecursosHumanos extends Empleado {
 
 		try (PreparedStatement sentencia= DBUtils.getConnectionDB().prepareStatement(empleadosSQL)) {
 			//Sentencia SQL para añadir la información
-			DBUtils.getConnectionDB().setAutoCommit(false);
 			sentencia.setString(1, empleado.getCodigoEmpleado());
 			sentencia.setString(2, empleado.getDni());
 			sentencia.setString(3, empleado.getNombre());
@@ -89,13 +88,8 @@ public class RecursosHumanos extends Empleado {
 			sentencia.setBoolean(9, true);
 			sentencia.executeUpdate();
 
-			DBUtils.getConnectionDB().commit();
-			sentencia.close();
 		} catch (SQLException sqle){
 			sqle.printStackTrace();
-			DBUtils.getConnectionDB().rollback();
-		} finally {
-			DBUtils.getConnectionDB().setAutoCommit(true);
 		}
 	}
 
@@ -112,6 +106,7 @@ public class RecursosHumanos extends Empleado {
 			actualizacionDDBB.executeUpdate();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
+			ExcepcionesController.lanzarExcepcion(Excepcion.SQL_NOT_CONNECTED);
 		}
 	}
 

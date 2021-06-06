@@ -1,6 +1,10 @@
 package ObjetosCrucero.Servicios;
 
+import Utils.DBUtils;
+
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -17,52 +21,65 @@ public class Parada extends Puerto{
     public Parada() {
     }
 
+    //CONSTRUCTOR COPIA
+
+
     //COSNTRUCTOR CON TODOS LOS PARAMETROS
-    public Parada(String codigoCrucero, String codigoPuerto, Date fechaEmbarque,
+    public Parada(String codigoCrucero, String nombrePuerto, String codigoCiudad, String codigoPuerto, Date fechaEmbarque,
                   Date fechaLlegada, Date fechaSalida, int numeroParada) {
-        this.fechaEmbarque = fechaEmbarque;
-        this.numeroParada = numeroParada;
-        this.fechaLlegada = fechaLlegada;
-        this.fechaSalida = fechaSalida;
+        super(codigoPuerto, nombrePuerto, codigoCiudad);
+        this.setFechaEmbarque(fechaEmbarque);
+        this.setNumeroParada(numeroParada);
+        this.setFechaLlegada(fechaLlegada);
+        this.setFechaSalida(fechaSalida);
     }
 
     //GETTERS Y SETTERS
     public Date getFechaEmbarque() {
+
         return fechaEmbarque;
     }
 
     public void setFechaEmbarque(Date fechaEmbarque) {
+
         this.fechaEmbarque = fechaEmbarque;
     }
 
-    public int getNumeroParada() {
+    public int getNumeroParada()
+    {
         return numeroParada;
     }
 
-    public void setNumeroParada(int numeroParada) {
+    public void setNumeroParada(int numeroParada)
+    {
         this.numeroParada = numeroParada;
     }
 
-    public Date getFechaLlegada() {
+    public Date getFechaLlegada()
+    {
         return fechaLlegada;
     }
 
-    public void setFechaLlegada(Date fechaLlegada) {
+    public void setFechaLlegada(Date fechaLlegada)
+    {
         this.fechaLlegada = fechaLlegada;
     }
 
-    public Date getFechaSalida() {
+    public Date getFechaSalida()
+    {
         return fechaSalida;
     }
 
-    public void setFechaSalida(Date fechaSalida) {
+    public void setFechaSalida(Date fechaSalida)
+    {
         this.fechaSalida = fechaSalida;
     }
 
     //TOSTRING
     @Override
     public String toString() {
-        return "Parada{" +
+        return super.toString() +
+                "Parada{" +
                 ", fechaEmbarque=" + fechaEmbarque +
                 ", numeroParada=" + numeroParada +
                 ", fechaLlegada=" + fechaLlegada +
@@ -71,10 +88,31 @@ public class Parada extends Puerto{
     }
 
     //METODOS
+    //AÑADIR PARADA
+    public void addParada() throws SQLException {
+        PreparedStatement insertarParada = null;
+        try{
+            //Sentencia SQL para añadir la información.
+            DBUtils.getConnectionDB().setAutoCommit(false);
+
+            String puertosSQL = ("INSERT INTO PARADA VALUES (?,?,?);");
+            insertarParada.setString(1, getCodigoPuerto());
+            insertarParada.setString(2, getNombrePuerto());
+            insertarParada.setString(3, getCodigoCiudad());
+            insertarParada.executeUpdate();
+            DBUtils.getConnectionDB().commit();
+        } catch (SQLException sqle){
+            sqle.printStackTrace();
+            DBUtils.getConnectionDB().rollback();
+        } finally {
+            DBUtils.getConnectionDB().setAutoCommit(true);
+            insertarParada.close();
+        }
+    }
+    //
     //SOLICITAR DATOS PARADA
     public void SolicitarDatosParada (){
         Scanner sc = new Scanner(System.in);
-        super.SolicitarDatos();
         System.out.println("Introduce la fecha de embarque");
         this.setFechaEmbarque(fechaEmbarque);
         System.out.println("Introduce el numero de la parada");

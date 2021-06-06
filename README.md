@@ -60,6 +60,9 @@
     <li><a href="#Licencia">Licencia</a></li>
     <li><a href="#Contacto">Contacto</a></li>
     <li><a href="#Agradecimientos">Agradecimientos</a></li>
+    <ul>
+     <li><a href="#Participantes-del-proyecto">Participantes del proyecto</a></li>
+   </ul>
   </ol>
 </details>
 
@@ -143,7 +146,14 @@ Project Link: [https://github.com/cifpfbmoll/proyecto-3a-evaluacion-monos_constr
 * [JVectorMap](http://jvectormap.com)
 * [Font Awesome](https://fontawesome.com)
 
+### Participantes-del-proyecto
 
+* [Roberto Torres Cruz](https://github.com/rdtorres-cfgs)
+* [David Sastre Fernández](https://github.com/David-Sastre)
+* [Andrés Parra González](https://github.com/AndresParraG)
+* [Jose Luís Saiz ](https://fontawesome.com)
+* [Marc Aguiló ](http://jvectormap.com)
+* [Sandra López Zarzuela ](http://jvectormap.com)
 
 
 

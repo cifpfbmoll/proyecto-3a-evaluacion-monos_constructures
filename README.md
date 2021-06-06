@@ -151,9 +151,9 @@ Project Link: [https://github.com/cifpfbmoll/proyecto-3a-evaluacion-monos_constr
 * [Roberto Torres Cruz](https://github.com/rdtorres-cfgs)
 * [David Sastre Fernández](https://github.com/David-Sastre)
 * [Andrés Parra González](https://github.com/AndresParraG)
-* [Jose Luís Saiz ](https://fontawesome.com)
-* [Marc Aguiló ](http://jvectormap.com)
-* [Sandra López Zarzuela ](http://jvectormap.com)
+* [Jose Luís Saiz López](https://github.com/joseluissaiz)
+* [Marc Aguiló Valentí](https://github.com/Marcaguilov0502)
+* [Sandra López Zarzuela ](https://github.com/SandraLopezZarzuela)
 
 
 

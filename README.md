@@ -40,33 +40,33 @@
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
-  <summary>Table of Contents</summary>
+  <summary>Tabla de Contenido</summary>
   <ol>
     <li>
-      <a href="#Sobre el proyecto">About The Project</a>
+      <a href="#Sobre-el-proyecto">Sobre el proyecto</a>
       <ul>
-        <li><a href="#Construido con">Built With</a></li>
+        <li><a href="#Construido-con">Construido con</a></li>
       </ul>
     </li>
     <li>
-      <a href="#Primeros pasos">Getting Started</a>
+      <a href="#Primeros-pasos">Primeros pasos</a>
       <ul>
         <li><a href="#Prerequisitos">Prerequisites</a></li>
-        <li><a href="#Instalación">Installation</a></li>
+        <li><a href="#Instalacion">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#Metodo Uso">Usage</a></li>
-    <li><a href="#Fallas">Roadmap</a></li>
-    <li><a href="#Licencia">License</a></li>
-    <li><a href="#Contacto">Contact</a></li>
-    <li><a href="#Agradecimientos">Acknowledgements</a></li>
+    <li><a href="#Metodo-uso">Metodo de uso</a></li>
+    <li><a href="#Fallas">Fallos</a></li>
+    <li><a href="#Licencia">Licencia</a></li>
+    <li><a href="#Contacto">Contacto</a></li>
+    <li><a href="#Agradecimientos">Agradecimientos</a></li>
   </ol>
 </details>
 
 
 
 <!-- ABOUT THE PROJECT -->
-## Sobre el proyecto
+## Sobre-el-proyecto
 
 <img src="https://raw.githubusercontent.com/cifpfbmoll/proyecto-3a-evaluacion-monos_constructures/develop/MCE/src/Ventanas/Trash/img/portada.png">
 
@@ -75,7 +75,7 @@ Esta aplicación debe cumplir con los requisitos que nos demanda el Product Owne
 
 El principal objetivo de este documento es facilitar la información de referencia necesaria a las personas implicadas en el desarrollo del proyecto.
 
-### Construido con
+### Construido-con
 
 This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 * [JavaFX](https://openjfx.io/)
@@ -84,7 +84,7 @@ This section should list any major frameworks that you built your project using.
 
 
 <!-- GETTING STARTED -->
-## Primeros pasos
+## Primeros-pasos
 
 Este es un ejemplo de cómo puede dar instrucciones sobre cómo configurar su proyecto localmente.
 Para obtener una copia local en funcionamiento, siga estos sencillos pasos de ejemplo.
@@ -95,7 +95,7 @@ Aquí encontrará los requisitos principales para poder instalar la aplicación.
 2. En "Oracle JDK", haga clic en "Descargar JDK".
 3. Descargue el "Instalador de Windows x64" (p. Ej., "Jdk-15.0. {X} _windows-x64_bin.exe", aproximadamente 159 MB), donde {x} es un número de actualización que cambia rápidamente.
 
-### Instalación
+### Instalacion
 
 1. Descargar el ZIP MCE_Cruceros
 2. Abrir terminal y ejecutar 
@@ -103,7 +103,7 @@ Aquí encontrará los requisitos principales para poder instalar la aplicación.
    java -jav app.jar
    ```
 <!-- USAGE EXAMPLES -->
-## Metodo Uso
+## Metodo-uso
 
 Desde la aplicación podremos iniciar sesión como un usuario de la empresa y si disponemos de los permisos necesarios podremos dar de alta y baja nuevos empleados, así cómo ver el listado de todos nuestros trabajadores.
 

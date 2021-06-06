@@ -18,19 +18,17 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://raw.githubusercontent.com/cifpfbmoll/proyecto-3a-evaluacion-monos_constructures/develop/MCE/src/Ventanas/Trash/img/MC_Logo.png">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
-  <h3 align="center">Best-README-Template</h3>
+ <img src="https://raw.githubusercontent.com/cifpfbmoll/proyecto-3a-evaluacion-monos_constructures/develop/MCE/src/Ventanas/Trash/img/MC_Logo.png">
+  
+  <h3 align="center">MCE - CRUCEROS</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    Nuestro programa se va a encargar de gestionar los disntintos servicios en relacionados con los cruceros y viajes de la empresa, para ello va a ser necesario crear una base de datos y establecer una conexión con ella.
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://docs.google.com/document/d/1zlcap5IUuSNR-8NE5gal_vep5mQvqtSdq29mABAL894/edit?usp=sharing"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://raw.githubusercontent.com/cifpfbmoll/proyecto-3a-evaluacion-monos_constructures/develop/MCE/src/Ventanas/Trash/img/demo.png">View Demo</a>
     ·
     <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
     ·
@@ -45,133 +43,94 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#Sobre el proyecto">About The Project</a>
       <ul>
-        <li><a href="#built-with">Built With</a></li>
+        <li><a href="#Construido con">Built With</a></li>
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#Primeros pasos">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#Prerequisitos">Prerequisites</a></li>
+        <li><a href="#Instalación">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
+    <li><a href="#Metodo Uso">Usage</a></li>
+    <li><a href="#Fallas">Roadmap</a></li>
+    <li><a href="#Licencia">License</a></li>
+    <li><a href="#Contacto">Contact</a></li>
+    <li><a href="#Agradecimientos">Acknowledgements</a></li>
   </ol>
 </details>
 
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## Sobre el proyecto
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<img src="https://raw.githubusercontent.com/cifpfbmoll/proyecto-3a-evaluacion-monos_constructures/develop/MCE/src/Ventanas/Trash/img/portada.png">
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+En este documento se detallan los pasos realizados por la empresa Monos constructores para la creación de un proyecto de una aplicación de gestión de cruceros.
+Esta aplicación debe cumplir con los requisitos que nos demanda el Product Owner. Por lo que en este documento también se detallará el funcionamiento y explicación para el correcto uso de la aplicación.
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
+El principal objetivo de este documento es facilitar la información de referencia necesaria a las personas implicadas en el desarrollo del proyecto.
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have have contributed to expanding this template!
-
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
-
-### Built With
+### Construido con
 
 This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
-* [Laravel](https://laravel.com)
+* [JavaFX](https://openjfx.io/)
+* [MySQL](https://www.mysql.com/)
 
 
 
 <!-- GETTING STARTED -->
-## Getting Started
+## Primeros pasos
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+Este es un ejemplo de cómo puede dar instrucciones sobre cómo configurar su proyecto localmente.
+Para obtener una copia local en funcionamiento, siga estos sencillos pasos de ejemplo.
 
-### Prerequisites
+### Prerequisitos
+Aquí encontrará los requisitos principales para poder instalar la aplicación.
+1. Vaya al sitio de descarga de JDK (o Java SE) @ https://www.oracle.com/java/technologies/javase-downloads.html.
+2. En "Oracle JDK", haga clic en "Descargar JDK".
+3. Descargue el "Instalador de Windows x64" (p. Ej., "Jdk-15.0. {X} _windows-x64_bin.exe", aproximadamente 159 MB), donde {x} es un número de actualización que cambia rápidamente.
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+### Instalación
 
-### Installation
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Descargar el ZIP MCE_Cruceros
+2. Abrir terminal y ejecutar 
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   java -jav app.jar
    ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```JS
-   const API_KEY = 'ENTER YOUR API';
-   ```
-
-
-
 <!-- USAGE EXAMPLES -->
-## Usage
+## Metodo Uso
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
+Desde la aplicación podremos iniciar sesión como un usuario de la empresa y si disponemos de los permisos necesarios podremos dar de alta y baja nuevos empleados, así cómo ver el listado de todos nuestros trabajadores.
 
 
 <!-- ROADMAP -->
-## Roadmap
+## Fallas
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a list of proposed features (and known issues).
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-
+Listado de fallas actuales [fallos_pendientes_de_solucionar](https://github.com/cifpfbmoll/proyecto-3a-evaluacion-monos_constructures/issues)
 
 <!-- LICENSE -->
-## License
+## Licencia
+Este proyecto está bajo la Licencia (The Unlicense). Consulte [License.md](License.md) para obtener más información.
 
-Distributed under the MIT License. See `LICENSE` for more information.
 
 
 
 <!-- CONTACT -->
-## Contact
+## Contacto
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Monos_Constructores - [@Monos_Cronstructores](https://twitter.com/cronstructores) - monosconstructores@gmail.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/cifpfbmoll/proyecto-3a-evaluacion-monos_constructures](https://github.com/cifpfbmoll/proyecto-3a-evaluacion-monos_constructures)
 
 
 
 <!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
+## Agradecimientos
 * [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
 * [Img Shields](https://shields.io)
 * [Choose an Open Source License](https://choosealicense.com)

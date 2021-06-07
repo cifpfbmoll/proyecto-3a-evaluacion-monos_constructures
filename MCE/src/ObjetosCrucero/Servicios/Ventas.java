@@ -20,13 +20,13 @@ public class Ventas extends Empleado{
 	/**
 	 * Se crea un viaje nuevo dentro de la BBDD para poder asi asignar a posteriori Empleados y Billetes
 	 * @param viaje el viaje donde se van a obtener los datos para subirlos a la bbdd.
-	 * @throws SQLException si no se ha podido completar el rollback o el volver a poner el Autocommit a true
+	 * @catch SQLException si no se ha podido completar el rollback o el volver a poner el Autocommit a true
 	 */
-	public static void crearViaje(Viaje viaje) throws SQLException {
+	public static void crearViaje(Viaje viaje) {
 
 		//Las sentencias a ser insertadas (todas o ninguna)
 		String sentenciaViaje = "INSERT INTO VIAJE VALUES(?, ?, ?, ?)";
-		String sentenciaParadas = "INSERT INTO PARADAS VALUES(?, ?, ?, ?, ?, ?)";
+		String sentenciaParadas = "INSERT INTO PARADA VALUES(?, ?, ?, ?, ?, ?)";
 
 		                                                                         //Sentencias autocloasbles
 		try (PreparedStatement insertarViaje = DBUtils.getConnectionDB().prepareStatement(sentenciaViaje);
@@ -56,10 +56,17 @@ public class Ventas extends Empleado{
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 			ExcepcionesController.lanzarExcepcion(Excepcion.SQL_NOT_CONNECTED);
-			DBUtils.getConnectionDB().rollback();
+			try {
+				DBUtils.getConnectionDB().rollback();
+			} catch (SQLException sqleRollback) {
+				ExcepcionesController.lanzarExcepcion(Excepcion.SQL_CRITICAL);
+			}
 		} finally {
-			DBUtils.getConnectionDB().setAutoCommit(true);
-
+			try {
+				DBUtils.getConnectionDB().setAutoCommit(true);
+			} catch (SQLException sqleSetAutocommit) {
+				ExcepcionesController.lanzarExcepcion(Excepcion.SQL_CRITICAL);
+			}
 		}
 	}
 

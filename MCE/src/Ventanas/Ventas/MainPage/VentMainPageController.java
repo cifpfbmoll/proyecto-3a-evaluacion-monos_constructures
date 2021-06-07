@@ -67,37 +67,15 @@ public class VentMainPageController {
 		}
 	};
 
-	//Añadir un empleado
-	EventHandler<MouseEvent> crearEmpleado = event -> {
+	//Añadir un viaje
+	EventHandler<MouseEvent> crearViaje = event -> {
 		Animation.card_animation_EXIT_TO_LEFT(
 				mainCard,
-				"Añadir un empleado",
-				"/Ventanas/RecursosHumanos/AddStaff/rrhh_add_staff.fxml",
+				"Crear un viaje",
+				"/Ventanas/Ventas/CrearViaje/vent_add_viaje.fxml",
 				event
 		);
 	};
-
-	//Ver lista de empleados
-	EventHandler<MouseEvent> verListaEmpledos = event -> {
-		Animation.card_animation_EXIT_TO_LEFT(
-				mainCard,
-				"Lista de empleados",
-				"/Ventanas/RecursosHumanos/ViewStaff/rrhh_view_staff.fxml",
-				event
-		);
-	};
-
-	//Tramitar despido
-	EventHandler<MouseEvent> despedirEmpledo = event -> {
-		Animation.card_animation_EXIT_TO_LEFT(
-				mainCard,
-				"Lista de empleados",
-				"/Ventanas/RecursosHumanos/DeleteStaff/rrhh_delete_staff.fxml",
-				event
-		);
-	};
-
-
 
 	@FXML
 	private void initialize() throws InterruptedException {
@@ -118,9 +96,7 @@ public class VentMainPageController {
 		welcomeMessage.setText(Mensajes.getMensajeBienvenida());
 
 		// Asignando los eventos a los botones
-		addBillete.addEventHandler(MouseEvent.MOUSE_CLICKED, crearEmpleado);
-		searchBillete.addEventHandler(MouseEvent.MOUSE_CLICKED, verListaEmpledos);
-		removeBillete.addEventHandler(MouseEvent.MOUSE_CLICKED, despedirEmpledo);
+		addViaje.addEventHandler(MouseEvent.MOUSE_CLICKED, crearViaje);
 
 		logout.addEventHandler(MouseEvent.MOUSE_CLICKED, logOut);
 		Tooltip.install(logout, new Tooltip("Cerrar sesión")); //etiqueta del logout

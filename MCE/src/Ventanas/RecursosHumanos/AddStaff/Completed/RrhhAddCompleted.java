@@ -82,7 +82,7 @@ public class RrhhAddCompleted {
 		//Ajustamos los distintos textos del panel
 		Animation.setFechaYHora(fechaYHora);
 
-		//CAMBIAR---- Debe cojer los datos del usuario creado, no del loggeado.
+		//Informacion del nuevo empleado
 		userInfo.setText(
 				nuevoEmpleado.getCodigoEmpleado() + "\n" +
 						nuevoEmpleado.getDni() + "\n" +
